@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta name="description" content="">
+	<meta name="author" content="">
+
+	<title>CriptoForex-Ingresar</title>
+
+	<!-- Custom fonts for this template-->
+	<link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+
+	<!-- Custom styles for this template-->
+	<link href="css/sb-admin.css" rel="stylesheet">
+
+</head>
+
+<body class="bg-dark">
+
+	<div class="container">
+		<div class="card card-login mx-auto mt-5">
+			<div class="card-header">Ingresar</div>
+			<div class="card-body">
+				<!-- FROM -->
+				<form id="Fingresar">
+					<div class="form-group">
+						<div class="form-label-group">
+							<input type="email" id="correo" class="form-control" placeholder="Email address" required="required" autofocus="autofocus">
+							<label for="correo">Correo</label>
+						</div>
+					</div>
+					<div class="form-group">
+						<div class="form-label-group">
+							<input type="password" id="inputPassword" class="form-control" placeholder="Password" required="required">
+							<label for="inputPassword">Contraseña</label>
+						</div>
+					</div>
+					<div class="form-group">
+						<div class="checkbox">
+							<label>
+								<input type="checkbox" value="remember-me">
+								Recordar Contraseña
+							</label>
+						</div>
+					</div>
+					<button class="btn btn-primary btn-block">Ingresar</button>
+					<!--<a class="btn btn-primary btn-block" href="index.html">Login</a>-->
+				</form>
+				<!-- FROM -->
+				<div class="text-center">
+					<a class="d-block small mt-3" href="register.html">Registrarse</a>
+					<a class="d-block small" href="forgot-password.html">Olvido su Contraseña?</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<!--  codigo para decodificar el token jwt
+						var token = data.jwt;
+						var decoded = jwt_decode(token);
+						console.log(decoded);
+						$(location).attr('href','index.html')
+					-->	
+					<!-- Bootstrap core JavaScript-->
+					<script src="vendor/jquery/jquery.min.js"></script>
+					<script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+					<!-- Core plugin JavaScript-->
+					<script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+					<script src="js/jwt-decode-master/build/jwt-decode.min.js"></script>
+					<!-- JS -->
+					<script type="text/javascript">
+
+						$(document).ready(function() {
+							
+							$("#Fingresar").submit(function(event) {
+								
+
+								jQuery.ajax({
+
+									url: 'http://localhost:8080/ProyectoFinal-web/api/Login/logeoUsuario/',
+									type: 'POST',
+									dataType: 'json',
+									contentType:'application/json',
+									data: JSON.stringify({
+										email: $("#correo").val(),
+										pass: $("#inputPassword").val()
+									}),
+									success: function(data, textStatus, xhr) {
+										localStorage.setItem("tokenuser", data.jwt);
+										alert("Bienvenido");
+										$(location).attr('href','index.html');
+									},
+									error: function(xhr, textStatus, errorThrown) {
+										alert(textStatus);
+									}
+								});
+								event.preventDefault();
+
+							});
+
+							
+						});
+
+						
+					</script>
+					<!-- JS -->
+
+
+
+				</body>
+
+				</html>
