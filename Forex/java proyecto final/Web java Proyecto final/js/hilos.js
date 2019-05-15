@@ -5,5 +5,5 @@ function actualizarPrecio() {
 	postMessage(randomnum.toFixed(3));
 }
 
-setInterval("actualizarPrecio()",5000);
+setInterval("actualizarPrecio()",30000);
 

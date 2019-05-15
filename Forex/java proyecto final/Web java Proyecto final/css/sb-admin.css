@@ -67,7 +67,8 @@ body {
   line-height: 1.5;
   color: #212529;
   text-align: left;
-  background-color: #fff;
+  background: url(../imagen/fondo.jpg) no-repeat center center fixed;
+  background-size: cover;
 }
 
 [tabindex="-1"]:focus {
@@ -3594,6 +3595,19 @@ input[type="button"].btn-block {
   margin-right: 0;
 }
 
+.user-img{
+    margin-top: -50px;
+    margin-bottom: 35px;
+}
+
+.user-img img{
+    width: 100xp;
+    height: 100px;
+    box-shadow: 0px 0px 3px #848484;
+    border-radius: 50%;
+}
+
+
 .btn-sm + .dropdown-toggle-split, .btn-group-sm > .btn + .dropdown-toggle-split {
   padding-right: 0.375rem;
   padding-left: 0.375rem;
@@ -4916,6 +4930,7 @@ input[type="button"].btn-block {
   -ms-flex: 1 1 auto;
   flex: 1 1 auto;
   padding: 1.25rem;
+  background: #EEEEEE;
 }
 
 .card-title {

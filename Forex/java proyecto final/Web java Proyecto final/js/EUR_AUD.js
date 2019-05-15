@@ -5,4 +5,4 @@ function actualizarPrecioEUR() {
 	postMessage(randomnum.toFixed(3));
 }
 
-setInterval("actualizarPrecioEUR()",5000);
+setInterval("actualizarPrecioEUR()",30000);

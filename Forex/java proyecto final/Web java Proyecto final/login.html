@@ -16,6 +16,11 @@
 
 	<!-- Custom styles for this template-->
 	<link href="css/sb-admin.css" rel="stylesheet">
+	<style>
+		.hidden {
+			display: none;
+		}
+	</style>
 
 </head>
 
@@ -23,30 +28,26 @@
 
 	<div class="container">
 		<div class="card card-login mx-auto mt-5">
-			<div class="card-header">Ingresar</div>
+
 			<div class="card-body">
+				<div class="user-img d-flex justify-content-center">
+					<img src="./imagen/user.png" >
+				</div>
 				<!-- FROM -->
 				<form id="Fingresar">
 					<div class="form-group">
 						<div class="form-label-group">
-							<input type="email" id="correo" class="form-control" placeholder="Email address" required="required" autofocus="autofocus">
+							<input type="email" id="correo" class="form-control" placeholder="Correo" required="required" autofocus="autofocus">
 							<label for="correo">Correo</label>
 						</div>
 					</div>
 					<div class="form-group">
 						<div class="form-label-group">
-							<input type="password" id="inputPassword" class="form-control" placeholder="Password" required="required">
+							<input type="password" id="inputPassword" class="form-control" placeholder="Contraseña" required="required">
 							<label for="inputPassword">Contraseña</label>
 						</div>
 					</div>
-					<div class="form-group">
-						<div class="checkbox">
-							<label>
-								<input type="checkbox" value="remember-me">
-								Recordar Contraseña
-							</label>
-						</div>
-					</div>
+					
 					<button class="btn btn-primary btn-block">Ingresar</button>
 					<!--<a class="btn btn-primary btn-block" href="index.html">Login</a>-->
 				</form>
@@ -58,6 +59,28 @@
 			</div>
 		</div>
 	</div>
+
+	<!-- Modal -->
+	<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+		<div class="modal-dialog modal-dialog-centered" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalCenterTitle">Modal title</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<div class="alert alert-danger hidden" role="alert" id="erroralerta"><strong>Error!</strong><span></span></div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+					<button type="button" class="btn btn-primary">Save changes</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	
 	
 	<!--  codigo para decodificar el token jwt
 						var token = data.jwt;
@@ -72,6 +95,8 @@
 					<!-- Core plugin JavaScript-->
 					<script src="vendor/jquery-easing/jquery.easing.min.js"></script>
 					<script src="js/jwt-decode-master/build/jwt-decode.min.js"></script>
+
+					<script src="js/Bootbox/bootbox.min.js"></script>
 					<!-- JS -->
 					<script type="text/javascript">
 
@@ -92,11 +117,46 @@
 									}),
 									success: function(data, textStatus, xhr) {
 										localStorage.setItem("tokenuser", data.jwt);
-										alert("Bienvenido");
-										$(location).attr('href','index.html');
+										var token = data.jwt;
+										var decoded = jwt_decode(token);
+										bootbox.confirm({
+											title: "Bienvenido",
+											message: "que tenga una buena estadia en la pagina: "+decoded.sub,
+											buttons: {
+												cancel: {
+													label: '<i class="fa fa-times"></i> Cancel'
+												},
+												confirm: {
+													label: '<i class="fa fa-check"></i> Confirm'
+												}
+											},
+											callback: function (result) {
+												if(result == false){
+													localStorage.removeItem("tokenuser");
+												}else{
+													$(location).attr('href','index.html');
+												}
+												
+
+											}
+										});
+										
+										
 									},
 									error: function(xhr, textStatus, errorThrown) {
-										alert(textStatus);
+										bootbox.dialog({ 
+											title: 'Error!',
+											message: '<p>Ocurrio un error duranto la verificacion de datos</p>',
+											size: 'large',
+											onEscape: true,
+											backdrop: true,
+											buttons: {
+												fum: {
+													label: 'Aceptar',
+													className: 'btn-danger'
+												}
+											}
+										})
 									}
 								});
 								event.preventDefault();
