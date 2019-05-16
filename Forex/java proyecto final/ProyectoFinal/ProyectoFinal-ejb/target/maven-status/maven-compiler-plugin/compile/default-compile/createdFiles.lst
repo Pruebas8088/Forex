@@ -4,6 +4,7 @@ com\Udec\proyectoFinal\interfaces\Iusuario.class
 com\Udec\proyectoFinal\interfaces\IseguridadLocal.class
 com\Udec\proyectoFinal\interfaces\Idatos.class
 com\Udec\proyectoFinal\clase\ErrorMsg.class
+com\Udec\proyectoFinal\clase\Divisa.class
 com\Udec\proyectoFinal\utilitario\Seguridad.class
 com\Udec\proyectoFinal\clase\Conexion.class
 com\Udec\proyectoFinal\controller\UsuarioController.class

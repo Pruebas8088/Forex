@@ -6,8 +6,10 @@
 package com.Udec.proyectoFinal.interfaces;
 
 import com.Udec.proyectoFinal.clase.Datos;
+import com.Udec.proyectoFinal.clase.Divisa;
 import com.Udec.proyectoFinal.clase.ErrorMsg;
 import com.Udec.proyectoFinal.clase.Usuario;
+import java.util.ArrayList;
 import javax.ejb.Stateless;
 
 /**
@@ -47,6 +49,34 @@ public class Iusuario implements IusuarioLocal {
         
         dinero=dat.traerDinero(user);
         return dinero;
+    }
+
+    @Override
+    public ErrorMsg cerrarSesion(Usuario user) {
+            ErrorMsg er = new ErrorMsg();
+            Datos dat =  new Datos();
+            dat.cerradoCuenta(user);
+            er.setErrormsg("Cerrado");
+            return er;
+    }
+
+    @Override
+    public ErrorMsg compraDivisa(Divisa divisa) {
+            ErrorMsg er = new ErrorMsg();
+            Datos dat =  new Datos();
+            dat.compraDivisas(divisa);
+            er.setErrormsg("Compra Exitosa");
+            return er;
+    }
+
+    @Override
+    public ArrayList<Divisa> ConsultaDivisa(Divisa divisa) {
+        ArrayList<Divisa> listaDivisa= new ArrayList<Divisa>();
+           
+            Datos dat =  new Datos();
+            listaDivisa=dat.consultaDivisa(divisa);
+           
+            return listaDivisa;
     }
 
     

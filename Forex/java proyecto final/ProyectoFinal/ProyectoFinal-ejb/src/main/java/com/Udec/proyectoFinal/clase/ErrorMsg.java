@@ -6,7 +6,7 @@
 package com.Udec.proyectoFinal.clase;
 
 /**
- *
+ * Prueba
  * @author David
  */
 public class ErrorMsg {

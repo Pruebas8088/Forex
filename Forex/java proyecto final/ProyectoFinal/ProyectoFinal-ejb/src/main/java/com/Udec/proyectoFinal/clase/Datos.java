@@ -52,6 +52,17 @@ public class Datos {
         
     }
      
+     
+      public static void compraDivisas(Divisa divisa){
+            String qry = "INSERT INTO public.accion(idoperacion, valoinicial, token, valorfinal, cantidad,beneficio) values (" + divisa.getIdOperacion()+"," + divisa.getValorInicial()+","+"'" + divisa.getToken()+ "'"+"," + divisa.getValorFinal()+"," + divisa.getCantidad() +"," + divisa.getBeneficio()+")";
+            try {
+                stnt.executeUpdate(qry);
+            } catch (SQLException e) {
+                System.out.println("fallo");
+            }
+        
+    } 
+     
       public static Boolean validacion(Usuario usuario){
           boolean estado;
             String qry = "SELECT * FROM public.usuario where correo="+"'" + usuario.getEmail()+ "'"+"and contrasena="+"'" + usuario.getPass()+ "'"+"";
@@ -83,6 +94,18 @@ public class Datos {
             }
        
     }
+     
+     
+     public static void cerradoCuenta(Usuario usuario){
+          
+            String qry = "UPDATE public.usuario SET  token="+"'" + 0 + "'"+"WHERE token="+"'" + usuario.getToken()+ "'"+"";
+            try {
+                stnt.executeUpdate(qry);
+            } catch (SQLException e) {
+                System.out.println("fallo");
+            }
+       
+    } 
      
      public static void updateDinero(Usuario usuario){
           
@@ -161,6 +184,43 @@ public class Datos {
         listauser = null;
         return listauser;
     }
+    
+    public static ArrayList<Divisa> consultaDivisa(Divisa divisa){
+            String qry = "SELECT * FROM public.accion where token = "+"'"+ divisa.getToken()+"'";
+            ArrayList<Divisa> listaDivisa= new ArrayList<Divisa>();
+            try {
+                 rs=stnt.executeQuery(qry);
+                 listaDivisa=llenadoDivisa(rs);
+                 
+            } catch (SQLException e) {
+                System.out.println("fallo");
+            }
+            
+           return listaDivisa;
+    } 
+    
+    public static ArrayList<Divisa> llenadoDivisa(ResultSet rs){
+        ArrayList<Divisa> listadivisa = new ArrayList<Divisa>();
+        try {
+            while(rs.next()){
+               
+                    Divisa div = new Divisa();
+                    div.setCantidad(rs.getFloat("cantidad"));
+                    div.setIdOperacion(rs.getInt("idoperacion"));
+                    div.setToken(rs.getString("token"));
+                    div.setValorInicial(rs.getFloat("valoinicial"));
+                    div.setBeneficio(rs.getFloat("beneficio"));
+                    listadivisa.add(div);
+                   
+            }
+            return listadivisa;
+        } catch (SQLException ex) {
+            Logger.getLogger(Datos.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        listadivisa = null;
+        return listadivisa;
+    }
+    
 
 public void connect() {
         try {

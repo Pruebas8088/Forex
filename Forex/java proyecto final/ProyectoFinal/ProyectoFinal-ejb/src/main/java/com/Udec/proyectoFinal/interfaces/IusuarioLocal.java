@@ -5,8 +5,10 @@
  */
 package com.Udec.proyectoFinal.interfaces;
 
+import com.Udec.proyectoFinal.clase.Divisa;
 import com.Udec.proyectoFinal.clase.ErrorMsg;
 import com.Udec.proyectoFinal.clase.Usuario;
+import java.util.ArrayList;
 import javax.ejb.Local;
 
 /**
@@ -20,4 +22,10 @@ public interface IusuarioLocal {
     public float recargaDinero(Usuario user);
     
     public float consultarDinero(Usuario user);
+    
+    public ErrorMsg cerrarSesion(Usuario user) ;
+    
+    public ErrorMsg compraDivisa(Divisa divisa) ;
+    
+    public ArrayList<Divisa> ConsultaDivisa(Divisa divisa) ;
 }

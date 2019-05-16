@@ -5,6 +5,7 @@
  */
 package Udec;
 
+import com.Udec.proyectoFinal.clase.Divisa;
 import com.Udec.proyectoFinal.clase.Usuario;
 import com.Udec.proyectoFinal.interfaces.IusuarioLocal;
 import javax.ejb.EJB;
@@ -59,5 +60,42 @@ public class UsuarioService {
    } 
  
  
+ @POST
+ @Produces(MediaType.APPLICATION_JSON)
+ @Consumes(MediaType.APPLICATION_JSON)
+ @Path("/Cerrar")
+ public Response cerrarSesion(Usuario user){
+     try{
+        return Response.ok(usuario.cerrarSesion(user)).build();
+     }catch (Exception ex){
+         return Response.status(Response.Status.NOT_ACCEPTABLE).build();
+     }         
+   } 
+ 
+ @POST
+ @Produces(MediaType.APPLICATION_JSON)
+ @Consumes(MediaType.APPLICATION_JSON)
+ @Path("/CompraDivisa")
+ public Response CompraDivisa(Divisa divisa){
+     try{
+        return Response.ok(usuario.compraDivisa(divisa)).build();
+     }catch (Exception ex){
+         return Response.status(Response.Status.NOT_ACCEPTABLE).build();
+     }         
+   } 
+ 
+ @POST
+ @Produces(MediaType.APPLICATION_JSON)
+ @Consumes(MediaType.APPLICATION_JSON)
+ @Path("/ConsultaOperaciones")
+ public Response consultaOperacion(Divisa divisa){
+     try{
+        return Response.ok(usuario.ConsultaDivisa(divisa)).build();
+     }catch (Exception ex){
+         return Response.status(Response.Status.NOT_ACCEPTABLE).build();
+     }         
+   } 
+ 
+
     
 }
