@@ -22,17 +22,20 @@ public class Divisa {
     private int idOperacion;
     
     private float beneficio;
+    
+    private String divisa;
 
     public Divisa() {
     }
 
-    public Divisa(String token, float valorInicial, float valorFinal, float cantidad, int idOperacion, float beneficio) {
+    public Divisa(String token, float valorInicial, float valorFinal, float cantidad, int idOperacion, float beneficio, String divisa) {
         this.token = token;
         this.valorInicial = valorInicial;
         this.valorFinal = valorFinal;
         this.cantidad = cantidad;
         this.idOperacion = idOperacion;
         this.beneficio = beneficio;
+        this.divisa = divisa;
     }
 
     public String getToken() {
@@ -81,6 +84,14 @@ public class Divisa {
 
     public void setBeneficio(float beneficio) {
         this.beneficio = beneficio;
+    }
+
+    public String getDivisa() {
+        return divisa;
+    }
+
+    public void setDivisa(String divisa) {
+        this.divisa = divisa;
     }
     
     

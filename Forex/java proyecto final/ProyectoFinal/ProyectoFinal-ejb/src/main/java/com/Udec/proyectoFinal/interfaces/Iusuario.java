@@ -79,5 +79,30 @@ public class Iusuario implements IusuarioLocal {
             return listaDivisa;
     }
 
+    @Override
+    public float operacionBeneficio(Divisa divisa) {
+        ArrayList<Divisa> listaDivisa= new ArrayList<Divisa>();
+        Datos dat =  new Datos();
+        float bene =0;
+        listaDivisa = dat.consultaDivisa(divisa);
+        for (Divisa listdivi : listaDivisa) {
+             if(listdivi.getDivisa().equals(divisa.getDivisa())){
+                 if(listdivi.getIdOperacion() == 1){
+                     listdivi.setBeneficio((divisa.getValorFinal()-listdivi.getValorInicial())*listdivi.getCantidad());
+                     dat.updateDivisa(listdivi);
+                     bene+=listdivi.getBeneficio();
+                 }else{
+                     listdivi.setBeneficio((listdivi.getValorInicial()-divisa.getValorFinal())*listdivi.getCantidad());
+                     dat.updateDivisa(listdivi);
+                     bene+=listdivi.getBeneficio();
+                 }
+                 
+             }
+              
+        }
+       
+        return bene;
+    }
+
     
 }

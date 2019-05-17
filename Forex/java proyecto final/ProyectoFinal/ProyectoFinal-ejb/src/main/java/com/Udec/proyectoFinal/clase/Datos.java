@@ -54,7 +54,7 @@ public class Datos {
      
      
       public static void compraDivisas(Divisa divisa){
-            String qry = "INSERT INTO public.accion(idoperacion, valoinicial, token, valorfinal, cantidad,beneficio) values (" + divisa.getIdOperacion()+"," + divisa.getValorInicial()+","+"'" + divisa.getToken()+ "'"+"," + divisa.getValorFinal()+"," + divisa.getCantidad() +"," + divisa.getBeneficio()+")";
+            String qry = "INSERT INTO public.accion(idoperacion, valoinicial, token, valorfinal, cantidad,beneficio,divisa) values (" + divisa.getIdOperacion()+"," + divisa.getValorInicial()+","+"'" + divisa.getToken()+ "'"+"," + divisa.getValorFinal()+"," + divisa.getCantidad() +"," + divisa.getBeneficio()+","+"'" + divisa.getDivisa()+ "'"+")";
             try {
                 stnt.executeUpdate(qry);
             } catch (SQLException e) {
@@ -210,6 +210,7 @@ public class Datos {
                     div.setToken(rs.getString("token"));
                     div.setValorInicial(rs.getFloat("valoinicial"));
                     div.setBeneficio(rs.getFloat("beneficio"));
+                    div.setDivisa(rs.getString("divisa"));
                     listadivisa.add(div);
                    
             }
@@ -221,6 +222,17 @@ public class Datos {
         return listadivisa;
     }
     
+    
+     public static void updateDivisa(Divisa divisa){
+          
+            String qry = "UPDATE public.accion SET  beneficio="+ divisa.getBeneficio()+"WHERE token="+"'" + divisa.getToken() + "'"+"AND  CAST(valoinicial AS DECIMAL )="+divisa.getValorInicial()+"";
+            try {
+                stnt.executeUpdate(qry);
+            } catch (SQLException e) {
+                System.out.println("fallo");
+            }
+       
+    }
 
 public void connect() {
         try {

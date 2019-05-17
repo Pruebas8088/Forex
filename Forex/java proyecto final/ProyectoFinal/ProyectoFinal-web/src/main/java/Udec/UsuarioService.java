@@ -96,6 +96,22 @@ public class UsuarioService {
      }         
    } 
  
-
+ @POST
+ @Produces(MediaType.APPLICATION_JSON)
+ @Consumes(MediaType.APPLICATION_JSON)
+ @Path("/Beneficio")
+ public Response operacionBeneficio(Divisa divisa){
+       try{
+           JsonObject json = Json.createObjectBuilder()
+                 .add("beneficio",usuario.operacionBeneficio(divisa))
+                 .build();
+        return Response.ok(json).build();
+     }catch (Exception ex){
+         return Response.status(Response.Status.NOT_ACCEPTABLE).build();
+     }      
+      
+       
+      
+} 
     
 }

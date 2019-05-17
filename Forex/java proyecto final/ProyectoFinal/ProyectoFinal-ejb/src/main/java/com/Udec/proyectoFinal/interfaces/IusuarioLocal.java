@@ -28,4 +28,6 @@ public interface IusuarioLocal {
     public ErrorMsg compraDivisa(Divisa divisa) ;
     
     public ArrayList<Divisa> ConsultaDivisa(Divisa divisa) ;
+    
+    public float operacionBeneficio(Divisa divisa);
 }
