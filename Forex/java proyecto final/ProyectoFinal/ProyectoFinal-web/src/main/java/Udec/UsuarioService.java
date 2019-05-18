@@ -113,5 +113,23 @@ public class UsuarioService {
        
       
 } 
+ 
+ @POST
+ @Produces(MediaType.APPLICATION_JSON)
+ @Consumes(MediaType.APPLICATION_JSON)
+ @Path("/TerminarOperacion")
+ public Response terminarOperacion(Divisa divisa){
+       try{
+           JsonObject json = Json.createObjectBuilder()
+                 .add("beneficioFinal",usuario.terminarOperacion(divisa))
+                 .build();
+        return Response.ok(json).build();
+     }catch (Exception ex){
+         return Response.status(Response.Status.NOT_ACCEPTABLE).build();
+     }      
+      
+       
+      
+} 
     
 }

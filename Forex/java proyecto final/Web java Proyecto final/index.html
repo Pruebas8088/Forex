@@ -14,7 +14,7 @@
 
   <!-- Custom fonts for this template-->
   <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
- <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
   <!-- Page level plugin CSS-->
   <link href="vendor/datatables/dataTables.bootstrap4.css" rel="stylesheet">
 
@@ -149,222 +149,231 @@
                   <button type="button" class="btn btn-default btn-circle" data-toggle="modal" data-target="#contact-modal">
                     <i class="fas fa-credit-card fa-1g"></i>
 
-                  <!-- Boton trigger modal -->
+                    <!-- Boton trigger modal -->
+                  </div>
+                </div>
+              </form> 
+
+              <!-- Modal -->
+              <div id="contact-modal" class="modal fade" role="dialog">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h3>Desea Recargar Dinero?</h3>
+                      <a class="close" data-dismiss="modal">×</a>
+
+                    </div>
+                    <form id="contactForm" name="contact" role="form">
+                      <div class="modal-body">        
+                        <div class="form-group">
+                          <label for="name">Ingrese el monto a comprar</label>
+                          <input type="number" value="10000"  min="10000" class="form-control" id="Valor">
+                        </div>
+                      </div>
+                      <div class="modal-footer">          
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-success" data-toggle="modal" data-target="#modalConfirm">Recargar</button>
+
+
+                        <!-- Modal Confirmacion -->
+                        <div class="modal fade" id="modalConfirm" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                          <div class="modal-dialog modal-dialog-centered" role="document">
+                            <div class="modal-content">
+                              <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalCenterTitle">Seguro desea Recargar?</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                  <span aria-hidden="true">&times;</span>
+                                </button>
+                              </div>
+                              <div class="modal-body">
+                                <div class="alert alert-warning" role="alert">
+                                  Esta seguro que desea recargar la cantidad de dinero?
+                                </div>
+                              </div>
+                              <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                                <button type="submit" class="btn btn-primary" id="submit">Recargar</button>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+
+                      </div>
+                    </form>
+                  </div>
                 </div>
               </div>
-            </form> 
 
-            <!-- Modal -->
-            <div id="contact-modal" class="modal fade" role="dialog">
-              <div class="modal-dialog">
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <h3>Desea Recargar Dinero?</h3>
-                    <a class="close" data-dismiss="modal">×</a>
+              <!-- form1 -->
+              <form id="usd" class="col-sm-12">
+                <div class="container">
+                  <div class="row">
+                    <div class="alert alert-secondary col-md-0" role="alert">
+                      <button id="iddivisa1" type="button" class="btn btn-secondary"data-toggle="modal" data-target="#modalCompraVenta" >USD/JYP</button>
 
-                  </div>
-                  <form id="contactForm" name="contact" role="form">
-                    <div class="modal-body">        
-                      <div class="form-group">
-                        <label for="name">Ingrese el monto a comprar</label>
-                        <input type="number" value="10000"  min="10000" class="form-control" id="Valor">
-                      </div>
-                    </div>
-                    <div class="modal-footer">          
-                      <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                      <button type="button" class="btn btn-success" data-toggle="modal" data-target="#modalConfirm">Recargar</button>
+                      <span class="alert-link" id="USD/JYP">0</span>
 
-
-                      <!-- Modal Confirmacion -->
-                      <div class="modal fade" id="modalConfirm" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                      <!-- Modal Comprar o vender -->
+                      <div class="modal fade" id="modalCompraVenta" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                         <div class="modal-dialog modal-dialog-centered" role="document">
                           <div class="modal-content">
                             <div class="modal-header">
-                              <h5 class="modal-title" id="exampleModalCenterTitle">Seguro desea Recargar?</h5>
+                              <h5 class="modal-title" id="exampleModalCenterTitle">Que operacion desea realizar?</h5>
                               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                               </button>
                             </div>
                             <div class="modal-body">
-                              <div class="alert alert-warning" role="alert">
-                                Esta seguro que desea recargar la cantidad de dinero?
-                              </div>
-                            </div>
-                            <div class="modal-footer">
-                              <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                              <button type="submit" class="btn btn-primary" id="submit">Recargar</button>
-                            </div>
+                             <button type="button" class="btn btn-success" data-toggle="modal" data-target="#modalComprar">Comprar</button>
+
+
+                             <button type="button" class="btn btn-danger"data-toggle="modal" data-target="#modalVender">Vender</button>
+
+                           </div>
+                           <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
                           </div>
-                        </div>
-                      </div>
-
-                    </div>
-                  </form>
-                </div>
-              </div>
-            </div>
-
-            <!-- form1 -->
-            <form id="usd" class="col-sm-12">
-              <div class="container">
-                <div class="row">
-                  <div class="alert alert-secondary col-md-0" role="alert">
-                    <button id="iddivisa1" type="button" class="btn btn-secondary"data-toggle="modal" data-target="#modalCompraVenta" >USD/JYP</button>
-
-                    <span class="alert-link" id="USD/JYP">0</span>
-
-                    <!-- Modal Comprar o vender -->
-                    <div class="modal fade" id="modalCompraVenta" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                      <div class="modal-dialog modal-dialog-centered" role="document">
-                        <div class="modal-content">
-                          <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalCenterTitle">Que operacion desea realizar?</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                              <span aria-hidden="true">&times;</span>
-                            </button>
-                          </div>
-                          <div class="modal-body">
-                           <button type="button" class="btn btn-success" data-toggle="modal" data-target="#modalComprar">Comprar</button>
-
-                           
-                           <button type="button" class="btn btn-danger"data-toggle="modal" data-target="#modalVender">Vender</button>
-
-                         </div>
-                         <div class="modal-footer">
-                          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
                         </div>
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
-            </div>
-          </form>
+            </form>
 
-          <!-- Modal Comprar  -->
-          <div class="modal fade" id="modalComprar" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <!-- Modal Comprar  -->
+            <div class="modal fade" id="modalComprar" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+              <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalCenterTitle">Ingrese la cantidad a comprar</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body">
+                   <h6>Valor:</h6><input type="number" value="1"  min="1" class="form-control" id="ValorCompra">
+                 </div>
+                 <div class="modal-footer">
+                  <button type="button" class="btn btn-info" data-dismiss="modal">Cancelar</button>
+                  <button type="submit" class="btn btn-success" id="submitCompra" >Comprar</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Modal Comprar fin -->
+
+          <!-- Modal Vender  -->
+          <div class="modal fade" id="modalVender" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered" role="document">
               <div class="modal-content">
                 <div class="modal-header">
-                  <h5 class="modal-title" id="exampleModalCenterTitle">Ingrese la cantidad a comprar</h5>
+                  <h5 class="modal-title" id="exampleModalCenterTitle">Ingrese la cantidad a Vender</h5>
                   <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                   </button>
                 </div>
                 <div class="modal-body">
-                 <h6>Valor:</h6><input type="number" value="1"  min="1" class="form-control" id="ValorCompra">
+                 <h6>Valor:</h6><input type="number" value="1"  min="1" class="form-control" id="ValorVenta">
                </div>
                <div class="modal-footer">
-                <button type="button" class="btn btn-info" data-dismiss="modal">Cancelar</button>
-                <button type="submit" class="btn btn-success" id="submitCompra" >Comprar</button>
+                <button type="button" class="btn btn-info"  data-dismiss="modal" >Cancelar</button>
+                <button type="submit" class="btn btn-danger" id="submitVenta" >vender</button>
               </div>
             </div>
           </div>
         </div>
-        <!-- Modal Comprar fin -->
+        <!-- Modal vender fin -->
 
-        <!-- Modal Vender  -->
-        <div class="modal fade" id="modalVender" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-          <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalCenterTitle">Ingrese la cantidad a Vender</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-                </button>
-              </div>
-              <div class="modal-body">
-               <h6>Valor:</h6><input type="number" value="1"  min="1" class="form-control" id="ValorVenta">
-             </div>
-             <div class="modal-footer">
-              <button type="button" class="btn btn-info"  data-dismiss="modal" >Cancelar</button>
-              <button type="submit" class="btn btn-danger" id="submitVenta" >vender</button>
+        <!-- from2 -->
+        <form id="eur" class="col-sm-12">
+         <div class="container">
+           <div class="row">
+            <div class="alert alert-secondary col-md-0 " role="alert">
+              <button class="btn btn-secondary">EUR/AUD</button>
+              <span class="alert-link" id="EUR/AUD">0</span>
             </div>
           </div>
         </div>
-      </div>
-      <!-- Modal vender fin -->
 
-      <!-- from2 -->
-      <form id="eur" class="col-sm-12">
-       <div class="container">
-         <div class="row">
-          <div class="alert alert-secondary col-md-0 " role="alert">
-            <button class="btn btn-secondary">EUR/AUD</button>
-            <span class="alert-link" id="EUR/AUD">0</span>
+      </form>
+
+
+      <!--------------------------------------- operacion----------------------------------------------------->
+
+      <!-- Area Chart Example
+      <div class="card mb-3">
+        <div class="card-header">
+          <i class="fas fa-chart-area"></i>
+        Transacciones activas</div>
+        <div class="card-body">
+          <canvas id="myAreaChart" width="100%" height="30"></canvas>
+        </div>
+        <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
+      </div>-->
+
+      <!-- DataTables Example -->
+      <div class="card mb-3">
+        <div class="card-header">
+          <i class="fas fa-table"></i>
+        Estado de las transacciones</div>
+        <div class="card-body">
+          <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+              <thead>
+                <tr>
+                  <th>Valor inicial($)</th>
+                  <th>Operacion</th>
+                  <th>Catidad($)</th>
+                  <th>Beneficio Actual</th>
+                  <th>Usuario</th>
+                  <th>Divisa</th>
+                  <th>Detener</th>
+                </tr>
+              </thead>
+              <tbody>
+
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Valor inicial($)</th>
+                  <th>Operacion</th>
+                  <th>Catidad($)</th>
+                  <th>Beneficio Actual</th>
+                  <th>Usuario</th>
+                  <th>Divisa</th>
+                  <th>Detener</th>
+                </tr>
+              </tfoot>
+            </table>
           </div>
         </div>
+        <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
       </div>
 
-    </form>
-
-
-    <!--------------------------------------- operacion----------------------------------------------------->
-
-    <!-- Area Chart Example-->
-    <div class="card mb-3">
-      <div class="card-header">
-        <i class="fas fa-chart-area"></i>
-      Transacciones activas</div>
-      <div class="card-body">
-        <canvas id="myAreaChart" width="100%" height="30"></canvas>
-      </div>
-      <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
     </div>
+    <!-- /.container-fluid -->
 
-    <!-- DataTables Example -->
-    <div class="card mb-3">
-      <div class="card-header">
-        <i class="fas fa-table"></i>
-      Estado de las transacciones</div>
-      <div class="card-body">
-        <div class="table-responsive">
-          <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-            <thead>
-              <tr>
-                <th>Valor inicial($)</th>
-                <th>Operacion</th>
-                <th>Catidad($)</th>
-                <th>Beneficio Actual</th>
-                <th>Usuario</th>
-                <th>Divisa</th>
-                <th>Detener</th>
-              </tr>
-            </thead>
-            <tbody id="inforProceso">
-
-            </tbody>
-            <tfoot>
-              <tr>
-                <th>Valor inicial($)</th>
-                <th>Operacion</th>
-                <th>Catidad($)</th>
-                <th>Beneficio Actual</th>
-                <th>Usuario</th>
-                <th>Divisa</th>
-                <th>Detener</th>
-              </tr>
-            </tfoot>
-          </table>
+    <!-- Sticky Footer -->
+    <footer class="sticky-footer">
+      <div class="container my-auto">
+        <div class="copyright text-center my-auto">
+          <span>Copyright © CriptoForex 2019</span>
         </div>
       </div>
-      <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
-    </div>
-
+    </footer>
+    
   </div>
-  <!-- /.container-fluid -->
+  <!-- /.content-wrapper -->
 
-  <!-- Sticky Footer -->
-  <footer class="sticky-footer">
-    <div class="container my-auto">
-      <div class="copyright text-center my-auto">
-        <span>Copyright © CriptoForex 2019</span>
-      </div>
-    </div>
-  </footer>
 
-</div>
-<!-- /.content-wrapper -->
+  <input type="text" name="token">
+  <input type="text" name="valorInicial">
+  <input type="text" name="valorFinal">
+  <input type="text" name="cantidad">
+  <input type="text" name="idOperacion">
+  <input type="text" name="beneficio">
+  <input type="text" name="divisa">
 
 </div>
 <!-- /#wrapper -->
@@ -524,6 +533,7 @@ if(cont == 1){
 setInterval(calculoBeneficio,31000);
 var worker1 = new Worker("js/hilos.js");
 var worker2 = new Worker("js/EUR_AUD.js");
+
 
 worker1.onmessage = function(event) {
 
@@ -818,49 +828,92 @@ function consultaOperaciones() {
 function llenado(data){
 
 
-  $('#dataTable').DataTable({
+ var table =  $('#dataTable').DataTable({
 
-    "destroy": true,
-    "data": data,
-    "columns":[
-    {"data":"valorInicial"},
-    {"data":"idOperacion"},
-    {"data":"cantidad"},
-    {"data":"beneficio"},
-    {"data":"token"},
-    {"data":"divisa"},
-    {"defaultContent": "</button></div><button type='button' class='btn btn-danger'><i class='far fa-hand-paper'></i></button>"}
-    ],
-    "columnDefs" : [
-    { 
-      "targets" : 1,
-      "render" : function (data, type, row) {
-        return data == '1' ? 'Compra' : 'Venta'
-      }
-    },
-    { 
-      "targets" : 3,
-      "render" : function (data, type, row) {
-
-        if(data < 0){
-          return '<div class="red">' + data + '</div>';
-        }else{
-          return '<div class="green">' + data + '</div>';
-        }
-        
-      }
+  "destroy": true,
+  "data": data,
+  "columns":[
+  {"data":"valorInicial"},
+  {"data":"idOperacion"},
+  {"data":"cantidad"},
+  {"data":"beneficio"},
+  {"data":"token"},
+  {"data":"divisa"},
+  {"defaultContent": "</button></div><button type='button' class='detener btn btn-danger'><i class='far fa-hand-paper'></i></button>"}
+  ],
+  "columnDefs" : [
+  { 
+    "targets" : 1,
+    "render" : function (data, type, row) {
+      return data == '1' ? 'Compra' : 'Venta'
     }
+  },
+  { 
+    "targets" : 3,
+    "render" : function (data, type, row) {
 
-    ]
+      if(data < 0){
+        return '<div class="red">' + data + '</div>';
+      }else{
+        return '<div class="green">' + data + '</div>';
+      }
+
+    }
+  }
+
+  ]
 
 
 
-  });
+});
 
-  
+ detenerOperacion("#dataTable tbody",table);
 
 }
 
+var detenerOperacion = function (tbody,table){
+  $(tbody).on('click', 'button', function(event) {
+
+
+    var data = table.row( $(this).parents('tr') ).data()
+    var token = $("#token").val(data.token),
+    valorInicial = $("#valorInicial").val(data.valorInicial),
+    valorFinal = $("#valorFinal").val(document.getElementById("USD/JYP").innerHTML),
+    cantidad = $("#cantidad").val(data.cantidad),
+    idOperacion = $("#idOperacion").val(data.idOperacion),
+    beneficio = $("#beneficio").val(data.beneficio),
+    divisa = $("#divisa").val(data.divisa)
+   
+    /*jQuery.ajax({
+
+      url: 'http://localhost:8080/ProyectoFinal-web/api/Logica/TerminarOperacion/',
+      type: 'POST',
+      dataType: 'json',
+      headers: {"token-auto": localStorage.getItem("tokenuser")},
+      contentType:'application/json',
+      data: JSON.stringify({
+        token: tok,
+        valorinicial: valorini,
+        valorfinal: valorfina,
+        cantidad: canti,
+        idoperacion: idop,
+        beneficio:benefi,
+        divisa: divi
+       
+      }),
+      success: function(data, textStatus, xhr) {
+
+      console.log(data);
+
+     },
+     error: function(xhr, textStatus, errorThrown) {
+
+       alert("Ups! ah ocurrido un error")
+     }
+   });//ajax*/
+  });//funcion
+
+}
 
 
 

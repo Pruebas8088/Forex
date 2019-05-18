@@ -51,6 +51,8 @@ public class Conexion {
            }
     }
 
+   
+
     public Connection con(){ return con;  }
 
     public Statement stamt(){ return stmt; }

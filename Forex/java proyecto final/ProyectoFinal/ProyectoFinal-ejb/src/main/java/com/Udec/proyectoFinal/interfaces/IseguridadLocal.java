@@ -5,6 +5,8 @@
  */
 package com.Udec.proyectoFinal.interfaces;
 
+import com.Udec.proyectoFinal.clase.Usuario;
+import java.util.ArrayList;
 import java.util.Date;
 import javax.ejb.Local;
 
@@ -17,6 +19,7 @@ public interface IseguridadLocal {
     
   public String JwtConvert(String usuario, String contraseña);
   
+  public boolean validacion(Usuario user);
   
-  
+  public ArrayList<Usuario> traerdata();
 }

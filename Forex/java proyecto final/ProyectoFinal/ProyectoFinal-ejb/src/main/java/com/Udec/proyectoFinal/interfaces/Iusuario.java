@@ -104,5 +104,13 @@ public class Iusuario implements IusuarioLocal {
         return bene;
     }
 
+    @Override
+    public float terminarOperacion(Divisa divisa) {
+        Datos dat =  new Datos();
+        dat.insertarHistorial(divisa);
+        dat.borrarDivisa(divisa);
+        return divisa.getBeneficio();
+    }
+
     
 }

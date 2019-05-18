@@ -24,13 +24,12 @@ import javax.xml.bind.DatatypeConverter;
  */
 @Stateless
 public class Iseguridad implements IseguridadLocal {
-    @EJB
-    IdatosLocal datos;
+    
     
     @Override
     public String JwtConvert(String usuario, String contraseña) {
         Key key = traerKey();
-        
+        Datos datos = new  Datos();
         ArrayList<Usuario> listauser = new ArrayList<Usuario>();
         listauser = datos.traerInfo();
         if(listauser.isEmpty()){
@@ -72,4 +71,25 @@ public class Iseguridad implements IseguridadLocal {
         Key key = new SecretKeySpec(encodedKey,signatureAlgorithm.getJcaName());
         return key;
     }
+    
+    @Override
+    public boolean validacion(Usuario user){
+        boolean estado;
+        Datos dat = new Datos();
+        estado=dat.validacion(user);
+        return estado;
+    }
+
+    @Override
+    public ArrayList<Usuario> traerdata() {
+   
+        ArrayList<Usuario> listauser = new ArrayList<Usuario>();
+         Datos dat = new Datos();
+         listauser=dat.traerInfo();
+         return listauser;
+    
+    }
+
+   
+    
 }

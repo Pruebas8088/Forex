@@ -7,7 +7,6 @@ package Udec;
 
 
 import com.Udec.proyectoFinal.clase.Usuario;
-import com.Udec.proyectoFinal.interfaces.IdatosLocal;
 import com.Udec.proyectoFinal.interfaces.IseguridadLocal;
 import javax.ejb.EJB;
 
@@ -29,9 +28,7 @@ import javax.ws.rs.core.Response;
 @javax.enterprise.context.RequestScoped
 @Path("Login")
 public class UsuarioLogin {
-    
-    @EJB
-    IdatosLocal dato;
+
     
     @EJB
     IseguridadLocal seguridad;
@@ -42,7 +39,7 @@ public class UsuarioLogin {
  @Path("/logeoUsuario")
  public Response retornUsuariosJwtPrueba(Usuario user ){
             
-     if(dato.validacion(user) == true){
+     if(seguridad.validacion(user) == true){
          JsonObject json = Json.createObjectBuilder()
                  .add("jwt",seguridad.JwtConvert(user.getEmail(),user.getPass()))
                  .build();

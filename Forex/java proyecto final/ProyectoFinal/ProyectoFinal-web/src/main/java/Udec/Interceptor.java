@@ -7,7 +7,8 @@ package Udec;
 
 import com.Udec.proyectoFinal.clase.Datos;
 import com.Udec.proyectoFinal.clase.Usuario;
-import com.Udec.proyectoFinal.interfaces.IdatosLocal;
+import com.Udec.proyectoFinal.interfaces.Iseguridad;
+import com.Udec.proyectoFinal.interfaces.IseguridadLocal;
 import com.Udec.proyectoFinal.interfaces.IusuarioLocal;
 import com.Udec.proyectoFinal.utilitario.Seguridad;
 import java.io.IOException;
@@ -59,10 +60,10 @@ public class Interceptor implements ContainerRequestFilter{
     }
     
    @EJB
-   IdatosLocal datos;
+   IseguridadLocal segur;
     private String traerToken(String token){
          ArrayList<Usuario> listauser = new ArrayList<Usuario>();
-         listauser = datos.traerInfo();
+         listauser = segur.traerdata();
          String tokenverif="";
          for (Usuario Lusuario : listauser) {
                 

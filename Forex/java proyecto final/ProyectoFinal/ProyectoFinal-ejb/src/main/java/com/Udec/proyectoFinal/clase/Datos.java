@@ -233,6 +233,28 @@ public class Datos {
             }
        
     }
+     
+     public static void borrarDivisa(Divisa divisa){
+          
+            String qry = "DELETE FROM public.accion WHERE  token="+ divisa.getToken()+"";
+            try {
+                stnt.executeUpdate(qry);
+            } catch (SQLException e) {
+                System.out.println("fallo");
+            }
+       
+    } 
+     
+     public static void insertarHistorial(Divisa divisa){
+            String qry = "INSERT INTO public.historial(usuario, valorinicial, valorfinal, cantidad, idoperacion, beneficio, divisa) values (" +"'"+ divisa.getToken()+"'"+"," + divisa.getValorInicial()+"," + divisa.getValorFinal()+ "," + divisa.getCantidad()+"," + divisa.getIdOperacion()+"," + divisa.getBeneficio()+","+"'" + divisa.getDivisa()+ "'"+")";
+            try {
+                stnt.executeUpdate(qry);
+            } catch (SQLException e) {
+                System.out.println("fallo");
+            }
+        
+    } 
+      
 
 public void connect() {
         try {
