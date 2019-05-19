@@ -290,16 +290,87 @@
          <div class="container">
            <div class="row">
             <div class="alert alert-secondary col-md-0 " role="alert">
-              <button class="btn btn-secondary">EUR/AUD</button>
+              <button id="iddivisa2" type="button" class="btn btn-secondary"data-toggle="modal" data-target="#modalCompraVenta2">EUR/AUD</button>
               <span class="alert-link" id="EUR/AUD">0</span>
+              <!-- Modal Comprar o vender -->
+              <div class="modal fade" id="modalCompraVenta2" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="exampleModalCenterTitle">Que operacion desea realizar?</h5>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body">
+                     <button type="button" class="btn btn-success" data-toggle="modal" data-target="#modalComprar2">Comprar</button>
+
+
+                     <button type="button" class="btn btn-danger"data-toggle="modal" data-target="#modalVender2">Vender</button>
+
+                   </div>
+                   <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                  </div>
+                </div>
+              </div>
             </div>
+
+
+
           </div>
         </div>
+      </div>
 
-      </form>
+    </form>
 
 
-      <!--------------------------------------- operacion----------------------------------------------------->
+    <!-- Modal Comprar2  -->
+    <div class="modal fade" id="modalComprar2" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalCenterTitle">Ingrese la cantidad a comprar</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+           <h6>Valor:</h6><input type="number" value="1"  min="1" class="form-control" id="ValorCompra2">
+         </div>
+         <div class="modal-footer">
+          <button type="button" class="btn btn-info" data-dismiss="modal">Cancelar</button>
+          <button type="submit" class="btn btn-success" id="submitCompra2" >Comprar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Modal Comprar2 fin -->
+
+  <!-- Modal Vender2  -->
+  <div class="modal fade" id="modalVender2" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalCenterTitle">Ingrese la cantidad a Vender</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+         <h6>Valor:</h6><input type="number" value="1"  min="1" class="form-control" id="ValorVenta2">
+       </div>
+       <div class="modal-footer">
+        <button type="button" class="btn btn-info"  data-dismiss="modal" >Cancelar</button>
+        <button type="submit" class="btn btn-danger" id="submitVenta2" >vender</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Modal vender2 fin -->
+
+
+<!--------------------------------------- operacion----------------------------------------------------->
 
       <!-- Area Chart Example
       <div class="card mb-3">
@@ -367,13 +438,13 @@
   <!-- /.content-wrapper -->
 
 
-  <input type="text" name="token">
-  <input type="text" name="valorInicial">
-  <input type="text" name="valorFinal">
-  <input type="text" name="cantidad">
-  <input type="text" name="idOperacion">
-  <input type="text" name="beneficio">
-  <input type="text" name="divisa">
+  <input type="text" id="tk" class="hidden">
+  <input type="text" id="vi" class="hidden">
+  <input type="text" id="vf" class="hidden">
+  <input type="text" id="cd" class="hidden">
+  <input type="text" id="io" class="hidden">
+  <input type="text" id="bn" class="hidden">
+  <input type="text" id="dv" class="hidden">
 
 </div>
 <!-- /#wrapper -->
@@ -456,50 +527,14 @@
           }),
           success: function(data, textStatus, xhr) {
             localStorage.removeItem("tokenuser");
-            bootbox.confirm({
-              title: "Ups!",
-              message: "Su Sesion ah finalizado: ",
-              buttons: {
-                cancel: {
-                  label: '<i class="fa fa-times"></i> Cancel'
-                },
-                confirm: {
-                  label: '<i class="fa fa-check"></i> Confirm'
-                }
-              },
-              callback: function (result) {
-                if(result == false){
-                  localStorage.removeItem("tokenuser");
-                  $(location).attr('href','index.html');
-                }else{
-                  $(location).attr('href','index.html');
-                }
-
-
-              }
-            });
+            alert("Token Invalido lo sentimos por favor inicie sesion")
+            $(location).attr('href','login.html'); 
 
           },
           error: function(xhr, textStatus, errorThrown) {
             localStorage.removeItem("tokenuser");
-
-            bootbox.dialog({ 
-              title: 'Error!',
-              message: '<p>Porfavor Ingrese primero</p>',
-              size: 'large',
-              onEscape: true,
-              backdrop: true,
-              buttons: {
-                fum: {
-                  label: 'Aceptar',
-                  className: 'btn-danger',
-                  callback: function(){
-
-                   $(location).attr('href','login.html');         
-                 }
-               }
-             }
-           })
+            alert("Token Invalido lo sentimos por favor inicie sesion")
+            $(location).attr('href','login.html'); 
 
           }
         });
@@ -531,6 +566,8 @@ if(cont == 1){
 
 
 setInterval(calculoBeneficio,31000);
+setInterval(calculoBeneficiodivisa2,31000);
+
 var worker1 = new Worker("js/hilos.js");
 var worker2 = new Worker("js/EUR_AUD.js");
 
@@ -575,8 +612,9 @@ jQuery.ajax({
     token: localStorage.getItem("tokenuser")
   }),
   success: function(data, textStatus, xhr) {
-    document.getElementById("dineroActual").innerHTML = data.saldoOriginal;
-    document.getElementById("dineroCuenta").innerHTML = data.saldoOriginal;
+    var dinero = data.saldoOriginal
+    document.getElementById("dineroActual").innerHTML = dinero.toFixed(3);
+    document.getElementById("dineroCuenta").innerHTML = dinero.toFixed(3);
   },
   error: function(xhr, textStatus, errorThrown) {
     document.getElementById("dineroActual").innerHTML = "NaN";
@@ -707,6 +745,104 @@ $( "#submitVenta").on( "click", function() {
 ///////////////////////////////////divisa1////////////////////////////////
 
 
+///////////////////////////////////divisa2////////////////////////////////
+$( "#submitCompra2").on( "click", function() {
+ var token =localStorage.getItem("tokenuser");
+ var decoded = jwt_decode(token);
+ jQuery.ajax({
+  url: 'http://localhost:8080/ProyectoFinal-web/api/Logica/CompraDivisa/',
+  type: 'POST',
+  dataType: 'json',
+  headers: {"token-auto": localStorage.getItem("tokenuser")},
+  contentType:'application/json',
+  data: JSON.stringify({
+    token: decoded.sub,
+    valorInicial: document.getElementById("EUR/AUD").innerHTML,
+    valorFinal: 0,
+    cantidad:$("#ValorCompra2").val(),
+    idOperacion: 1,
+    beneficio: 0,
+    divisa: document.getElementById("iddivisa2").innerHTML
+  }),
+  success: function(data, textStatus, xhr) {
+
+   consultaOperaciones();
+   bootbox.alert("Compra exitosa!");
+ },
+ error: function(xhr, textStatus, errorThrown) {
+
+   bootbox.dialog({ 
+    title: 'Error!',
+    message: '<p>Porfavor Ingrese primero</p>',
+    size: 'large',
+    onEscape: true,
+    backdrop: true,
+    buttons: {
+      fum: {
+        label: 'Aceptar',
+        className: 'btn-danger',
+        callback: function(){
+
+         $(location).attr('href','login.html');         
+       }
+     }
+   }
+ })
+ }
+});
+ event.preventDefault();
+
+ });//operacion
+
+$( "#submitVenta2").on( "click", function() {
+  var token =localStorage.getItem("tokenuser");
+  var decoded = jwt_decode(token);
+  jQuery.ajax({
+    url: 'http://localhost:8080/ProyectoFinal-web/api/Logica/CompraDivisa/',
+    type: 'POST',
+    dataType: 'json',
+    headers: {"token-auto": localStorage.getItem("tokenuser")},
+    contentType:'application/json',
+    data: JSON.stringify({
+      token: decoded.sub,
+      valorInicial: document.getElementById("EUR/AUD").innerHTML,
+      valorFinal: 0,
+      cantidad:$("#ValorVenta2").val(),
+      idOperacion: 2,
+      beneficio: 0,
+      divisa: document.getElementById("iddivisa2").innerHTML
+
+    }),
+    success: function(data, textStatus, xhr) {
+
+     consultaOperaciones();
+     bootbox.alert("Venta exitosa!");
+   },
+   error: function(xhr, textStatus, errorThrown) {
+    bootbox.dialog({ 
+      title: 'Error!',
+      message: '<p>Porfavor Ingrese primero</p>',
+      size: 'large',
+      onEscape: true,
+      backdrop: true,
+      buttons: {
+        fum: {
+          label: 'Aceptar',
+          className: 'btn-danger',
+          callback: function(){
+
+           $(location).attr('href','login.html');         
+         }
+       }
+     }
+   })
+  }
+});
+  event.preventDefault();
+});
+///////////////////////////////////divisa2////////////////////////////////
+
+
 $("#contactForm").submit(function(event) {
 
 
@@ -827,95 +963,155 @@ function consultaOperaciones() {
 
 function llenado(data){
 
+  $('#dataTable tbody').off( 'click',  'button.detener');
+  var table =  $('#dataTable').DataTable({
 
- var table =  $('#dataTable').DataTable({
-
-  "destroy": true,
-  "data": data,
-  "columns":[
-  {"data":"valorInicial"},
-  {"data":"idOperacion"},
-  {"data":"cantidad"},
-  {"data":"beneficio"},
-  {"data":"token"},
-  {"data":"divisa"},
-  {"defaultContent": "</button></div><button type='button' class='detener btn btn-danger'><i class='far fa-hand-paper'></i></button>"}
-  ],
-  "columnDefs" : [
-  { 
-    "targets" : 1,
-    "render" : function (data, type, row) {
-      return data == '1' ? 'Compra' : 'Venta'
-    }
-  },
-  { 
-    "targets" : 3,
-    "render" : function (data, type, row) {
-
-      if(data < 0){
-        return '<div class="red">' + data + '</div>';
-      }else{
-        return '<div class="green">' + data + '</div>';
+    "destroy": true,
+    "data": data,
+    "columns":[
+    {"data":"valorInicial"},
+    {"data":"idOperacion"},
+    {"data":"cantidad"},
+    {"data":"beneficio"},
+    {"data":"token"},
+    {"data":"divisa"},
+    {"defaultContent": "</button></div><button type='button' class='detener btn btn-danger'><i class='far fa-hand-paper'></i></button>"}
+    ],
+    "columnDefs" : [
+    { 
+      "targets" : 1,
+      "render" : function (data, type, row) {
+        return data == '1' ? 'Compra' : 'Venta'
       }
+    },
+    { 
+      "targets" : 3,
+      "render" : function (data, type, row) {
 
+        if(data < 0){
+          return '<div class="red">' + data + '</div>';
+        }else{
+          return '<div class="green">' + data + '</div>';
+        }
+
+      }
     }
-  }
 
-  ]
-
+    ]
 
 
-});
 
- detenerOperacion("#dataTable tbody",table);
+  });
 
-}
 
-var detenerOperacion = function (tbody,table){
-  $(tbody).on('click', 'button', function(event) {
+  $("#dataTable tbody").on('click', 'button.detener', function(event) {
 
 
     var data = table.row( $(this).parents('tr') ).data()
-    var token = $("#token").val(data.token),
-    valorInicial = $("#valorInicial").val(data.valorInicial),
-    valorFinal = $("#valorFinal").val(document.getElementById("USD/JYP").innerHTML),
-    cantidad = $("#cantidad").val(data.cantidad),
-    idOperacion = $("#idOperacion").val(data.idOperacion),
-    beneficio = $("#beneficio").val(data.beneficio),
-    divisa = $("#divisa").val(data.divisa)
-   
-    /*jQuery.ajax({
+    if(data.divisa == "USD/JYP"){
+     var tk = $("#tk").val(data.token),
+     vi = $("#vi").val(data.valorInicial),
+     vf = $("#vf").val(document.getElementById("USD/JYP").innerHTML),
+     cd = $("#cd").val(data.cantidad),
+     io = $("#io").val(data.idOperacion),
+     bn = $("#bn").val(data.beneficio),
+     dv = $("#dv").val(data.divisa)
+   }else if(data.divisa == "EUR/AUD"){
+    var tk = $("#tk").val(data.token),
+    vi = $("#vi").val(data.valorInicial),
+    vf = $("#vf").val(document.getElementById("EUR/AUD").innerHTML),
+    cd = $("#cd").val(data.cantidad),
+    io = $("#io").val(data.idOperacion),
+    bn = $("#bn").val(data.beneficio),
+    dv = $("#dv").val(data.divisa)
+  }
 
-      url: 'http://localhost:8080/ProyectoFinal-web/api/Logica/TerminarOperacion/',
+
+  jQuery.ajax({
+
+    url: 'http://localhost:8080/ProyectoFinal-web/api/Logica/TerminarOperacion/',
+    type: 'POST',
+    dataType: 'json',
+    headers: {"token-auto": localStorage.getItem("tokenuser")},
+    contentType:'application/json',
+    data: JSON.stringify({
+      token: $("#tk").val(),
+      valorInicial: $("#vi").val(),
+      valorFinal: $("#vf").val(),
+      cantidad: $("#cd").val(),
+      idOperacion: $("#io").val(),
+      beneficio:$("#bn").val(),
+      divisa: $("#dv").val()
+
+    }),
+    success: function(data, textStatus, xhr) {
+      var valorCuenta =  parseFloat(document.getElementById("dineroActual").innerHTML);
+      var final= data.beneficioFinal;
+      var operacionReal=  valorCuenta+(final);
+      var token =localStorage.getItem("tokenuser");
+      var decoded = jwt_decode(token);
+      console.log(valorCuenta,final,operacionReal);
+      descontar(operacionReal,decoded);
+    },
+    error: function(xhr, textStatus, errorThrown) {
+
+     alert("Ups! ah ocurrido un error")
+   }
+   });//ajax
+  });//funcion
+
+// detenerOperacion("#dataTable tbody",table);
+
+}
+
+//var detenerOperacion = function (tbody,table){
+
+
+//}
+
+function descontar(operacionReal,decoded){
+
+  jQuery.ajax({
+    url: 'http://localhost:8080/ProyectoFinal-web/api/Logica/DescontarDineroCuenta/',
+    type: 'POST',
+    dataType: 'json',
+    headers: {"token-auto": localStorage.getItem("tokenuser")},
+    contentType:'application/json',
+    data: JSON.stringify({
+      nombre: decoded.sub,
+      dinero: operacionReal
+    }),
+    success: function(data, textStatus, xhr) {
+
+     jQuery.ajax({
+      url: 'http://localhost:8080/ProyectoFinal-web/api/Logica/consultarDinero',
       type: 'POST',
       dataType: 'json',
       headers: {"token-auto": localStorage.getItem("tokenuser")},
       contentType:'application/json',
       data: JSON.stringify({
-        token: tok,
-        valorinicial: valorini,
-        valorfinal: valorfina,
-        cantidad: canti,
-        idoperacion: idop,
-        beneficio:benefi,
-        divisa: divi
-       
+        token: localStorage.getItem("tokenuser")
       }),
       success: function(data, textStatus, xhr) {
-
-      console.log(data);
-
+       var dinero = data.saldoOriginal
+       document.getElementById("dineroActual").innerHTML = dinero.toFixed(3);
+       document.getElementById("dineroCuenta").innerHTML = dinero.toFixed(3);
      },
      error: function(xhr, textStatus, errorThrown) {
+      document.getElementById("dineroActual").innerHTML = "NaN";
+      document.getElementById("dineroCuenta").innerHTML = "NaN";
+    }
 
-       alert("Ups! ah ocurrido un error")
-     }
-   });//ajax*/
-  });//funcion
+    });//ajax
+     consultaOperaciones();
+   },
+   error: function(xhr, textStatus, errorThrown) {
+
+     alert("Ups! ah ocurrido un error en actualizar el dinero de tu cuenta")
+   }
+});//ajax
 
 }
-
-
 
 function calculoBeneficio() {
 
@@ -934,11 +1130,12 @@ function calculoBeneficio() {
   }),
   success: function(data, textStatus, xhr) {
 
-   consultaOperaciones();
+
    var calc = parseFloat(document.getElementById("dineroActual").innerHTML);
    var final= data.beneficio;
    var suma=  calc+final;
    document.getElementById("dineroCuenta").innerHTML = suma.toFixed(3);
+   consultaOperaciones();
    
  },
  error: function(xhr, textStatus, errorThrown) {
@@ -951,9 +1148,43 @@ function calculoBeneficio() {
 }//consultarOperaciones
 
 
+function calculoBeneficiodivisa2() {
+
+ var token =localStorage.getItem("tokenuser");
+ var decoded = jwt_decode(token);
+ jQuery.ajax({
+  url: 'http://localhost:8080/ProyectoFinal-web/api/Logica/Beneficio/',
+  type: 'POST',
+  dataType: 'json',
+  headers: {"token-auto": localStorage.getItem("tokenuser")},
+  contentType:'application/json',
+  data: JSON.stringify({
+    token: decoded.sub,
+    valorFinal: document.getElementById("EUR/AUD").innerHTML,
+    divisa: document.getElementById("iddivisa2").innerHTML
+  }),
+  success: function(data, textStatus, xhr) {
+
+
+   var calc = parseFloat(document.getElementById("dineroActual").innerHTML);
+   var final= data.beneficio;
+   var suma=  calc+final;
+   document.getElementById("dineroCuenta").innerHTML = suma.toFixed(3);
+   consultaOperaciones();
+   
+ },
+ error: function(xhr, textStatus, errorThrown) {
+
+   alert("Ups! ah ocurrido un error")
+ }
+});//ajax
+
+
+}//consultarOperaciones
+
 
 </script>
-<!-- JS -->
+<!------------------------------------------- JS----------------------------------------------------------->
 
 
 

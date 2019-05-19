@@ -29,7 +29,11 @@ public interface IusuarioLocal {
     
     public ArrayList<Divisa> ConsultaDivisa(Divisa divisa) ;
     
+     public ArrayList<Divisa> ConsultaHistorial(Divisa divisa) ;
+    
     public float operacionBeneficio(Divisa divisa);
     
     public float terminarOperacion(Divisa divisa);
+    
+    public ErrorMsg descontarDinero(Usuario user);
 }

@@ -184,7 +184,7 @@ public class Datos {
         listauser = null;
         return listauser;
     }
-    
+    ////////////////////////////////////////////////////////////////////////////////////
     public static ArrayList<Divisa> consultaDivisa(Divisa divisa){
             String qry = "SELECT * FROM public.accion where token = "+"'"+ divisa.getToken()+"'";
             ArrayList<Divisa> listaDivisa= new ArrayList<Divisa>();
@@ -223,6 +223,47 @@ public class Datos {
     }
     
     
+    
+    public static ArrayList<Divisa> consultaDivisaHistorial(Divisa divisa){
+            String qry = "SELECT * FROM public.historial where usuario = "+"'"+ divisa.getToken()+"'";
+            ArrayList<Divisa> listaDivisa= new ArrayList<Divisa>();
+            try {
+                 rs=stnt.executeQuery(qry);
+                 listaDivisa=llenadoDivisaHistorial(rs);
+                 
+            } catch (SQLException e) {
+                System.out.println("fallo");
+            }
+            
+           return listaDivisa;
+    } 
+    
+    public static ArrayList<Divisa> llenadoDivisaHistorial(ResultSet rs){
+        ArrayList<Divisa> listadivisa = new ArrayList<Divisa>();
+        try {
+            while(rs.next()){
+               
+                    Divisa div = new Divisa();
+                    div.setToken(rs.getString("usuario"));
+                    div.setValorInicial(rs.getFloat("valorinicial"));
+                    div.setValorFinal(rs.getFloat("valorfinal"));
+                    div.setCantidad(rs.getFloat("cantidad"));
+                    div.setIdOperacion(rs.getInt("idoperacion"));
+                    div.setBeneficio(rs.getFloat("beneficio"));
+                    div.setDivisa(rs.getString("divisa"));
+                    listadivisa.add(div);
+                   
+            }
+            return listadivisa;
+        } catch (SQLException ex) {
+            Logger.getLogger(Datos.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        listadivisa = null;
+        return listadivisa;
+    }
+    
+    
+    
      public static void updateDivisa(Divisa divisa){
           
             String qry = "UPDATE public.accion SET  beneficio="+ divisa.getBeneficio()+"WHERE token="+"'" + divisa.getToken() + "'"+"AND  CAST(valoinicial AS DECIMAL )="+divisa.getValorInicial()+"";
@@ -236,11 +277,11 @@ public class Datos {
      
      public static void borrarDivisa(Divisa divisa){
           
-            String qry = "DELETE FROM public.accion WHERE  token="+ divisa.getToken()+"";
+            String qry = "DELETE FROM public.accion WHERE  token="+"'"+ divisa.getToken()+"'"+"AND beneficio="+"'"+divisa.getBeneficio()+"'"+" AND idoperacion="+"'"+divisa.getIdOperacion()+"'"+"";
             try {
                 stnt.executeUpdate(qry);
             } catch (SQLException e) {
-                System.out.println("fallo");
+                System.out.println("fallo borrar");
             }
        
     } 
@@ -250,11 +291,22 @@ public class Datos {
             try {
                 stnt.executeUpdate(qry);
             } catch (SQLException e) {
-                System.out.println("fallo");
+                System.out.println("fallo insertar en el historial");
             }
         
-    } 
+     } 
       
+     
+      public static void updateDineroCuenta(Usuario usuario){
+          
+            String qry = "UPDATE public.usuario SET  dinero="+ usuario.getDinero()+"WHERE nombre="+"'" + usuario.getNombre()+ "'"+"";
+            try {
+                stnt.executeUpdate(qry);
+            } catch (SQLException e) {
+                System.out.println("fallo");
+            }
+       
+    }
 
 public void connect() {
         try {

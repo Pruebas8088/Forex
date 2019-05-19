@@ -20,6 +20,31 @@
   <!-- Custom styles for this template-->
   <link href="css/sb-admin.css" rel="stylesheet">
 
+  <style type="text/css">
+    .btn-circle {
+      width: 30px;
+      height: 30px;
+      padding: 6px 0px;
+      border-radius: 15px;
+      text-align: center;
+      font-size: 12px;
+      line-height: 1.42857;
+      background: #EEEEEE;
+    }
+    .red {
+      background-color: #FC9191;
+    }
+    .green {
+      background-color: #97F17B;
+    }
+
+  </style>
+  <style>
+    .hidden {
+      display: none;
+    }
+  </style>
+
 </head>
 
 <body id="page-top">
@@ -27,8 +52,8 @@
   <nav class="navbar navbar-expand navbar-dark bg-dark static-top">
 
     <a class="navbar-brand mr-1" href="index.html">CriptoForex</a>
-     <div class="d-flex justify-content-start">
-          <img src="./imagen/icono.png" height="24" width="24">
+    <div class="d-flex justify-content-start">
+      <img src="./imagen/icono.png" height="24" width="24">
     </div>
 
 
@@ -38,19 +63,19 @@
 
     <!-- Navbar Search -->
     <form class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0">
-    
+
     </form>
 
     <!-- Navbar -->
     <ul class="navbar-nav ml-auto ml-md-0">
-      
+
       <li class="nav-item dropdown no-arrow">
         <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           <i class="fas fa-user-circle fa-fw"></i>
         </a>
         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
-         
-        <a class="dropdown-item" href="Editar_perfil.html">Editar Perfil</a>
+
+          <a class="dropdown-item" href="Editar_perfil.html">Editar Perfil</a>
           <div class="dropdown-divider"></div>
           <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">Cerrar Sesion</a>
         </div>
@@ -74,135 +99,337 @@
           <i class="fas fa-fw fa-folder"></i>
           <span>Opciones de la cuenta</span>
         </a>
-       <div class="dropdown-menu" aria-labelledby="pagesDropdown">
+        <div class="dropdown-menu" aria-labelledby="pagesDropdown">
          <h6 class="dropdown-header">Selecciones:</h6>
          <a class="dropdown-item" href="Editar_perfil.html">Editar Perfil</a>
        </div>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="charts.html">
-          <i class="fas fa-fw fa-chart-area"></i>
-          <span>Graficas</span></a>
+     </li>
+     <li class="nav-item">
+      <a class="nav-link" href="charts.html">
+        <i class="fas fa-fw fa-chart-area"></i>
+        <span>Graficas</span></a>
       </li>
       <li class="nav-item active">
         <a class="nav-link" href="tables.html">
           <i class="fas fa-fw fa-table"></i>
           <span>Reporte de transacciones</span></a>
-      </li>
-    </ul>
+        </li>
+      </ul>
 
-    <div id="content-wrapper">
+      <div id="content-wrapper">
 
-      <div class="container-fluid">
+        <div class="container-fluid">
 
-        <!-- Breadcrumbs-->
-        <ol class="breadcrumb">
-          <li class="breadcrumb-item">
-            <a href="index.html">CriptoForex</a>
-          </li>
-          <li class="breadcrumb-item active"> Reporte de transacciones</li>
-        </ol>
+          <!-- Breadcrumbs-->
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+              <a href="index.html">CriptoForex</a>
+            </li>
+            <li class="breadcrumb-item active"> Reporte de transacciones</li>
+          </ol>
 
-        <!-- DataTables Example -->
-        <div class="card mb-3">
-          <div class="card-header">
-            <i class="fas fa-table"></i>
-            Reporte de transacciones</div>
-          <div class="card-body">
-            <div class="table-responsive">
-              <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                <thead>
-                  <tr>
-                    <th>Name</th>
-                    <th>Position</th>
-                    <th>Office</th>
-                    <th>Age</th>
-                    <th>Start date</th>
-                    <th>Salary</th>
-                  </tr>
-                </thead>
-                <tfoot>
-                  <tr>
-                    <th>Name</th>
-                    <th>Position</th>
-                    <th>Office</th>
-                    <th>Age</th>
-                    <th>Start date</th>
-                    <th>Salary</th>
-                  </tr>
-                </tfoot>
-                <tbody>
-                 
-                </tbody>
-              </table>
+          <!-- DataTables Example -->
+          <div class="card mb-3">
+            <div class="card-header">
+              <i class="fas fa-table"></i>
+            Estado de las transacciones</div>
+            <div class="card-body">
+              <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                  <thead>
+                    <tr>
+                      <th>Usuario</th>
+                      <th>Valor inicial($)</th>
+                      <th>Valor final($)</th>
+                      <th>Catidad($)</th>
+                      <th>Operacion</th>
+                      <th>Beneficio</th>
+                      <th>Divisa</th>
+
+                    </tr>
+                  </thead>
+                  <tbody>
+
+                  </tbody>
+                  <tfoot>
+                    <tr>
+                      <th>Usuario</th>
+                      <th>Valor inicial($)</th>
+                      <th>Valor final($)</th>
+                      <th>Catidad($)</th>
+                      <th>Operacion</th>
+                      <th>Beneficio</th>
+                      <th>Divisa</th>
+
+                    </tr>
+                  </tfoot>
+                </table>
+              </div>
+            </div>
+            <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
+          </div>
+
+          <p class="small text-center text-muted my-5">
+            <em>More table examples coming soon...</em>
+          </p>
+
+        </div>
+        <!-- /.container-fluid -->
+
+        <!-- Sticky Footer -->
+        <footer class="sticky-footer">
+          <div class="container my-auto">
+            <div class="copyright text-center my-auto">
+              <span>Copyright © CriptoForex 2019</span>
             </div>
           </div>
-          <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
-        </div>
-
-        <p class="small text-center text-muted my-5">
-          <em>More table examples coming soon...</em>
-        </p>
+        </footer>
 
       </div>
-      <!-- /.container-fluid -->
+      <!-- /.content-wrapper -->
 
-      <!-- Sticky Footer -->
-      <footer class="sticky-footer">
-        <div class="container my-auto">
-          <div class="copyright text-center my-auto">
-            <span>Copyright © CriptoForex 2019</span>
+    </div>
+    <!-- /#wrapper -->
+
+    <!-- Scroll to Top Button-->
+    <a class="scroll-to-top rounded" href="#page-top">
+      <i class="fas fa-angle-up"></i>
+    </a>
+
+    <!-- Logout Modal-->
+    <form id="cerrado">
+      <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+             <h5 class="modal-title" id="exampleModalLabel">Desea Cerrar Sesion?</h5>
+             <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">×</span>
+            </button>
+          </div>
+          <div class="modal-body">Seguro desea Cerrar Sesion?.</div>
+          <div class="modal-footer">
+            <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
+            <button type="submit" class="btn btn-primary" id="submit">Cerrar Sesion</button>
           </div>
         </div>
-      </footer>
-
-    </div>
-    <!-- /.content-wrapper -->
-
-  </div>
-  <!-- /#wrapper -->
-
-  <!-- Scroll to Top Button-->
-  <a class="scroll-to-top rounded" href="#page-top">
-    <i class="fas fa-angle-up"></i>
-  </a>
-
-  <!-- Logout Modal-->
-  <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Desea Cerrar Sesion?</h5>
-          <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">×</span>
-          </button>
-        </div>
-        <div class="modal-body">Seguro desea Cerrar Sesion?.</div>
-        <div class="modal-footer">
-          <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
-          <a class="btn btn-primary" href="login.html">Cerrar Sesion</a>
-        </div>
       </div>
     </div>
-  </div>
+  </form>
+
 
   <!-- Bootstrap core JavaScript-->
   <script src="vendor/jquery/jquery.min.js"></script>
   <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
+
   <!-- Core plugin JavaScript-->
   <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
 
   <!-- Page level plugin JavaScript-->
+  <script src="vendor/chart.js/Chart.min.js"></script>
   <script src="vendor/datatables/jquery.dataTables.js"></script>
   <script src="vendor/datatables/dataTables.bootstrap4.js"></script>
 
   <!-- Custom scripts for all pages-->
   <script src="js/sb-admin.min.js"></script>
 
-  <!-- Demo scripts for this page-->
-  <script src="js/demo/datatables-demo.js"></script>
+  <!--  scripts for this page-->
+  <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.18/datatables.min.js"></script>
+  <script src="js/Bootbox/bootbox.min.js"></script>
+  <script src="js/jwt-decode-master/build/jwt-decode.min.js"></script>
 
+
+  <!-------js--------------->
+  <script type="text/javascript">
+
+    $(document).ready(function() {
+
+      consultaOperaciones();
+
+
+
+      function validarhora(){ 
+
+
+        if(localStorage.getItem("tokenuser")  == "undefined"){
+         $(location).attr('href','index.html');
+       }else{
+        try {
+         var token = localStorage.getItem("tokenuser");
+         var decoded = jwt_decode(token);
+         var cad=(new Date().getTime())/1000;
+         if(cad > decoded.exp){
+           jQuery.ajax({
+            url: 'http://localhost:8080/ProyectoFinal-web/api/Logica/Cerrar/',
+            type: 'POST',
+            dataType: 'json',
+            headers: {"token-auto": localStorage.getItem("tokenuser")},
+            contentType:'application/json',
+            data: JSON.stringify({
+
+              token: localStorage.getItem("tokenuser")
+            }),
+            success: function(data, textStatus, xhr) {
+              localStorage.removeItem("tokenuser");
+              alert("Token Invalido lo sentimos por favor inicie sesion")
+              $(location).attr('href','login.html'); 
+
+            },
+            error: function(xhr, textStatus, errorThrown) {
+              localStorage.removeItem("tokenuser");
+
+              alert("Token Invalido lo sentimos por favor inicie sesion")
+              $(location).attr('href','login.html'); 
+
+
+            }
+          });
+           event.preventDefault();
+     }//if validaciom
+   } catch(e) {
+    alert("Token Invalido lo sentimos por favor inicie sesion")
+    $(location).attr('href','login.html');   
+  }
+
+
+}
+
+
+
+}//validacion token vencido
+//////////////////////////
+
+setInterval(validarhora,1000); 
+
+
+
+
+
+$("#cerrado").submit(function(event) {
+
+  jQuery.ajax({
+    url: 'http://localhost:8080/ProyectoFinal-web/api/Logica/Cerrar/',
+    type: 'POST',
+    dataType: 'json',
+    headers: {"token-auto": localStorage.getItem("tokenuser")},
+    contentType:'application/json',
+    data: JSON.stringify({
+
+      token: localStorage.getItem("tokenuser")
+    }),
+    success: function(data, textStatus, xhr) {
+      localStorage.removeItem("tokenuser");
+      bootbox.alert(data.errormsg);
+      $(location).attr('href','login.html');
+    },
+    error: function(xhr, textStatus, errorThrown) {
+      localStorage.removeItem("tokenuser");
+
+      bootbox.dialog({ 
+        title: 'Error!',
+        message: '<p>Porfavor Ingrese primero</p>',
+        size: 'large',
+        onEscape: true,
+        backdrop: true,
+        buttons: {
+          fum: {
+            label: 'Aceptar',
+            className: 'btn-danger',
+            callback: function(){
+
+             $(location).attr('href','login.html');         
+           }
+         }
+       }
+     })
+
+    }
+  });
+  event.preventDefault();
+
+
+});
+
+
+function consultaOperaciones() {
+
+ var token =localStorage.getItem("tokenuser");
+ var decoded = jwt_decode(token);
+ jQuery.ajax({
+  url: 'http://localhost:8080/ProyectoFinal-web/api/Logica/ConsultarHisotrial/',
+  type: 'POST',
+  dataType: 'json',
+  headers: {"token-auto": localStorage.getItem("tokenuser")},
+  contentType:'application/json',
+  data: JSON.stringify({
+    token: decoded.sub
+  }),
+  success: function(data, textStatus, xhr) {
+
+    llenado(data);
+
+  },
+  error: function(xhr, textStatus, errorThrown) {
+   }//funcion
+
+ });//ajax
+
+}//consultarOperaciones
+
+function llenado(data){
+
+  var table =  $('#dataTable').DataTable({
+
+    "destroy": true,
+    "data": data,
+    "columns":[
+    {"data":"token"},
+    {"data":"valorInicial"},
+    {"data":"valorFinal"},
+    {"data":"cantidad"},
+    {"data":"idOperacion"},
+    {"data":"beneficio"},
+    {"data":"divisa"}
+    ],
+    "columnDefs" : [
+    { 
+      "targets" : 4,
+      "render" : function (data, type, row) {
+        return data == '1' ? 'Compra' : 'Venta'
+      }
+    },
+    { 
+      "targets" : [2,5],
+      "render" : function (data, type, row) {
+
+        if(data < 0){
+          return '<div class="red">' + data + '</div>';
+        }else{
+          return '<div class="green">' + data + '</div>';
+        }
+
+      }
+    }
+
+    ]
+
+
+
+  });
+
+
+
+
+}
+
+
+
+});//docuement ready 
+
+
+</script>
+<!-------js--------------->
 </body>
 
 </html>

@@ -131,5 +131,33 @@ public class UsuarioService {
        
       
 } 
+ 
+ 
+  @POST
+ @Produces(MediaType.APPLICATION_JSON)
+ @Consumes(MediaType.APPLICATION_JSON)
+ @Path("/DescontarDineroCuenta")
+ public Response descontarDinero(Usuario user){
+     try{
+        
+        return Response.ok(usuario.descontarDinero(user)).build();
+     }catch (Exception ex){
+         return Response.status(Response.Status.NOT_ACCEPTABLE).build();
+     }         
+   } 
+ 
     
+ 
+ @POST
+ @Produces(MediaType.APPLICATION_JSON)
+ @Consumes(MediaType.APPLICATION_JSON)
+ @Path("/ConsultarHisotrial")
+ public Response ConsultarHisotrialCuenta(Divisa divisa){
+     try{
+        return Response.ok(usuario.ConsultaHistorial(divisa)).build();
+     }catch (Exception ex){
+         return Response.status(Response.Status.NOT_ACCEPTABLE).build();
+     }         
+   } 
+ 
 }

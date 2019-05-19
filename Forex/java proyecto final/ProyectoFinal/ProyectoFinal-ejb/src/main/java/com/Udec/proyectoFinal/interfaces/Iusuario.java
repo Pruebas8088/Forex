@@ -107,9 +107,28 @@ public class Iusuario implements IusuarioLocal {
     @Override
     public float terminarOperacion(Divisa divisa) {
         Datos dat =  new Datos();
-        dat.insertarHistorial(divisa);
         dat.borrarDivisa(divisa);
+        dat.insertarHistorial(divisa);
         return divisa.getBeneficio();
+    }
+
+    @Override
+    public ErrorMsg descontarDinero(Usuario user) {
+        Datos dat =  new Datos();
+        dat.updateDineroCuenta(user);
+        ErrorMsg er = new ErrorMsg();
+        er.setErrormsg("actualizado");
+        return er;
+    }
+
+    @Override
+    public ArrayList<Divisa> ConsultaHistorial(Divisa divisa) {
+    ArrayList<Divisa> listaDivisa= new ArrayList<Divisa>();
+           
+            Datos dat =  new Datos();
+            listaDivisa=dat.consultaDivisaHistorial(divisa);
+           
+            return listaDivisa;
     }
 
     
