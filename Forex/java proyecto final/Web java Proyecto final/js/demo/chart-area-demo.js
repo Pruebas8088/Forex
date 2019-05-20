@@ -1,4 +1,8 @@
 // Set new default font family and font color to mimic Bootstrap's default styling
+$(document).ready(function{
+  consultaOperaciones();
+
+
 Chart.defaults.global.defaultFontFamily = '-apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif';
 Chart.defaults.global.defaultFontColor = '#292b2c';
 
@@ -7,7 +11,7 @@ var ctx = document.getElementById("myAreaChart");
 var myLineChart = new Chart(ctx, {
   type: 'line',
   data: {
-    labels: ["Mar 1", "Mar 2", "Mar 3", "Mar 4", "Mar 5", "Mar 6", "Mar 7", "Mar 8", "Mar 9", "Mar 10", "Mar 11", "Mar 12", "Mar 13"],
+    labels: [],
     datasets: [{
       label: "Sessions",
       lineTension: 0.3,
@@ -20,7 +24,7 @@ var myLineChart = new Chart(ctx, {
       pointHoverBackgroundColor: "rgba(2,117,216,1)",
       pointHitRadius: 50,
       pointBorderWidth: 2,
-      data: [10000, 30162, 26263, 18394, 18287, 28682, 31274, 33259, 25849, 24159, 32651, 31984, 38451],
+      data: [],
     }],
   },
   options: {
@@ -51,4 +55,34 @@ var myLineChart = new Chart(ctx, {
       display: false
     }
   }
+});
+
+function consultaOperaciones() {
+
+ var token =localStorage.getItem("tokenuser");
+ var decoded = jwt_decode(token);
+ jQuery.ajax({
+  url: 'http://localhost:8080/ProyectoFinal-web/api/Logica/ConsultarHisotrial/',
+  type: 'POST',
+  dataType: 'json',
+  headers: {"token-auto": localStorage.getItem("tokenuser")},
+  contentType:'application/json',
+  data: JSON.stringify({
+    token: decoded.sub
+  }),
+  success: function(data, textStatus, xhr) {
+
+    ctx.data.datasets[0] = data.beneficio;
+    ctx.data.labels = data.beneficio;
+    chart.update();
+
+
+  },
+  error: function(xhr, textStatus, errorThrown) {
+   }//funcion
+
+ });//ajax
+
+}//consultarOperaciones
+
 });

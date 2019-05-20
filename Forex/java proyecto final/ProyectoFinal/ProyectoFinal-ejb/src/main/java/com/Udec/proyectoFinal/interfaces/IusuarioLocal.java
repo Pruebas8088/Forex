@@ -36,4 +36,6 @@ public interface IusuarioLocal {
     public float terminarOperacion(Divisa divisa);
     
     public ErrorMsg descontarDinero(Usuario user);
+    
+
 }
