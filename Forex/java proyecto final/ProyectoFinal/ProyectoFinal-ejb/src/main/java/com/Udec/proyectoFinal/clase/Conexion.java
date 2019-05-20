@@ -22,14 +22,11 @@ public class Conexion {
        
         
 
-   public Conexion() {
-<<<<<<< HEAD
-          
+   public Conexion() {          
         System.out.println("Contraseña="+contrase);
-=======
-	
+
         System.out.println("ContraseÃ±a="+contrase);
->>>>>>> 052caab31339ee534e72f5699d5717021bf5c28d
+
         indica1=0; indica2=0;
 	try {
 	      Class.forName(driver).newInstance();
