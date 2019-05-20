@@ -3,7 +3,10 @@ package com.Udec.proyectoFinal.clase;
 /**
  * @author 
  */
+
 import java.sql.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class Conexion {
 	//String driver="com.mysql.jdbc.Driver";
@@ -16,9 +19,11 @@ public class Conexion {
 	Statement stmt=null; 
         String contrase ="123";
         String usuario = "postgres";
+       
+        
 
    public Conexion() {
-	
+          
         System.out.println("Contraseña="+contrase);
         indica1=0; indica2=0;
 	try {
@@ -51,7 +56,16 @@ public class Conexion {
            }
     }
 
-   
+   public void disconnet() {
+        if (con != null) {
+            try {
+                con.close();
+            } catch (SQLException ex) {
+                System.out.println("ConnectDB " + ex.getMessage());
+            }
+        }
+    }
+
 
     public Connection con(){ return con;  }
 

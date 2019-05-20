@@ -21,314 +21,455 @@ import java.util.logging.Logger;
  */
 public class Datos {
     
-    static Connection con =null;
-    static Statement stnt =null;
-    static ResultSet rs=null;
-    String server;
-    String user;
-    String pass;
+
+    
 
     public Datos() {
-        
-        server = "jdbc:postgresql://localhost:5432/Proyecto_final";
-        user = "postgres";
-        pass = "123";
-        
-        Conexion c = new Conexion();
-        if(c.indica_1()==1 && c.indica_2()==1){
-            stnt=c.stamt();
-            con =c.con();
-        }
+
     }
     
     
-     public static void envio(Usuario usuario){
-            String qry = "Insert into usuario(nombre,apellido,correo,contrasena,token,dinero) values ("+"'" + usuario.getNombre()+ "'"+","+"'" + usuario.getApellido() + "'"+","+"'" + usuario.getEmail()+ "'"+","+"'" + usuario.getPass()+ "'"+","+"'" + "0" + "'"+"," + 0 +")";
-            try {
-                stnt.executeUpdate(qry);
-            } catch (SQLException e) {
-                System.out.println("fallo");
+     public void envio(Usuario usuario){
+        String url= "jdbc:postgresql://localhost:5432/Proyecto_final";
+        String driver = "org.postgresql.Driver";
+        Connection con=null;
+	String contrase ="123";
+        String us = "postgres";
+           try {
+                Class.forName(driver).newInstance();
+                con=DriverManager.getConnection(url,us,contrase);
+                Statement stntenvio = con.createStatement();
+                String qry = "Insert into usuario(nombre,apellido,correo,contrasena,token,dinero) values ("+"'" + usuario.getNombre()+ "'"+","+"'" + usuario.getApellido() + "'"+","+"'" + usuario.getEmail()+ "'"+","+"'" + usuario.getPass()+ "'"+","+"'" + "0" + "'"+"," + 0 +")";
+                 
+                    ResultSet rs = stntenvio.executeQuery(qry);
+                    rs.close();
+                    stntenvio.close();
+                    con.close();
+                    
+               
+            } catch (Exception e) {
+             System.out.println("fallo funcion envio");
             }
-        
+          
     }
      
      
-      public static void compraDivisas(Divisa divisa){
-            String qry = "INSERT INTO public.accion(idoperacion, valoinicial, token, valorfinal, cantidad,beneficio,divisa) values (" + divisa.getIdOperacion()+"," + divisa.getValorInicial()+","+"'" + divisa.getToken()+ "'"+"," + divisa.getValorFinal()+"," + divisa.getCantidad() +"," + divisa.getBeneficio()+","+"'" + divisa.getDivisa()+ "'"+")";
-            try {
-                stnt.executeUpdate(qry);
-            } catch (SQLException e) {
-                System.out.println("fallo");
-            }
+      public void compraDivisas(Divisa divisa){
+        String url= "jdbc:postgresql://localhost:5432/Proyecto_final";
+        String driver = "org.postgresql.Driver";
+        Connection con=null;
+	String contrase ="123";
+        String us = "postgres";
+           try {
+                 Class.forName(driver).newInstance();
+                 con=DriverManager.getConnection(url,us,contrase);
+                 Statement stntCompraDivisa = con.createStatement();
+                 String qry = "INSERT INTO public.accion(idoperacion, valoinicial, token, valorfinal, cantidad,beneficio,divisa) values (" + divisa.getIdOperacion()+"," + divisa.getValorInicial()+","+"'" + divisa.getToken()+ "'"+"," + divisa.getValorFinal()+"," + divisa.getCantidad() +"," + divisa.getBeneficio()+","+"'" + divisa.getDivisa()+ "'"+")";
+             
+                    ResultSet rs =stntCompraDivisa.executeQuery(qry);
+                    rs.close();
+                    stntCompraDivisa.close();
+                    con.close();
+                    
+         } catch (SQLException ex) {
+            System.out.println("fallo funcion compraDivisas");
+         } catch (Exception e) {
+             System.out.println("fallo funcion compraDivisas");
+         }
+            
         
     } 
      
-      public static Boolean validacion(Usuario usuario){
-          boolean estado;
-            String qry = "SELECT * FROM public.usuario where correo="+"'" + usuario.getEmail()+ "'"+"and contrasena="+"'" + usuario.getPass()+ "'"+"";
-            try {
-                rs=stnt.executeQuery(qry);
-                rs.first();
-                if(rs.getString(4).isEmpty()){
+      public  Boolean validacion(Usuario usuario){
+        boolean estado;
+        String url= "jdbc:postgresql://localhost:5432/Proyecto_final";
+        String driver = "org.postgresql.Driver";
+        Connection con=null;
+	String contrase ="123";
+        String us = "postgres";
+           try {
+                 Class.forName(driver).newInstance();
+                 con=DriverManager.getConnection(url,us,contrase);
+                 Statement stntvalidacion = con.createStatement();
+                 String qry = "SELECT * FROM public.usuario where correo="+"'" + usuario.getEmail()+ "'"+"and contrasena="+"'" + usuario.getPass()+ "'"+"";
+                 ResultSet rsValidacion=stntvalidacion.executeQuery(qry);
+             while(rsValidacion.next()){
+                Usuario user = new Usuario();
+                user.setToken(rsValidacion.getString("token")); 
+                if(user.getToken().isEmpty()){
                      estado=false;
+                     rsValidacion.close();
+                     stntvalidacion.close();
+                      con.close();
                      return estado;
                 }else{
                     estado=true;
+                    rsValidacion.close();
+                    stntvalidacion.close();
+                     con.close();
                     return estado;
                 }
-                
-               
-            } catch (SQLException e) {
-                System.out.println("fallo");
+                   
             }
+        } catch (SQLException ex) {
+             System.out.println("fallo funcion validacion");
+        } catch (Exception ex) {
+             System.out.println("fallo funcion validacion");
+        }
         return false;
     }
     
-     public static void updateToken(Usuario usuario,String jwt){
-          
-            String qry = "UPDATE public.usuario SET  token="+"'" + jwt+ "'"+"WHERE correo="+"'" + usuario.getEmail()+ "'"+"";
-            try {
-                stnt.executeUpdate(qry);
-            } catch (SQLException e) {
-                System.out.println("fallo");
-            }
-       
-    }
-     
-     
-     public static void cerradoCuenta(Usuario usuario){
-          
-            String qry = "UPDATE public.usuario SET  token="+"'" + 0 + "'"+"WHERE token="+"'" + usuario.getToken()+ "'"+"";
-            try {
-                stnt.executeUpdate(qry);
-            } catch (SQLException e) {
-                System.out.println("fallo");
-            }
-       
-    } 
-     
-     public static void updateDinero(Usuario usuario){
-          
-            String qry = "UPDATE public.usuario SET  dinero="+ usuario.getDinero()+"WHERE token="+"'" + usuario.getToken() + "'"+"";
-            try {
-                stnt.executeUpdate(qry);
-            } catch (SQLException e) {
-                System.out.println("fallo");
-            }
-       
-    }
-     
-    
-    public static ArrayList<Usuario> traerInfo(){
-            String qry = "SELECT * FROM usuario";
-            ArrayList<Usuario> listauser = new ArrayList<Usuario>();
-            try {
-                 rs=stnt.executeQuery(qry);
-                 listauser=llenado(rs);
-                 
-            } catch (SQLException e) {
-                System.out.println("fallo");
-            }
-            
-           return listauser;
-    } 
-    
-    public static float traerDinero(Usuario user){
-            String qry = "SELECT * FROM usuario where token = "+"'"+ user.getToken()+"'";
-            float dinero=0;
-            try {
-                 rs=stnt.executeQuery(qry);
-                 dinero=llenadodinero(rs);
-                 return dinero;
-            } catch (SQLException e) {
-                System.out.println("fallo");
-            }
-            
-           return dinero;
-    } 
-    
-    public static float llenadodinero(ResultSet rs){
-        float dinero =0 ;
-        Usuario user = new Usuario();
-        try {
-            while(rs.next()){
-                user.setDinero(rs.getFloat("dinero"));
+     public  void updateToken(Usuario usuario,String jwt){
+        String url= "jdbc:postgresql://localhost:5432/Proyecto_final";
+        String driver = "org.postgresql.Driver";
+        Connection con=null;
+	String contrase ="123";
+        String us = "postgres";
+           try {
+                 Class.forName(driver).newInstance();
+                 con=DriverManager.getConnection(url,us,contrase);
+                 Statement stntupdateTok =  con.createStatement();
+                 String qry = "UPDATE public.usuario SET  token="+"'" + jwt+ "'"+"WHERE correo="+"'" + usuario.getEmail()+ "'"+"";
+                 ResultSet rs = stntupdateTok.executeQuery(qry);
+                 rs.close();
+                 stntupdateTok.close();
+                 con.close();
                    
-            }
-            return user.getDinero();
-        } catch (SQLException ex) {
-            Logger.getLogger(Datos.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return dinero;
+         } catch (SQLException ex) {
+               System.out.println("fallo updatetoken"+ex);
+         }catch (Exception ex) {
+               System.out.println("fallo updatetoken"+ex);
+         }
+           
+       
     }
+     
+     
+     public  void cerradoCuenta(Usuario usuario){
+        String url= "jdbc:postgresql://localhost:5432/Proyecto_final";
+        String driver = "org.postgresql.Driver";
+        Connection con=null;
+	String contrase ="123";
+        String us = "postgres";
+           try {
+                 Class.forName(driver).newInstance();
+                 con=DriverManager.getConnection(url,us,contrase);
+             Statement stntcerradoCuenta = con.createStatement();
+             String qry = "UPDATE public.usuario SET  token="+"'" + 0 + "'"+"WHERE token="+"'" + usuario.getToken()+ "'"+"";
+              
+                    ResultSet rs = stntcerradoCuenta.executeQuery(qry);
+                    rs.close();
+                    stntcerradoCuenta.close();
+                    con.close();
+              
+         } catch (SQLException ex) {
+              System.out.println("fallo  cerradoCuenta ");
+         } catch (Exception ex) {
+              System.out.println("fallo  cerradoCuenta ");
+         }
+            
+       
+    } 
+     
+     public  void updateDinero(Usuario usuario){
+        String url= "jdbc:postgresql://localhost:5432/Proyecto_final";
+        String driver = "org.postgresql.Driver";
+        Connection con=null;
+	String contrase ="123";
+        String us = "postgres";
+           try {
+                 Class.forName(driver).newInstance();
+                 con=DriverManager.getConnection(url,us,contrase);
+             Statement stntupdateDinero = con.createStatement();
+             String qry = "UPDATE public.usuario SET  dinero="+ usuario.getDinero()+"WHERE token="+"'" + usuario.getToken() + "'"+"";
+              
+                     ResultSet rs =  stntupdateDinero.executeQuery(qry);
+                     rs.close();
+                     stntupdateDinero.close();
+                     con.close();
+                
+         } catch (SQLException ex) {
+            System.out.println("fallo updateDinero ");
+         } catch (Exception ex) {
+            System.out.println("fallo updateDinero ");
+         }
+           
+       
+    }
+     
     
-    public static ArrayList<Usuario> llenado(ResultSet rs){
-        ArrayList<Usuario> listauser = new ArrayList<Usuario>();
-        try {
-            while(rs.next()){
+    public  ArrayList<Usuario> traerInfo(){
+         ArrayList<Usuario> listauser = new ArrayList<Usuario>();
+          String url= "jdbc:postgresql://localhost:5432/Proyecto_final";
+        String driver = "org.postgresql.Driver";
+        Connection con=null;
+	String contrase ="123";
+        String us = "postgres";
+           try {
+                 Class.forName(driver).newInstance();
+                 con=DriverManager.getConnection(url,us,contrase);
+             Statement stnttraerInfo = con.createStatement();
+             String qry = "SELECT * FROM usuario";
+              
+                ResultSet rsTraerinfo = stnttraerInfo.executeQuery(qry);
+                
+                 while(rsTraerinfo.next()){
                
                     Usuario user = new Usuario();
-                    user.setNombre(rs.getString("nombre"));
-                    user.setApellido(rs.getString("apellido"));
-                    user.setEmail(rs.getString("correo"));
-                    user.setPass(rs.getString("contrasena"));
-                    user.setToken(rs.getString("token"));
-                    user.setDinero(rs.getFloat("dinero"));
+                    user.setNombre(rsTraerinfo.getString("nombre"));
+                    user.setApellido(rsTraerinfo.getString("apellido"));
+                    user.setEmail(rsTraerinfo.getString("correo"));
+                    user.setPass(rsTraerinfo.getString("contrasena"));
+                    user.setToken(rsTraerinfo.getString("token"));
+                    user.setDinero(rsTraerinfo.getFloat("dinero"));
                     listauser.add(user);
                    
-            }
-            return listauser;
-        } catch (SQLException ex) {
-            Logger.getLogger(Datos.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        listauser = null;
+                }
+               
+                 stnttraerInfo.close();
+                 rsTraerinfo.close();
+                  con.close();
+                return listauser;
+            
+         } catch (SQLException ex) {
+             System.out.println("fallo traerinfo");
+         } catch (Exception ex) {
+             System.out.println("fallo traerinfo");
+         }
         return listauser;
-    }
+    } 
+    
+    
+    
+    
+    public float traerDinero(Usuario user){
+         float dinero=0;
+        String url= "jdbc:postgresql://localhost:5432/Proyecto_final";
+        String driver = "org.postgresql.Driver";
+        Connection con=null;
+	String contrase ="123";
+        String us = "postgres";
+           try {
+                 Class.forName(driver).newInstance();
+                 con=DriverManager.getConnection(url,us,contrase);
+             Statement stnttraerDinero = con.createStatement();
+             String qry = "SELECT * FROM usuario where token = "+"'"+ user.getToken()+"'";
+              
+                    ResultSet rstraerdinero=stnttraerDinero.executeQuery(qry);
+                    while(rstraerdinero.next()){
+                      user.setDinero(rstraerdinero.getFloat("dinero"));
+                   
+                     }
+                    dinero = user.getDinero();
+                    
+                    stnttraerDinero.close();
+                    rstraerdinero.close();
+                     con.close();
+                    return dinero;
+             
+         } catch (SQLException ex) {
+             System.out.println("fallo traerdinero");
+         } catch (Exception ex) {
+             System.out.println("fallo traerdinero");
+         }
+         return dinero;
+    } 
+    
+
+    
+   
     ////////////////////////////////////////////////////////////////////////////////////
-    public static ArrayList<Divisa> consultaDivisa(Divisa divisa){
-            String qry = "SELECT * FROM public.accion where token = "+"'"+ divisa.getToken()+"'";
+    public  ArrayList<Divisa> consultaDivisa(Divisa divisa){
             ArrayList<Divisa> listaDivisa= new ArrayList<Divisa>();
-            try {
-                 rs=stnt.executeQuery(qry);
-                 listaDivisa=llenadoDivisa(rs);
+        String url= "jdbc:postgresql://localhost:5432/Proyecto_final";
+        String driver = "org.postgresql.Driver";
+        Connection con=null;
+	String contrase ="123";
+        String us = "postgres";
+           try {
+                 Class.forName(driver).newInstance();
+                 con=DriverManager.getConnection(url,us,contrase);
+             Statement stntconsultaDivisa = con.createStatement();
+             String qry = "SELECT * FROM public.accion where token = "+"'"+ divisa.getToken()+"'";
+                ResultSet rsconsultaDivisa=stntconsultaDivisa.executeQuery(qry);
+                while(rsconsultaDivisa.next()){
+               
+                    Divisa div = new Divisa();
+                    div.setCantidad(rsconsultaDivisa.getFloat("cantidad"));
+                    div.setIdOperacion(rsconsultaDivisa.getInt("idoperacion"));
+                    div.setToken(rsconsultaDivisa.getString("token"));
+                    div.setValorInicial(rsconsultaDivisa.getFloat("valoinicial"));
+                    div.setBeneficio(rsconsultaDivisa.getFloat("beneficio"));
+                    div.setDivisa(rsconsultaDivisa.getString("divisa"));
+                    listaDivisa.add(div);
+                   
+                }
+                 stntconsultaDivisa.close();
+                 rsconsultaDivisa.close();
+                 con.close();
                  
-            } catch (SQLException e) {
-                System.out.println("fallo");
-            }
+         
+            
+         } catch (SQLException ex) {
+             System.out.println("fallo  consultaDivisa");
+         } catch (Exception ex) {
+             System.out.println("fallo  consultaDivisa");
+         }
+            
+          
             
            return listaDivisa;
     } 
+
     
-    public static ArrayList<Divisa> llenadoDivisa(ResultSet rs){
-        ArrayList<Divisa> listadivisa = new ArrayList<Divisa>();
-        try {
-            while(rs.next()){
+    
+    public  ArrayList<Divisa> consultaDivisaHistorial(Divisa divisa){
+         ArrayList<Divisa> listaDivisa= new ArrayList<Divisa>();
+         String url= "jdbc:postgresql://localhost:5432/Proyecto_final";
+        String driver = "org.postgresql.Driver";
+        Connection con=null;
+	String contrase ="123";
+        String us = "postgres";
+           try {
+                 Class.forName(driver).newInstance();
+                 con=DriverManager.getConnection(url,us,contrase);
+             Statement stntconsultaDivisaHistorial = con.createStatement();
+             String qry = "SELECT * FROM public.historial where usuario = "+"'"+ divisa.getToken()+"'";
+             
+                   ResultSet rsconsultaDivisaHistorial=stntconsultaDivisaHistorial.executeQuery(qry);
+                  while(rsconsultaDivisaHistorial.next()){
                
                     Divisa div = new Divisa();
-                    div.setCantidad(rs.getFloat("cantidad"));
-                    div.setIdOperacion(rs.getInt("idoperacion"));
-                    div.setToken(rs.getString("token"));
-                    div.setValorInicial(rs.getFloat("valoinicial"));
-                    div.setBeneficio(rs.getFloat("beneficio"));
-                    div.setDivisa(rs.getString("divisa"));
-                    listadivisa.add(div);
+                    div.setToken(rsconsultaDivisaHistorial.getString("usuario"));
+                    div.setValorInicial(rsconsultaDivisaHistorial.getFloat("valorinicial"));
+                    div.setValorFinal(rsconsultaDivisaHistorial.getFloat("valorfinal"));
+                    div.setCantidad(rsconsultaDivisaHistorial.getFloat("cantidad"));
+                    div.setIdOperacion(rsconsultaDivisaHistorial.getInt("idoperacion"));
+                    div.setBeneficio(rsconsultaDivisaHistorial.getFloat("beneficio"));
+                    div.setDivisa(rsconsultaDivisaHistorial.getString("divisa"));
+                    listaDivisa.add(div);
                    
-            }
-            return listadivisa;
-        } catch (SQLException ex) {
-            Logger.getLogger(Datos.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        listadivisa = null;
-        return listadivisa;
+                    }
+                   stntconsultaDivisaHistorial.close();
+                   rsconsultaDivisaHistorial.close();
+                   con.close();
+         } catch (SQLException ex) {
+              System.out.println("fallo  consultaDivisaHistorial");
+         } catch (Exception ex) {
+              System.out.println("fallo  consultaDivisaHistorial");
+         }
+         return listaDivisa;
+    } 
+    
+ 
+    
+    
+    
+     public void updateDivisa(Divisa divisa){
+        String url= "jdbc:postgresql://localhost:5432/Proyecto_final";
+        String driver = "org.postgresql.Driver";
+        Connection con=null;
+	String contrase ="123";
+        String us = "postgres";
+           try {
+                 Class.forName(driver).newInstance();
+                 con=DriverManager.getConnection(url,us,contrase);
+             Statement stntupdateDivisa = con.createStatement();
+             String qry = "UPDATE public.accion SET  beneficio="+ divisa.getBeneficio()+"WHERE token="+"'" + divisa.getToken() + "'"+"AND  CAST(valoinicial AS DECIMAL )="+divisa.getValorInicial()+"";
+               
+                   ResultSet rs = stntupdateDivisa.executeQuery(qry);
+                   rs.close();
+                   stntupdateDivisa.close();
+                    con.close();
+              
+         } catch (SQLException ex) {
+             System.out.println("fallo  updateDivisa");
+         } catch (Exception ex) {
+             System.out.println("fallo  updateDivisa");
+         }
+           
+       
     }
-    
-    
-    
-    public static ArrayList<Divisa> consultaDivisaHistorial(Divisa divisa){
-            String qry = "SELECT * FROM public.historial where usuario = "+"'"+ divisa.getToken()+"'";
-            ArrayList<Divisa> listaDivisa= new ArrayList<Divisa>();
-            try {
-                 rs=stnt.executeQuery(qry);
-                 listaDivisa=llenadoDivisaHistorial(rs);
+     
+     public void borrarDivisa(Divisa divisa){
+        String url= "jdbc:postgresql://localhost:5432/Proyecto_final";
+        String driver = "org.postgresql.Driver";
+        Connection con=null;
+	String contrase ="123";
+        String us = "postgres";
+           try {
+                 Class.forName(driver).newInstance();
+                 con=DriverManager.getConnection(url,us,contrase);
+             Statement stntborrarDivisa = con.createStatement();
+              String qry = "DELETE FROM public.accion WHERE  token="+"'"+ divisa.getToken()+"'"+"AND beneficio="+"'"+divisa.getBeneficio()+"'"+" AND idoperacion="+"'"+divisa.getIdOperacion()+"'"+"";
+                
+                     ResultSet rs = stntborrarDivisa.executeQuery(qry);
+                     rs.close();
+                     stntborrarDivisa.close();
+                     con.close();
+                     
                  
-            } catch (SQLException e) {
-                System.out.println("fallo");
-            }
+         } catch (SQLException ex) {
+             System.out.println("fallo borrarDivisa");
+         } catch (Exception ex) {
+             System.out.println("fallo borrarDivisa");
+         }
             
-           return listaDivisa;
+       
     } 
-    
-    public static ArrayList<Divisa> llenadoDivisaHistorial(ResultSet rs){
-        ArrayList<Divisa> listadivisa = new ArrayList<Divisa>();
-        try {
-            while(rs.next()){
+     
+     public void insertarHistorial(Divisa divisa){
+       String url= "jdbc:postgresql://localhost:5432/Proyecto_final";
+        String driver = "org.postgresql.Driver";
+        Connection con=null;
+	String contrase ="123";
+        String us = "postgres";
+           try {
+                 Class.forName(driver).newInstance();
+                 con=DriverManager.getConnection(url,us,contrase);
+             Statement stntinsertarHistorial = con.createStatement();
+             String qry = "INSERT INTO public.historial(usuario, valorinicial, valorfinal, cantidad, idoperacion, beneficio, divisa) values (" +"'"+ divisa.getToken()+"'"+"," + divisa.getValorInicial()+"," + divisa.getValorFinal()+ "," + divisa.getCantidad()+"," + divisa.getIdOperacion()+"," + divisa.getBeneficio()+","+"'" + divisa.getDivisa()+ "'"+")";
                
-                    Divisa div = new Divisa();
-                    div.setToken(rs.getString("usuario"));
-                    div.setValorInicial(rs.getFloat("valorinicial"));
-                    div.setValorFinal(rs.getFloat("valorfinal"));
-                    div.setCantidad(rs.getFloat("cantidad"));
-                    div.setIdOperacion(rs.getInt("idoperacion"));
-                    div.setBeneficio(rs.getFloat("beneficio"));
-                    div.setDivisa(rs.getString("divisa"));
-                    listadivisa.add(div);
-                   
-            }
-            return listadivisa;
-        } catch (SQLException ex) {
-            Logger.getLogger(Datos.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        listadivisa = null;
-        return listadivisa;
-    }
-    
-    
-    
-     public static void updateDivisa(Divisa divisa){
-          
-            String qry = "UPDATE public.accion SET  beneficio="+ divisa.getBeneficio()+"WHERE token="+"'" + divisa.getToken() + "'"+"AND  CAST(valoinicial AS DECIMAL )="+divisa.getValorInicial()+"";
-            try {
-                stnt.executeUpdate(qry);
-            } catch (SQLException e) {
-                System.out.println("fallo");
-            }
-       
-    }
-     
-     public static void borrarDivisa(Divisa divisa){
-          
-            String qry = "DELETE FROM public.accion WHERE  token="+"'"+ divisa.getToken()+"'"+"AND beneficio="+"'"+divisa.getBeneficio()+"'"+" AND idoperacion="+"'"+divisa.getIdOperacion()+"'"+"";
-            try {
-                stnt.executeUpdate(qry);
-            } catch (SQLException e) {
-                System.out.println("fallo borrar");
-            }
-       
-    } 
-     
-     public static void insertarHistorial(Divisa divisa){
-            String qry = "INSERT INTO public.historial(usuario, valorinicial, valorfinal, cantidad, idoperacion, beneficio, divisa) values (" +"'"+ divisa.getToken()+"'"+"," + divisa.getValorInicial()+"," + divisa.getValorFinal()+ "," + divisa.getCantidad()+"," + divisa.getIdOperacion()+"," + divisa.getBeneficio()+","+"'" + divisa.getDivisa()+ "'"+")";
-            try {
-                stnt.executeUpdate(qry);
-            } catch (SQLException e) {
-                System.out.println("fallo insertar en el historial");
-            }
+                    ResultSet rs = stntinsertarHistorial.executeQuery(qry);
+                    rs.close();
+                    stntinsertarHistorial.close();
+                     con.close();
+                
         
+         } catch (SQLException ex) {
+             System.out.println("fallo insertarHistorial");
+         } catch (Exception ex) {
+             System.out.println("fallo insertarHistorial");
+         }
+           
      } 
       
      
-      public static void updateDineroCuenta(Usuario usuario){
-          
-            String qry = "UPDATE public.usuario SET  dinero="+ usuario.getDinero()+"WHERE nombre="+"'" + usuario.getNombre()+ "'"+"";
-            try {
-                stnt.executeUpdate(qry);
-            } catch (SQLException e) {
-                System.out.println("fallo");
-            }
+      public void updateDineroCuenta(Usuario usuario){
+         String url= "jdbc:postgresql://localhost:5432/Proyecto_final";
+        String driver = "org.postgresql.Driver";
+        Connection con=null;
+	String contrase ="123";
+        String us = "postgres";
+           try {
+                 Class.forName(driver).newInstance();
+                 con=DriverManager.getConnection(url,us,contrase);
+             Statement stntupdateDineroCuenta = con.createStatement();
+             String qry = "UPDATE public.usuario SET  dinero="+ usuario.getDinero()+"WHERE nombre="+"'" + usuario.getNombre()+ "'"+"";
+             ResultSet rs =  stntupdateDineroCuenta.executeQuery(qry);
+                    rs.close();
+                    stntupdateDineroCuenta.close();
+                    con.close();
+              
+                    
+         } catch (SQLException ex) {
+             System.out.println("fallo updateDineroCuenta");
+         } catch (Exception ex) {
+             System.out.println("fallo updateDineroCuenta");
+         }
+            
        
     }
 
-public void connect() {
-        try {
-            Class.forName("org.postgresql.Driver");
-            con = DriverManager.getConnection(server, user, pass);
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        } catch (SQLException e) {
-            System.out.println("ConnectDB " + e.getMessage());
-        }
-    }
-public void disconnet() {
-        if (con != null) {
-            try {
-                con.close();
-            } catch (SQLException ex) {
-                System.out.println("ConnectDB " + ex.getMessage());
-            }
-        }
-    }
- 
-    public Connection getConnect() {
-        return con;
-    }
+
 }

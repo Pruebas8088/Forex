@@ -38,6 +38,7 @@ public class Iseguridad implements IseguridadLocal {
         }else{
             for (Usuario userL : listauser) {
                     if(userL.getEmail().equals(usuario) && userL.getPass().equals(contraseña)){
+                        Datos datosupdate = new  Datos();
                         String jwt = Jwts.builder()
                                         .signWith(key, SignatureAlgorithm.HS256)
                                         .setSubject(userL.getNombre())
@@ -45,7 +46,7 @@ public class Iseguridad implements IseguridadLocal {
                                         .setExpiration(expiracion())
                                         .claim("Correo", userL.getEmail())
                                         .compact();
-                        datos.updateToken(userL,jwt);
+                        datosupdate.updateToken(userL,jwt);
                         return jwt;
                     }
                 }

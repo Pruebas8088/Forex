@@ -89,11 +89,13 @@ public class Iusuario implements IusuarioLocal {
              if(listdivi.getDivisa().equals(divisa.getDivisa())){
                  if(listdivi.getIdOperacion() == 1){
                      listdivi.setBeneficio((divisa.getValorFinal()-listdivi.getValorInicial())*listdivi.getCantidad());
-                     dat.updateDivisa(listdivi);
+                     Datos datupdate1 =  new Datos();
+                     datupdate1.updateDivisa(listdivi);
                      bene+=listdivi.getBeneficio();
                  }else{
                      listdivi.setBeneficio((listdivi.getValorInicial()-divisa.getValorFinal())*listdivi.getCantidad());
-                     dat.updateDivisa(listdivi);
+                      Datos datupdate2 =  new Datos();
+                     datupdate2.updateDivisa(listdivi);
                      bene+=listdivi.getBeneficio();
                  }
                  
@@ -107,8 +109,9 @@ public class Iusuario implements IusuarioLocal {
     @Override
     public float terminarOperacion(Divisa divisa) {
         Datos dat =  new Datos();
+        Datos datinsertar =  new Datos();
         dat.borrarDivisa(divisa);
-        dat.insertarHistorial(divisa);
+        datinsertar.insertarHistorial(divisa);
         return divisa.getBeneficio();
     }
 
