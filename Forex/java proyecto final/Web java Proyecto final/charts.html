@@ -1,5 +1,9 @@
+
 <!DOCTYPE html>
+
 <html lang="en">
+
+
 
 <head>
 
@@ -107,11 +111,10 @@
         <div class="card mb-3">
           <div class="card-header">
             <i class="fas fa-chart-area"></i>
-            Area Chart Example</div>
-          <div class="card-body">
-            <canvas id="myAreaChart" width="100%" height="30"></canvas>
+            Grafica de Beneficios</div>
+          <div class="card-body" >
+            <canvas id="myAreaChart" width="100%" height="30" ></canvas>
           </div>
-          <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
         </div>
 
        
@@ -165,9 +168,10 @@
   <!-- Bootstrap core JavaScript-->
   <script src="vendor/jquery/jquery.min.js"></script>
   <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
   <!-- Core plugin JavaScript-->
   <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+  <script src="js/jwt-decode-master/build/jwt-decode.min.js"></script>
 
   <!-- Page level plugin JavaScript-->
   <script src="vendor/chart.js/Chart.min.js"></script>
@@ -176,9 +180,66 @@
   <script src="js/sb-admin.min.js"></script>
 
   <!-- Demo scripts for this page-->
-  <script src="js/demo/chart-area-demo.js"></script>
+  <!--<script src="js/demo/chart-area-demo.js"></script>
   <script src="js/demo/chart-bar-demo.js"></script>
-  <script src="js/demo/chart-pie-demo.js"></script>
+  <script src="js/demo/chart-pie-demo.js"></script>-->
+
+<!-- JS -->
+<script type="text/javascript"> 
+
+$(document).ready(function(){
+
+consultaOperaciones();
+
+let  ctx = document.getElementById("myAreaChart").getContext("2d");
+var chart = new Chart(ctx, {
+  type: 'line', 
+  data: {
+    labels: ["p"],
+    datasets: [{
+      label: "Beneficio",
+      backgroundColor: "rgba(2,117,216,0.2)",
+      borderColor: "rgba(2,117,216,1)",
+      data: [4,3],
+    }],
+  },
+  
+})
+
+
+
+  function consultaOperaciones() {
+
+ var token =localStorage.getItem("tokenuser");
+ var decoded = jwt_decode(token);
+ jQuery.ajax({
+  url: 'http://localhost:8080/ProyectoFinal-web/api/Logica/ConsultarHisotrial/',
+  type: 'POST',
+  dataType: 'json',
+  headers: {"token-auto": localStorage.getItem("tokenuser")},
+  contentType:'application/json',
+  data: JSON.stringify({
+    token: decoded.sub
+  }),
+  success: function(data, textStatus, xhr) {
+    var array = new Array();
+    data.forEach(function(element){
+      array.push(element.beneficio);
+    });
+    chart.data.labels = array ;
+    chart.data.datasets[0].data =array;
+    chart.update();
+
+  },
+  error: function(xhr, textStatus, errorThrown) {
+   }//funcion
+
+ });//ajax
+
+}//consultarOperaciones
+});//docuement ready 
+</script>
+
 
 </body>
 

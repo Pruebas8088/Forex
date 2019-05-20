@@ -12,19 +12,24 @@ public class Conexion {
 	//String driver="com.mysql.jdbc.Driver";
         String driver = "org.postgresql.Driver";
 	//String url="jdbc:mysql://localhost:3306/acuario"; /** este nombre es el nombre de la base de datos? */
-        String url= "jdbc:postgresql://localhost:5432/Proyecto_final";
+        String url= "jdbc:postgresql://localhost:5432/ProyectoFinal";
         String user,contra,aviso1,aviso2;
 	public int indica1,indica2;
 	Connection con=null;
 	Statement stmt=null; 
-        String contrase ="123";
+        String contrase ="1234";
         String usuario = "postgres";
        
         
 
    public Conexion() {
+<<<<<<< HEAD
           
         System.out.println("Contraseña="+contrase);
+=======
+	
+        System.out.println("ContraseÃ±a="+contrase);
+>>>>>>> 052caab31339ee534e72f5699d5717021bf5c28d
         indica1=0; indica2=0;
 	try {
 	      Class.forName(driver).newInstance();
@@ -52,7 +57,7 @@ public class Conexion {
                    System.out.println ("Error Creando el Statement= "+ e.getMessage());
             }
       }else{
-               System.out.println("Invalida usuario o contraseña");
+               System.out.println("Invalida usuario o contraseÃ±a");
            }
     }
 

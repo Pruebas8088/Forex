@@ -127,7 +127,15 @@
             </li>
             <li class="breadcrumb-item active"> Reporte de transacciones</li>
           </ol>
+  
 
+       
+
+        <p class="small text-center text-muted my-5">
+          <em>More chart examples coming soon...</em>
+        </p>
+
+      </div>
           <!-- DataTables Example -->
           <div class="card mb-3">
             <div class="card-header">
@@ -141,7 +149,7 @@
                       <th>Usuario</th>
                       <th>Valor inicial($)</th>
                       <th>Valor final($)</th>
-                      <th>Catidad($)</th>
+                      <th>Cantidad($)</th>
                       <th>Operacion</th>
                       <th>Beneficio</th>
                       <th>Divisa</th>
@@ -156,7 +164,7 @@
                       <th>Usuario</th>
                       <th>Valor inicial($)</th>
                       <th>Valor final($)</th>
-                      <th>Catidad($)</th>
+                      <th>Cantidad($)</th>
                       <th>Operacion</th>
                       <th>Beneficio</th>
                       <th>Divisa</th>
@@ -196,6 +204,8 @@
       <i class="fas fa-angle-up"></i>
     </a>
 
+
+
     <!-- Logout Modal-->
     <form id="cerrado">
       <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -228,6 +238,7 @@
 
   <!-- Page level plugin JavaScript-->
   <script src="vendor/chart.js/Chart.min.js"></script>
+  <script src="vendor/chart.js/Chart.js"></script>
   <script src="vendor/datatables/jquery.dataTables.js"></script>
   <script src="vendor/datatables/dataTables.bootstrap4.js"></script>
 
@@ -245,7 +256,7 @@
 
     $(document).ready(function() {
 
-      consultaOperaciones();
+    consultaOperaciones();
 
 
 
@@ -276,7 +287,7 @@
               $(location).attr('href','login.html'); 
 
             },
-            error: function(xhr, textStatus, errorThrown) {
+            err,or: function(xhr, textStatus, errorThrown) {
               localStorage.removeItem("tokenuser");
 
               alert("Token Invalido lo sentimos por favor inicie sesion")
@@ -366,8 +377,13 @@ function consultaOperaciones() {
     token: decoded.sub
   }),
   success: function(data, textStatus, xhr) {
+<<<<<<< HEAD
      
+=======
+    
+>>>>>>> 052caab31339ee534e72f5699d5717021bf5c28d
     llenado(data);
+    
 
   },
   error: function(xhr, textStatus, errorThrown) {
