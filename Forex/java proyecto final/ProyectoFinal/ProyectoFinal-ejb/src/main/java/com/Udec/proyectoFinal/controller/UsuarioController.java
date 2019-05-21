@@ -18,13 +18,17 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 /**
- *
+ *clase que contiene funciones de usuario
  * @author David
  */
 public class UsuarioController {
     
    
-    
+    /**
+     * funcion que controla que los datos no esten vacios
+     * @param user objetoque contiene los datos del usuario
+     * @return er
+     */
     public ErrorMsg anadirUser(Usuario user)  {
         ErrorMsg er = new ErrorMsg();
             if(user.getNombre().isEmpty() || user.getApellido().isEmpty() || user.getEmail().isEmpty() || user.getPass().isEmpty()){
@@ -37,7 +41,11 @@ public class UsuarioController {
                return er;
          }    
     }
-    
+    /**
+     * funcion que recarga el dinero del usuario
+     * @param user objeto que contiene los datos del usuario
+     * @return dinero
+     */
     public float recargaDinero(Usuario user){
         float dinero;
          Datos dat =  new Datos();
@@ -46,7 +54,11 @@ public class UsuarioController {
         return dinero;
     }
     
-    
+    /**
+     * funcion que consulta el dinero del usuario
+     * @param user objeto que contiene los datos del usuario
+     * @return  dinero
+     */
     public float consultarDinero(Usuario user){
         float dinero;
          Datos dat =  new Datos();

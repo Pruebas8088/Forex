@@ -9,7 +9,7 @@ import javax.ws.rs.ApplicationPath;
 import javax.ws.rs.core.Application;
 
 /**
- *
+ *clase que crea el path de aplicacion
  * @author David
  */
 @ApplicationPath("api")

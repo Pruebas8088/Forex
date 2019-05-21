@@ -757,6 +757,7 @@ $( "#submitCompra2").on( "click", function() {
   contentType:'application/json',
   data: JSON.stringify({
     token: decoded.sub,
+    correo: decoded.Correo,
     valorInicial: document.getElementById("EUR/AUD").innerHTML,
     valorFinal: 0,
     cantidad:$("#ValorCompra2").val(),

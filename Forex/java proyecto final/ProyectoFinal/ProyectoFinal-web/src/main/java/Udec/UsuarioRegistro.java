@@ -16,17 +16,23 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 /**
- *
- * @author David
+ *funcion que contiene metodos del registro
+ * @author Jonathan
  */
 @javax.enterprise.context.RequestScoped
 @Path("Registro")
 public class UsuarioRegistro {
-
+    /**
+     * objeto que apunta a la interfaz de usuario
+     */
     @EJB
     IusuarioLocal usuario;
     
-    
+ /**
+  * metodo que agrega usuario a la base de datos
+  * @param user
+  * @return 
+  */   
  @POST
  @Produces(MediaType.APPLICATION_JSON)
  @Consumes(MediaType.APPLICATION_JSON)

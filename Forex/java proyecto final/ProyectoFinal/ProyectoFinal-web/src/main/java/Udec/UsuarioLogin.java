@@ -22,17 +22,23 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 /**
- *
+ *clase que contiene funciones del logueo
  * @author David
  */
 @javax.enterprise.context.RequestScoped
 @Path("Login")
 public class UsuarioLogin {
 
-    
+    /**
+     * atributo de la interfaaz de seguridad
+     */
     @EJB
     IseguridadLocal seguridad;
-    
+ /**
+  * funcio que realiza la validacion del usuario
+  * @param user
+  * @return 
+  */   
  @POST
  @Produces(MediaType.APPLICATION_JSON)
  @Consumes(MediaType.APPLICATION_JSON)

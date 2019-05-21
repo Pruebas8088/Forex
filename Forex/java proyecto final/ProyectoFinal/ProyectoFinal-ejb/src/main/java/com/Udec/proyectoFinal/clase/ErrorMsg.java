@@ -6,27 +6,38 @@
 package com.Udec.proyectoFinal.clase;
 
 /**
- * Prueba
+ * clase que contiene los atributos de los mensajes
  * @author David
  */
 public class ErrorMsg {
-    
+    /**
+     * atributo que contiene el mensaje de error
+     */
     private String errormsg;
-
+    /**
+     * constructor de la clase que inicializa las variables
+     * @param errormsg 
+     */
     public ErrorMsg(String errormsg) {
         this.errormsg = errormsg;
     }
-
+    /***
+     * constructor de la clase
+     */
     public ErrorMsg() {
     }
-
+    /**
+     * retorna el mensaje de eror
+     * @return errormsg
+     */
     public String getErrormsg() {
         return errormsg;
     }
-
+    /**
+     * modifica el mensaje de error
+     * @param errormsg 
+     */
     public void setErrormsg(String errormsg) {
         this.errormsg = errormsg;
     }
-    
-    
 }

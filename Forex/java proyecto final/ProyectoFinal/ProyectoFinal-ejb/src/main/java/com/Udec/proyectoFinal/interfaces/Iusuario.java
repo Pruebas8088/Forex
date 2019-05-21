@@ -10,15 +10,25 @@ import com.Udec.proyectoFinal.clase.Divisa;
 import com.Udec.proyectoFinal.clase.ErrorMsg;
 import com.Udec.proyectoFinal.clase.Usuario;
 import java.util.ArrayList;
+import java.util.Properties;
 import javax.ejb.Stateless;
+import javax.mail.MessagingException;
+import javax.mail.PasswordAuthentication;
+import javax.mail.Session;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 
 /**
- *
+ *clase que contiene funciones de usuario
  * @author Jonathan
  */
 @Stateless
 public class Iusuario implements IusuarioLocal {
-
+    /**
+     * funcion que agrega un usuario
+     * @param user objeto que contiene los datos de usuario
+     * @return er
+     */
     @Override
     public ErrorMsg anadirUser(Usuario user) {
          ErrorMsg er = new ErrorMsg();
@@ -32,7 +42,11 @@ public class Iusuario implements IusuarioLocal {
                return er;
          }  
     }
-
+    /**
+     * funcion que recarga el dinero de la cuenta
+     * @param user objeto que contiene los datos de usuario
+     * @return dinero
+     */
     @Override
     public float recargaDinero(Usuario user) {
         float dinero;
@@ -41,7 +55,11 @@ public class Iusuario implements IusuarioLocal {
         dinero=user.getDinero();
         return dinero;
     }
-
+    /**
+     * funcion que consulta el dinero del usuario
+     * @param user objeto que contiene los datos del usuario
+     * @return dinero
+     */
     @Override
     public float consultarDinero(Usuario user) {
         float dinero;
@@ -50,7 +68,11 @@ public class Iusuario implements IusuarioLocal {
         dinero=dat.traerDinero(user);
         return dinero;
     }
-
+    /**
+     * funcion que cierra sesion
+     * @param user objeto que contiene los datos del usuario
+     * @return  er
+     */
     @Override
     public ErrorMsg cerrarSesion(Usuario user) {
             ErrorMsg er = new ErrorMsg();
@@ -59,16 +81,25 @@ public class Iusuario implements IusuarioLocal {
             er.setErrormsg("Cerrado");
             return er;
     }
-
+    /**
+     * funcion que genera la operacion con las divisas
+     * @param divisa objeto que contiene los datos de la divisa a operar
+     * @return er
+     */
     @Override
     public ErrorMsg compraDivisa(Divisa divisa) {
+            enviarCorreo(divisa.getCorreo(), divisa.getCantidad());
             ErrorMsg er = new ErrorMsg();
             Datos dat =  new Datos();
             dat.compraDivisas(divisa);
-            er.setErrormsg("Compra Exitosa");
+            er.setErrormsg("Compra Exitosa, confirmacion enviada a su correo");
             return er;
     }
-
+    /**
+     * funcion que consulta las divisas activas
+     * @param divisa objeto que contiene los atributos de las divisas
+     * @return listaDivisa
+     */
     @Override
     public ArrayList<Divisa> ConsultaDivisa(Divisa divisa) {
         ArrayList<Divisa> listaDivisa= new ArrayList<Divisa>();
@@ -78,7 +109,11 @@ public class Iusuario implements IusuarioLocal {
            
             return listaDivisa;
     }
-
+    /**
+     * funcion que genera la operacion del beneficio qgenerado con las divisas
+     * @param divisa objeto que contiene los atributos de las divisas
+     * @return bene
+     */
     @Override
     public float operacionBeneficio(Divisa divisa) {
         ArrayList<Divisa> listaDivisa= new ArrayList<Divisa>();
@@ -105,7 +140,11 @@ public class Iusuario implements IusuarioLocal {
        
         return bene;
     }
-
+    /**
+     * funcion que realiza la finalizacion de la operacion con la divisa
+     * @param divisa objeto que contiene los atributos de la divisa
+     * @return divisa.getBeneficio
+     */
     @Override
     public float terminarOperacion(Divisa divisa) {
         Datos dat =  new Datos();
@@ -114,7 +153,11 @@ public class Iusuario implements IusuarioLocal {
         datinsertar.insertarHistorial(divisa);
         return divisa.getBeneficio();
     }
-
+    /**
+     * funcion que descuenta el dinero deacuerdo con el beneficio obtenido
+     * @param user objeto que contiene los datos del usuario
+     * @return  er
+     */
     @Override
     public ErrorMsg descontarDinero(Usuario user) {
         Datos dat =  new Datos();
@@ -123,7 +166,11 @@ public class Iusuario implements IusuarioLocal {
         er.setErrormsg("actualizado");
         return er;
     }
-
+    /**
+     * funcion que consulta el historial de las divisas
+     * @param divisa objeto que contiene los atributos de la divisa
+     * @return listaDivisa
+     */
     @Override
     public ArrayList<Divisa> ConsultaHistorial(Divisa divisa) {
     ArrayList<Divisa> listaDivisa= new ArrayList<Divisa>();
@@ -133,8 +180,41 @@ public class Iusuario implements IusuarioLocal {
            
             return listaDivisa;
     }
+    /**
+     * funcion que geera el envio del correo de la recarga del dinero
+     * @param correo atributo que contiene el correo del cliente
+     * @param cantidad  atributo que contiene la cantidad de dinero recargado
+     */
+    public void enviarCorreo(String correo, float cantidad){
+        Properties props = new Properties();
+        props.put("mail.smtp.auth", "true");
+        props.put("mail.smtp.starttls.enable", "true");
+        props.put("mail.smtp.host", "smtp.gmail.com");
+        props.put("mail.smtp.port", "587");
 
-    
+        Session session = Session.getInstance(props,
+                new javax.mail.Authenticator() {
+                    protected PasswordAuthentication getPasswordAuthentication() {
+                        return new PasswordAuthentication("sosa8088111@gmail.com", "JOSTICK8088");
+                    }
+                });
+
+        try {
+
+            javax.mail.Message message = new MimeMessage(session);
+            message.setFrom(new InternetAddress("sosa8088111@gmail.com"));
+            message.setRecipients(javax.mail.Message.RecipientType.TO,
+                    InternetAddress.parse(correo));
+            message.setSubject("Confirmacion compra");
+            message.setText("Ha realizado la compra de: $"+cantidad+".");
+
+            javax.mail.Transport.send(message);
+            
+
+        } catch (MessagingException e) {
+            throw new RuntimeException(e);
+        }
+    }//enviarCorreo
 
     
 }

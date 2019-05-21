@@ -19,15 +19,22 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 /**
- *
+ *clase que contiene metodos del proyecto
  * @author David
  */
 @javax.enterprise.context.RequestScoped
 @Path("Logica")
 public class UsuarioService {
-  @EJB
+    /**
+     * variable que apunta a la interfaz de usuario
+     */
+    @EJB
   IusuarioLocal usuario;
-    
+ /**
+  * metodo que realiza recarga del dinero del usuario
+  * @param user
+  * @return 
+  */   
  @POST
  @Produces(MediaType.APPLICATION_JSON)
  @Consumes(MediaType.APPLICATION_JSON)
@@ -43,7 +50,11 @@ public class UsuarioService {
      }         
    } 
  
- 
+ /**
+  * metodo que consulta el dinero del usuario
+  * @param user
+  * @return 
+  */
  @POST
  @Produces(MediaType.APPLICATION_JSON)
  @Consumes(MediaType.APPLICATION_JSON)
@@ -59,7 +70,11 @@ public class UsuarioService {
      }         
    } 
  
- 
+ /**
+  * metodo que cierra sesion
+  * @param user
+  * @return 
+  */
  @POST
  @Produces(MediaType.APPLICATION_JSON)
  @Consumes(MediaType.APPLICATION_JSON)
@@ -71,7 +86,11 @@ public class UsuarioService {
          return Response.status(Response.Status.NOT_ACCEPTABLE).build();
      }         
    } 
- 
+ /**
+  * metodo que realiza la compra de las divisas
+  * @param divisa
+  * @return 
+  */
  @POST
  @Produces(MediaType.APPLICATION_JSON)
  @Consumes(MediaType.APPLICATION_JSON)
@@ -83,7 +102,11 @@ public class UsuarioService {
          return Response.status(Response.Status.NOT_ACCEPTABLE).build();
      }         
    } 
- 
+ /**
+  * metodo que consulta las operaciones activas
+  * @param divisa
+  * @return 
+  */
  @POST
  @Produces(MediaType.APPLICATION_JSON)
  @Consumes(MediaType.APPLICATION_JSON)
@@ -95,7 +118,11 @@ public class UsuarioService {
          return Response.status(Response.Status.NOT_ACCEPTABLE).build();
      }         
    } 
- 
+ /**
+  * metodo que calcula el beneficio de las eraciones activas
+  * @param divisa
+  * @return 
+  */
  @POST
  @Produces(MediaType.APPLICATION_JSON)
  @Consumes(MediaType.APPLICATION_JSON)
@@ -113,7 +140,11 @@ public class UsuarioService {
        
       
 } 
- 
+ /**
+  * metodo que realiza la finalizacion de las operaciones
+  * @param divisa
+  * @return 
+  */
  @POST
  @Produces(MediaType.APPLICATION_JSON)
  @Consumes(MediaType.APPLICATION_JSON)
@@ -132,7 +163,11 @@ public class UsuarioService {
       
 } 
  
- 
+ /**
+  * metodo que realiza la operacion con el dinero del usuario
+  * @param user
+  * @return 
+  */
   @POST
  @Produces(MediaType.APPLICATION_JSON)
  @Consumes(MediaType.APPLICATION_JSON)
@@ -147,7 +182,11 @@ public class UsuarioService {
    } 
  
     
- 
+ /**
+  * metodo que consulta el historial de las operaciones
+  * @param divisa
+  * @return 
+  */
  @POST
  @Produces(MediaType.APPLICATION_JSON)
  @Consumes(MediaType.APPLICATION_JSON)

@@ -24,13 +24,17 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.ext.Provider;
 
 /**
- *
- * @author David
+ *clase que contiene el filtro del proyecto
+ * @author Jonathan
  */
 @Provider
 @PreMatching
 public class Interceptor implements ContainerRequestFilter{
-
+/**
+ * funcion filtro del proyecto
+ * @param requestContext
+ * @throws IOException 
+ */
     @Override
     public void filter(ContainerRequestContext requestContext) throws IOException {
         String url = requestContext.getUriInfo().getAbsolutePath().toString();
@@ -58,7 +62,9 @@ public class Interceptor implements ContainerRequestFilter{
             
         }
     }
-    
+    /**
+     * funcion que trae el token de usuario
+     */
    @EJB
    IseguridadLocal segur;
     private String traerToken(String token){

@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import javax.ejb.Local;
 
 /**
- *
+ *interfaz de usuario
  * @author Jonathan
  */
 @Local

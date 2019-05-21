@@ -11,7 +11,7 @@ import java.util.Date;
 import javax.ejb.Local;
 
 /**
- *
+ *interfaz de seguridda
  * @author Jonathan
  */
 @Local
