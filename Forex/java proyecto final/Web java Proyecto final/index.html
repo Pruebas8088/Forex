@@ -757,7 +757,6 @@ $( "#submitCompra2").on( "click", function() {
   contentType:'application/json',
   data: JSON.stringify({
     token: decoded.sub,
-    correo: decoded.Correo,
     valorInicial: document.getElementById("EUR/AUD").innerHTML,
     valorFinal: 0,
     cantidad:$("#ValorCompra2").val(),
@@ -845,8 +844,8 @@ $( "#submitVenta2").on( "click", function() {
 
 
 $("#contactForm").submit(function(event) {
-
-
+  var token =localStorage.getItem("tokenuser");
+  var decoded = jwt_decode(token);
   jQuery.ajax({
     url: 'http://localhost:8080/ProyectoFinal-web/api/Logica/recargarDinero/',
     type: 'POST',
@@ -855,31 +854,16 @@ $("#contactForm").submit(function(event) {
     contentType:'application/json',
     data: JSON.stringify({
       dinero: $("#Valor").val(),
-      token: localStorage.getItem("tokenuser")
+      token: localStorage.getItem("tokenuser"),
+      email: decoded.Correo
 
     }),
     success: function(data, textStatus, xhr) {
-
+      consultarDinero();
       bootbox.alert("Recarga exitosa!");
     },
     error: function(xhr, textStatus, errorThrown) {
-      bootbox.dialog({ 
-        title: 'Error!',
-        message: '<p>Porfavor Ingrese primero</p>',
-        size: 'large',
-        onEscape: true,
-        backdrop: true,
-        buttons: {
-          fum: {
-            label: 'Aceptar',
-            className: 'btn-danger',
-            callback: function(){
-
-             $(location).attr('href','login.html');         
-           }
-         }
-       }
-     })
+      bootbox.alert("Ha ocurrido un error");
     }
   });
   event.preventDefault();
@@ -1182,6 +1166,28 @@ function calculoBeneficiodivisa2() {
 
 
 }//consultarOperaciones
+
+function consultarDinero(){
+  jQuery.ajax({
+  url: 'http://localhost:8080/ProyectoFinal-web/api/Logica/consultarDinero',
+  type: 'POST',
+  dataType: 'json',
+  headers: {"token-auto": localStorage.getItem("tokenuser")},
+  contentType:'application/json',
+  data: JSON.stringify({
+    token: localStorage.getItem("tokenuser")
+  }),
+  success: function(data, textStatus, xhr) {
+    var dinero = data.saldoOriginal
+    document.getElementById("dineroActual").innerHTML = dinero.toFixed(3);
+    document.getElementById("dineroCuenta").innerHTML = dinero.toFixed(3);
+  },
+  error: function(xhr, textStatus, errorThrown) {
+    document.getElementById("dineroActual").innerHTML = "NaN";
+    document.getElementById("dineroCuenta").innerHTML = "NaN";
+  }
+});
+}
 
 
 </script>
