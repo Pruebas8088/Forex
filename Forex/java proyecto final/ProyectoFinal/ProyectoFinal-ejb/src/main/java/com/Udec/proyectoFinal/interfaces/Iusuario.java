@@ -49,8 +49,12 @@ public class Iusuario implements IusuarioLocal {
      */
     @Override
     public float recargaDinero(Usuario user) {
-        float dinero;
-         Datos dat =  new Datos();
+        //enviarCorreo(user.getEmail(), user.getDinero());
+        float dinero = user.getDinero();
+        float dinero1 = consultarDinero(user);
+        dinero = (dinero1+user.getDinero());
+        user.setDinero(dinero);
+        Datos dat =  new Datos();
         dat.updateDinero(user);
         dinero=user.getDinero();
         return dinero;
@@ -88,7 +92,10 @@ public class Iusuario implements IusuarioLocal {
      */
     @Override
     public ErrorMsg compraDivisa(Divisa divisa) {
+<<<<<<< HEAD
             //enviarCorreo(divisa.getCorreo(), divisa.getCantidad());
+=======
+>>>>>>> f2606255a58ceecce3395245ce894d852ae165a3
             ErrorMsg er = new ErrorMsg();
             Datos dat =  new Datos();
             dat.compraDivisas(divisa);
@@ -206,7 +213,7 @@ public class Iusuario implements IusuarioLocal {
             message.setRecipients(javax.mail.Message.RecipientType.TO,
                     InternetAddress.parse(correo));
             message.setSubject("Confirmacion compra");
-            message.setText("Ha realizado la compra de: $"+cantidad+".");
+            message.setText("Ha realizado la compra de: $"+cantidad+" exitosamente");
 
             javax.mail.Transport.send(message);
             

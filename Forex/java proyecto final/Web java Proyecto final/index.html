@@ -167,7 +167,7 @@
                       <div class="modal-body">        
                         <div class="form-group">
                           <label for="name">Ingrese el monto a comprar</label>
-                          <input type="number" value="10000"  min="10000" class="form-control" id="Valor">
+                          <input type="number" value="10000"  min="10000" class="form-control" id="Valorrecargadinero">
                         </div>
                       </div>
                       <div class="modal-footer">          
@@ -252,7 +252,16 @@
                     </button>
                   </div>
                   <div class="modal-body">
-                   <h6>Valor:</h6><input type="number" value="1"  min="1" class="form-control" id="ValorCompra">
+                     <div class="dropdown">
+                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                         Valor del pip
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                          <a class="dropdown-item" href="#">1</a>
+                          <a class="dropdown-item" href="#">2</a>
+                          <a class="dropdown-item" href="#">3</a>
+                        </div>
+                    </div>
                  </div>
                  <div class="modal-footer">
                   <button type="button" class="btn btn-info" data-dismiss="modal">Cancelar</button>
@@ -274,7 +283,16 @@
                   </button>
                 </div>
                 <div class="modal-body">
-                 <h6>Valor:</h6><input type="number" value="1"  min="1" class="form-control" id="ValorVenta">
+                 <div class="dropdown">
+                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                         Valor del pip
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                          <a class="dropdown-item" href="#">1</a>
+                          <a class="dropdown-item" href="#">2</a>
+                          <a class="dropdown-item" href="#">3</a>
+                        </div>
+                    </div>
                </div>
                <div class="modal-footer">
                 <button type="button" class="btn btn-info"  data-dismiss="modal" >Cancelar</button>
@@ -336,7 +354,16 @@
             </button>
           </div>
           <div class="modal-body">
-           <h6>Valor:</h6><input type="number" value="1"  min="1" class="form-control" id="ValorCompra2">
+           <div class="dropdown">
+                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                         Valor del pip
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                          <a class="dropdown-item" href="#">1</a>
+                          <a class="dropdown-item" href="#">2</a>
+                          <a class="dropdown-item" href="#">3</a>
+                        </div>
+                    </div>
          </div>
          <div class="modal-footer">
           <button type="button" class="btn btn-info" data-dismiss="modal">Cancelar</button>
@@ -358,7 +385,16 @@
           </button>
         </div>
         <div class="modal-body">
-         <h6>Valor:</h6><input type="number" value="1"  min="1" class="form-control" id="ValorVenta2">
+         <div class="dropdown">
+                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                         Valor del pip
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                          <a class="dropdown-item" href="#">1</a>
+                          <a class="dropdown-item" href="#">2</a>
+                          <a class="dropdown-item" href="#">3</a>
+                        </div>
+                    </div>
        </div>
        <div class="modal-footer">
         <button type="button" class="btn btn-info"  data-dismiss="modal" >Cancelar</button>
@@ -648,7 +684,12 @@ $(document).ready(function() {
 
 ///////////////////////////////////divisa1////////////////////////////////
 $( "#submitCompra").on( "click", function() {
- var token =localStorage.getItem("tokenuser");
+var dineroAct =  document.getElementById("dineroActual").innerHTML;
+var dineroCuen  =  document.getElementById("dineroCuenta").innerHTML;
+if(dineroAct <= 0 || dineroCuen <=0){
+  alert("Dinero insuficiente para seguir operando");
+}else{
+  var token =localStorage.getItem("tokenuser");
  var decoded = jwt_decode(token);
  jQuery.ajax({
   url: 'http://localhost:8080/ProyectoFinal-web/api/Logica/CompraDivisa/',
@@ -665,6 +706,8 @@ $( "#submitCompra").on( "click", function() {
     beneficio: 0,
     divisa: document.getElementById("iddivisa1").innerHTML
   }),
+
+ 
   success: function(data, textStatus, xhr) {
 
    consultaOperaciones();
@@ -691,10 +734,16 @@ $( "#submitCompra").on( "click", function() {
  }
 });
  event.preventDefault();
-
+}
  });//operacion
 
 $( "#submitVenta").on( "click", function() {
+
+  var dineroAct =  document.getElementById("dineroActual").innerHTML;
+var dineroCuen  =  document.getElementById("dineroCuenta").innerHTML;
+if(dineroAct <= 0 || dineroCuen <=0){
+  alert("Dinero insuficiente para seguir operando");
+}else{
   var token =localStorage.getItem("tokenuser");
   var decoded = jwt_decode(token);
   jQuery.ajax({
@@ -739,12 +788,19 @@ $( "#submitVenta").on( "click", function() {
   }
 });
   event.preventDefault();
+}
 });
 ///////////////////////////////////divisa1////////////////////////////////
 
 
 ///////////////////////////////////divisa2////////////////////////////////
 $( "#submitCompra2").on( "click", function() {
+
+  var dineroAct =  document.getElementById("dineroActual").innerHTML;
+var dineroCuen  =  document.getElementById("dineroCuenta").innerHTML;
+if(dineroAct <= 0 || dineroCuen <=0){
+  alert("Dinero insuficiente para seguir operando");
+}else{
  var token =localStorage.getItem("tokenuser");
  var decoded = jwt_decode(token);
  jQuery.ajax({
@@ -755,7 +811,6 @@ $( "#submitCompra2").on( "click", function() {
   contentType:'application/json',
   data: JSON.stringify({
     token: decoded.sub,
-    correo: decoded.Correo,
     valorInicial: document.getElementById("EUR/AUD").innerHTML,
     valorFinal: 0,
     cantidad:$("#ValorCompra2").val(),
@@ -790,10 +845,15 @@ $( "#submitCompra2").on( "click", function() {
  }
 });
  event.preventDefault();
-
+}
  });//operacion
 
 $( "#submitVenta2").on( "click", function() {
+  var dineroAct =  document.getElementById("dineroActual").innerHTML;
+var dineroCuen  =  document.getElementById("dineroCuenta").innerHTML;
+if(dineroAct <= 0 || dineroCuen <=0){
+  alert("Dinero insuficiente para seguir operando");
+}else{
   var token =localStorage.getItem("tokenuser");
   var decoded = jwt_decode(token);
   jQuery.ajax({
@@ -838,13 +898,15 @@ $( "#submitVenta2").on( "click", function() {
   }
 });
   event.preventDefault();
+}
 });
 ///////////////////////////////////divisa2////////////////////////////////
 
 
 $("#contactForm").submit(function(event) {
-
-
+  var token =localStorage.getItem("tokenuser");
+  var decoded = jwt_decode(token);
+  console.log($("#Valorrecargadinero").val());
   jQuery.ajax({
     url: 'http://localhost:8080/ProyectoFinal-web/api/Logica/recargarDinero/',
     type: 'POST',
@@ -852,32 +914,17 @@ $("#contactForm").submit(function(event) {
     headers: {"token-auto": localStorage.getItem("tokenuser")},
     contentType:'application/json',
     data: JSON.stringify({
-      dinero: $("#Valor").val(),
-      token: localStorage.getItem("tokenuser")
+      dinero: $("#Valorrecargadinero").val(),
+      token: localStorage.getItem("tokenuser"),
+      email: decoded.Correo
 
     }),
     success: function(data, textStatus, xhr) {
-
+      consultarDinero();
       bootbox.alert("Recarga exitosa!");
     },
     error: function(xhr, textStatus, errorThrown) {
-      bootbox.dialog({ 
-        title: 'Error!',
-        message: '<p>Porfavor Ingrese primero</p>',
-        size: 'large',
-        onEscape: true,
-        backdrop: true,
-        buttons: {
-          fum: {
-            label: 'Aceptar',
-            className: 'btn-danger',
-            callback: function(){
-
-             $(location).attr('href','login.html');         
-           }
-         }
-       }
-     })
+      bootbox.alert("Ha ocurrido un error");
     }
   });
   event.preventDefault();
@@ -1180,6 +1227,28 @@ function calculoBeneficiodivisa2() {
 
 
 }//consultarOperaciones
+
+function consultarDinero(){
+  jQuery.ajax({
+  url: 'http://localhost:8080/ProyectoFinal-web/api/Logica/consultarDinero',
+  type: 'POST',
+  dataType: 'json',
+  headers: {"token-auto": localStorage.getItem("tokenuser")},
+  contentType:'application/json',
+  data: JSON.stringify({
+    token: localStorage.getItem("tokenuser")
+  }),
+  success: function(data, textStatus, xhr) {
+    var dinero = data.saldoOriginal
+    document.getElementById("dineroActual").innerHTML = dinero.toFixed(3);
+    document.getElementById("dineroCuenta").innerHTML = dinero.toFixed(3);
+  },
+  error: function(xhr, textStatus, errorThrown) {
+    document.getElementById("dineroActual").innerHTML = "NaN";
+    document.getElementById("dineroCuenta").innerHTML = "NaN";
+  }
+});
+}
 
 
 </script>
