@@ -93,6 +93,7 @@
           var x = comparaContrasena();
           if(x == false){
               alert("Contraseñas no coinciden!!");
+              event.preventDefault();
           }else{
         jQuery.ajax({
           url: 'http://localhost:8080/ProyectoFinal-web/api/Registro/registroUsuario/',
@@ -127,6 +128,7 @@
        });
         event.preventDefault();
 }
+
       });
 
       

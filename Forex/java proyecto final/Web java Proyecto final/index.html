@@ -252,7 +252,16 @@
                     </button>
                   </div>
                   <div class="modal-body">
-                   <h6>Valor:</h6><input type="number" value="1"  min="1" class="form-control" id="ValorCompra">
+                     <div class="dropdown">
+                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                         Valor del pip
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                          <a class="dropdown-item" href="#">1</a>
+                          <a class="dropdown-item" href="#">2</a>
+                          <a class="dropdown-item" href="#">3</a>
+                        </div>
+                    </div>
                  </div>
                  <div class="modal-footer">
                   <button type="button" class="btn btn-info" data-dismiss="modal">Cancelar</button>
@@ -274,7 +283,16 @@
                   </button>
                 </div>
                 <div class="modal-body">
-                 <h6>Valor:</h6><input type="number" value="1"  min="1" class="form-control" id="ValorVenta">
+                 <div class="dropdown">
+                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                         Valor del pip
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                          <a class="dropdown-item" href="#">1</a>
+                          <a class="dropdown-item" href="#">2</a>
+                          <a class="dropdown-item" href="#">3</a>
+                        </div>
+                    </div>
                </div>
                <div class="modal-footer">
                 <button type="button" class="btn btn-info"  data-dismiss="modal" >Cancelar</button>
@@ -336,7 +354,16 @@
             </button>
           </div>
           <div class="modal-body">
-           <h6>Valor:</h6><input type="number" value="1"  min="1" class="form-control" id="ValorCompra2">
+           <div class="dropdown">
+                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                         Valor del pip
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                          <a class="dropdown-item" href="#">1</a>
+                          <a class="dropdown-item" href="#">2</a>
+                          <a class="dropdown-item" href="#">3</a>
+                        </div>
+                    </div>
          </div>
          <div class="modal-footer">
           <button type="button" class="btn btn-info" data-dismiss="modal">Cancelar</button>
@@ -358,7 +385,16 @@
           </button>
         </div>
         <div class="modal-body">
-         <h6>Valor:</h6><input type="number" value="1"  min="1" class="form-control" id="ValorVenta2">
+         <div class="dropdown">
+                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                         Valor del pip
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                          <a class="dropdown-item" href="#">1</a>
+                          <a class="dropdown-item" href="#">2</a>
+                          <a class="dropdown-item" href="#">3</a>
+                        </div>
+                    </div>
        </div>
        <div class="modal-footer">
         <button type="button" class="btn btn-info"  data-dismiss="modal" >Cancelar</button>
@@ -651,7 +687,7 @@ $(document).ready(function() {
 $( "#submitCompra").on( "click", function() {
 var dineroAct =  document.getElementById("dineroActual").innerHTML;
 var dineroCuen  =  document.getElementById("dineroCuenta").innerHTML;
-if(dineroAct <= 0 || dineroCue <=0){
+if(dineroAct <= 0 || dineroCuen <=0){
   alert("Dinero insuficiente para seguir operando");
 }else{
   var token =localStorage.getItem("tokenuser");
@@ -707,7 +743,7 @@ $( "#submitVenta").on( "click", function() {
 
   var dineroAct =  document.getElementById("dineroActual").innerHTML;
 var dineroCuen  =  document.getElementById("dineroCuenta").innerHTML;
-if(dineroAct <= 0 || dineroCue <=0){
+if(dineroAct <= 0 || dineroCuen <=0){
   alert("Dinero insuficiente para seguir operando");
 }else{
   var token =localStorage.getItem("tokenuser");
@@ -764,7 +800,7 @@ $( "#submitCompra2").on( "click", function() {
 
   var dineroAct =  document.getElementById("dineroActual").innerHTML;
 var dineroCuen  =  document.getElementById("dineroCuenta").innerHTML;
-if(dineroAct <= 0 || dineroCue <=0){
+if(dineroAct <= 0 || dineroCuen <=0){
   alert("Dinero insuficiente para seguir operando");
 }else{
  var token =localStorage.getItem("tokenuser");
@@ -817,7 +853,7 @@ if(dineroAct <= 0 || dineroCue <=0){
 $( "#submitVenta2").on( "click", function() {
   var dineroAct =  document.getElementById("dineroActual").innerHTML;
 var dineroCuen  =  document.getElementById("dineroCuenta").innerHTML;
-if(dineroAct <= 0 || dineroCue <=0){
+if(dineroAct <= 0 || dineroCuen <=0){
   alert("Dinero insuficiente para seguir operando");
 }else{
   var token =localStorage.getItem("tokenuser");
