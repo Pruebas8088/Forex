@@ -65,7 +65,7 @@
               </div>
             </div>
           </div>
-          <button id="btregis"class="btn btn-primary btn-block" type="submit">Registrarse</button>
+          <button id="btregis"class="btn btn-primary btn-block"  type="submit">Registrarse</button>
           
         </form>
         <!-----------------------------------formulario-------------------------------------------------->
@@ -90,7 +90,10 @@
     $(document).ready(function() {
 
       $("#Fregistro").submit(function(event) {
-
+          var x = comparaContrasena();
+          if(x == false){
+              alert("Contraseñas no coinciden!!");
+          }else{
         jQuery.ajax({
           url: 'http://localhost:8080/ProyectoFinal-web/api/Registro/registroUsuario/',
           type: 'POST',
@@ -123,12 +126,24 @@
          }
        });
         event.preventDefault();
-
+}
       });
 
       
 
     });
+
+    function comparaContrasena(){
+      var contra1 = $("#inputPassword").val();
+      var contra2 = $("#confirmPassword").val();
+
+      if(contra1 != contra2){
+        alert("Contraseñas no coinciden!!");
+        return false;
+      }else{
+        return true;
+      }
+    }
 
     
   </script>

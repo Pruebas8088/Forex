@@ -167,7 +167,7 @@
                       <div class="modal-body">        
                         <div class="form-group">
                           <label for="name">Ingrese el monto a comprar</label>
-                          <input type="number" value="10000"  min="10000" class="form-control" id="Valor">
+                          <input type="number" value="10000"  min="10000" class="form-control" id="Valorrecargadinero">
                         </div>
                       </div>
                       <div class="modal-footer">          
@@ -649,7 +649,12 @@ $(document).ready(function() {
 
 ///////////////////////////////////divisa1////////////////////////////////
 $( "#submitCompra").on( "click", function() {
- var token =localStorage.getItem("tokenuser");
+var dineroAct =  document.getElementById("dineroActual").innerHTML;
+var dineroCuen  =  document.getElementById("dineroCuenta").innerHTML;
+if(dineroAct <= 0 || dineroCue <=0){
+  alert("Dinero insuficiente para seguir operando");
+}else{
+  var token =localStorage.getItem("tokenuser");
  var decoded = jwt_decode(token);
  jQuery.ajax({
   url: 'http://localhost:8080/ProyectoFinal-web/api/Logica/CompraDivisa/',
@@ -666,6 +671,8 @@ $( "#submitCompra").on( "click", function() {
     beneficio: 0,
     divisa: document.getElementById("iddivisa1").innerHTML
   }),
+
+ 
   success: function(data, textStatus, xhr) {
 
    consultaOperaciones();
@@ -693,10 +700,16 @@ $( "#submitCompra").on( "click", function() {
  }
 });
  event.preventDefault();
-
+}
  });//operacion
 
 $( "#submitVenta").on( "click", function() {
+
+  var dineroAct =  document.getElementById("dineroActual").innerHTML;
+var dineroCuen  =  document.getElementById("dineroCuenta").innerHTML;
+if(dineroAct <= 0 || dineroCue <=0){
+  alert("Dinero insuficiente para seguir operando");
+}else{
   var token =localStorage.getItem("tokenuser");
   var decoded = jwt_decode(token);
   jQuery.ajax({
@@ -741,12 +754,19 @@ $( "#submitVenta").on( "click", function() {
   }
 });
   event.preventDefault();
+}
 });
 ///////////////////////////////////divisa1////////////////////////////////
 
 
 ///////////////////////////////////divisa2////////////////////////////////
 $( "#submitCompra2").on( "click", function() {
+
+  var dineroAct =  document.getElementById("dineroActual").innerHTML;
+var dineroCuen  =  document.getElementById("dineroCuenta").innerHTML;
+if(dineroAct <= 0 || dineroCue <=0){
+  alert("Dinero insuficiente para seguir operando");
+}else{
  var token =localStorage.getItem("tokenuser");
  var decoded = jwt_decode(token);
  jQuery.ajax({
@@ -791,10 +811,15 @@ $( "#submitCompra2").on( "click", function() {
  }
 });
  event.preventDefault();
-
+}
  });//operacion
 
 $( "#submitVenta2").on( "click", function() {
+  var dineroAct =  document.getElementById("dineroActual").innerHTML;
+var dineroCuen  =  document.getElementById("dineroCuenta").innerHTML;
+if(dineroAct <= 0 || dineroCue <=0){
+  alert("Dinero insuficiente para seguir operando");
+}else{
   var token =localStorage.getItem("tokenuser");
   var decoded = jwt_decode(token);
   jQuery.ajax({
@@ -839,6 +864,7 @@ $( "#submitVenta2").on( "click", function() {
   }
 });
   event.preventDefault();
+}
 });
 ///////////////////////////////////divisa2////////////////////////////////
 
@@ -846,6 +872,7 @@ $( "#submitVenta2").on( "click", function() {
 $("#contactForm").submit(function(event) {
   var token =localStorage.getItem("tokenuser");
   var decoded = jwt_decode(token);
+  console.log($("#Valorrecargadinero").val());
   jQuery.ajax({
     url: 'http://localhost:8080/ProyectoFinal-web/api/Logica/recargarDinero/',
     type: 'POST',
@@ -853,7 +880,7 @@ $("#contactForm").submit(function(event) {
     headers: {"token-auto": localStorage.getItem("tokenuser")},
     contentType:'application/json',
     data: JSON.stringify({
-      dinero: $("#Valor").val(),
+      dinero: $("#Valorrecargadinero").val(),
       token: localStorage.getItem("tokenuser"),
       email: decoded.Correo
 

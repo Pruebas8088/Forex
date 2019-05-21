@@ -49,8 +49,8 @@ public class Iusuario implements IusuarioLocal {
      */
     @Override
     public float recargaDinero(Usuario user) {
-        enviarCorreo(user.getEmail(), user.getDinero());
-        float dinero;
+        //enviarCorreo(user.getEmail(), user.getDinero());
+        float dinero = user.getDinero();
         float dinero1 = consultarDinero(user);
         dinero = (dinero1+user.getDinero());
         user.setDinero(dinero);

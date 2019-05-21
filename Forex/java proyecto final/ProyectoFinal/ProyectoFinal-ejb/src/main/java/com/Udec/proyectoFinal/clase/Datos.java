@@ -44,7 +44,7 @@ public class Datos {
                 Class.forName(driver).newInstance();
                 con=DriverManager.getConnection(url,us,contrase);
                 Statement stntenvio = con.createStatement();
-                String qry = "Insert into usuario(nombre,apellido,correo,contrasena,token,dinero) values ("+"'" + usuario.getNombre()+ "'"+","+"'" + usuario.getApellido() + "'"+","+"'" + usuario.getEmail()+ "'"+","+"'" + usuario.getPass()+ "'"+","+"'" + "0" + "'"+"," + 0 +")";
+                String qry = "Insert into usuario(nombre,apellido,correo,contrasena,token,dinero) values ("+"'" + usuario.getNombre()+ "'"+","+"'" + usuario.getApellido() + "'"+","+"'" + usuario.getEmail()+ "'"+","+"'" + usuario.getPass()+ "'"+","+"'" + "0" + "'"+"," + 1.0 +")";
                  
                     ResultSet rs = stntenvio.executeQuery(qry);
                     rs.close();
