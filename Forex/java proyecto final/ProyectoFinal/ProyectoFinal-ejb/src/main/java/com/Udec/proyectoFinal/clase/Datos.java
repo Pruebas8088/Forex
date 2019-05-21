@@ -14,7 +14,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
 /**
  * clase que se genera los query y conexiones a base de datos
  * @author Jonathan
@@ -35,10 +34,10 @@ public class Datos {
      * @param usuario objeto que contiene los datos del usuario a registrar
      */
      public void envio(Usuario usuario){
-        String url= "jdbc:postgresql://localhost:5432/ProyectoFinal";
+        String url= "jdbc:postgresql://localhost:5432/Proyecto_final";
         String driver = "org.postgresql.Driver";
         Connection con=null;
-	String contrase ="1234";
+    String contrase ="123";
         String us = "postgres";
            try {
                 Class.forName(driver).newInstance();
@@ -63,10 +62,10 @@ public class Datos {
     * @param divisa objeto que contiene los datos de la operacion a registrar
     */  
       public void compraDivisas(Divisa divisa){
-        String url= "jdbc:postgresql://localhost:5432/ProyectoFinal";
+        String url= "jdbc:postgresql://localhost:5432/Proyecto_final";
         String driver = "org.postgresql.Driver";
         Connection con=null;
-	String contrase ="1234";
+    String contrase ="123";
         String us = "postgres";
            try {
                  Class.forName(driver).newInstance();
@@ -86,16 +85,16 @@ public class Datos {
          }
     }//compraDivisas 
      /**
-      *funcion que realiza la validacion del usuario y contraseña utilizadas para login 
-      * @param usuario funcion que contiene el correo y contraseña para la validacion
-      * @return estado retorna un valor booleano true si coinciden usuario y contraseña y false en caso contrario
+      *funcion que realiza la validacion del usuario y contraseÃ±a utilizadas para login 
+      * @param usuario funcion que contiene el correo y contraseÃ±a para la validacion
+      * @return estado retorna un valor booleano true si coinciden usuario y contraseÃ±a y false en caso contrario
       */
       public  Boolean validacion(Usuario usuario){
         boolean estado;
-        String url= "jdbc:postgresql://localhost:5432/ProyectoFinal";
+        String url= "jdbc:postgresql://localhost:5432/Proyecto_final";
         String driver = "org.postgresql.Driver";
         Connection con=null;
-	String contrase ="1234";
+    String contrase ="123";
         String us = "postgres";
            try {
                  Class.forName(driver).newInstance();
@@ -108,19 +107,17 @@ public class Datos {
                 user.setToken(rsValidacion.getString("token")); 
                 if(user.getToken().isEmpty()){
                      estado=false;
-                     rsValidacion.close();
-                     stntvalidacion.close();
-                      con.close();
+                     
                      return estado;
                 }else{
                     estado=true;
-                    rsValidacion.close();
-                    stntvalidacion.close();
-                     con.close();
                     return estado;
                 }
                    
             }
+             rsValidacion.close();
+             stntvalidacion.close();
+             con.close();
         } catch (SQLException ex) {
              System.out.println("fallo funcion validacion");
         } catch (Exception ex) {
@@ -134,10 +131,10 @@ public class Datos {
      * @param jwt token generado para modificacion
      */
      public  void updateToken(Usuario usuario,String jwt){
-        String url= "jdbc:postgresql://localhost:5432/ProyectoFinal";
+        String url= "jdbc:postgresql://localhost:5432/Proyecto_final";
         String driver = "org.postgresql.Driver";
         Connection con=null;
-	String contrase ="1234";
+    String contrase ="123";
         String us = "postgres";
            try {
                  Class.forName(driver).newInstance();
@@ -163,10 +160,10 @@ public class Datos {
       * @param usuario objeto que contiene los datos de usuario para cerrar sesion
       */
      public  void cerradoCuenta(Usuario usuario){
-        String url= "jdbc:postgresql://localhost:5432/ProyectoFinal";
+        String url= "jdbc:postgresql://localhost:5432/Proyecto_final";
         String driver = "org.postgresql.Driver";
         Connection con=null;
-	String contrase ="1234";
+    String contrase ="123";
         String us = "postgres";
            try {
                  Class.forName(driver).newInstance();
@@ -190,10 +187,10 @@ public class Datos {
       * @param usuario objeto que coneitne los datos del usuario a modificar el dinero
       */
      public  void updateDinero(Usuario usuario){
-        String url= "jdbc:postgresql://localhost:5432/ProyectoFinal";
+        String url= "jdbc:postgresql://localhost:5432/Proyecto_final";
         String driver = "org.postgresql.Driver";
         Connection con=null;
-	String contrase ="1234";
+    String contrase ="123";
         String us = "postgres";
            try {
                  Class.forName(driver).newInstance();
@@ -219,10 +216,10 @@ public class Datos {
      */
     public  ArrayList<Usuario> traerInfo(){
          ArrayList<Usuario> listauser = new ArrayList<Usuario>();
-          String url= "jdbc:postgresql://localhost:5432/ProyectoFinal";
+          String url= "jdbc:postgresql://localhost:5432/Proyecto_final";
         String driver = "org.postgresql.Driver";
         Connection con=null;
-	String contrase ="1234";
+    String contrase ="123";
         String us = "postgres";
            try {
                  Class.forName(driver).newInstance();
@@ -265,10 +262,10 @@ public class Datos {
      */
     public float traerDinero(Usuario user){
          float dinero=0;
-        String url= "jdbc:postgresql://localhost:5432/ProyectoFinal";
+        String url= "jdbc:postgresql://localhost:5432/Proyecto_final";
         String driver = "org.postgresql.Driver";
         Connection con=null;
-	String contrase ="1234";
+    String contrase ="123";
         String us = "postgres";
            try {
                  Class.forName(driver).newInstance();
@@ -303,10 +300,10 @@ public class Datos {
      */
     public  ArrayList<Divisa> consultaDivisa(Divisa divisa){
             ArrayList<Divisa> listaDivisa= new ArrayList<Divisa>();
-        String url= "jdbc:postgresql://localhost:5432/ProyectoFinal";
+        String url= "jdbc:postgresql://localhost:5432/Proyecto_final";
         String driver = "org.postgresql.Driver";
         Connection con=null;
-	String contrase ="1234";
+    String contrase ="123";
         String us = "postgres";
            try {
                  Class.forName(driver).newInstance();
@@ -345,10 +342,10 @@ public class Datos {
      */
     public  ArrayList<Divisa> consultaDivisaHistorial(Divisa divisa){
          ArrayList<Divisa> listaDivisa= new ArrayList<Divisa>();
-         String url= "jdbc:postgresql://localhost:5432/ProyectoFinal";
+         String url= "jdbc:postgresql://localhost:5432/Proyecto_final";
         String driver = "org.postgresql.Driver";
         Connection con=null;
-	String contrase ="1234";
+    String contrase ="123";
         String us = "postgres";
            try {
                  Class.forName(driver).newInstance();
@@ -386,10 +383,10 @@ public class Datos {
      * @param divisa objeto que contiene los datos de la operacion a modificar
      */
      public void updateDivisa(Divisa divisa){
-        String url= "jdbc:postgresql://localhost:5432/ProyectoFinal";
+        String url= "jdbc:postgresql://localhost:5432/Proyecto_final";
         String driver = "org.postgresql.Driver";
         Connection con=null;
-	String contrase ="1234";
+    String contrase ="123";
         String us = "postgres";
            try {
                  Class.forName(driver).newInstance();
@@ -413,10 +410,10 @@ public class Datos {
       * @param divisa objeto que contiene los datos de la operacion a eliminar
       */
      public void borrarDivisa(Divisa divisa){
-        String url= "jdbc:postgresql://localhost:5432/ProyectoFinal";
+        String url= "jdbc:postgresql://localhost:5432/Proyecto_final";
         String driver = "org.postgresql.Driver";
         Connection con=null;
-	String contrase ="1234";
+    String contrase ="123";
         String us = "postgres";
            try {
                  Class.forName(driver).newInstance();
@@ -441,10 +438,10 @@ public class Datos {
       * @param divisa objeto que contiene los datos de la operacion a registrar
       */
      public void insertarHistorial(Divisa divisa){
-       String url= "jdbc:postgresql://localhost:5432/ProyectoFinal";
+       String url= "jdbc:postgresql://localhost:5432/Proyecto_final";
         String driver = "org.postgresql.Driver";
         Connection con=null;
-	String contrase ="1234";
+    String contrase ="123";
         String us = "postgres";
            try {
                  Class.forName(driver).newInstance();
@@ -468,10 +465,10 @@ public class Datos {
       * @param usuario objeto que contiene los datos del usuario a modificar
       */
       public void updateDineroCuenta(Usuario usuario){
-         String url= "jdbc:postgresql://localhost:5432/ProyectoFinal";
+         String url= "jdbc:postgresql://localhost:5432/Proyecto_final";
         String driver = "org.postgresql.Driver";
         Connection con=null;
-	String contrase ="1234";
+    String contrase ="123";
         String us = "postgres";
            try {
                  Class.forName(driver).newInstance();

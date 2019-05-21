@@ -88,7 +88,7 @@ public class Iusuario implements IusuarioLocal {
      */
     @Override
     public ErrorMsg compraDivisa(Divisa divisa) {
-            enviarCorreo(divisa.getCorreo(), divisa.getCantidad());
+            //enviarCorreo(divisa.getCorreo(), divisa.getCantidad());
             ErrorMsg er = new ErrorMsg();
             Datos dat =  new Datos();
             dat.compraDivisas(divisa);

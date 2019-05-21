@@ -555,18 +555,16 @@
 
 setInterval(validarhora,1000); 
 ////////////////////////////
-var cont = 1;
-if(cont == 1){
+
   document.getElementById("EUR/AUD").style.color='#0ABE1C';
-  document.getElementById("EUR/AUD").innerHTML = 0.789 ;
+  document.getElementById("EUR/AUD").innerHTML = 30000 ;
   document.getElementById("USD/JYP").style.color='#0ABE1C';
-  document.getElementById("USD/JYP").innerHTML = 0.345 ;
-  cont = cont + 1;
-}
+  document.getElementById("USD/JYP").innerHTML = 50000 ;
 
 
-setInterval(calculoBeneficio,31000);
-setInterval(calculoBeneficiodivisa2,31000);
+
+setInterval(calculoBeneficio,6000);
+setInterval(calculoBeneficiodivisa2,6000);
 
 var worker1 = new Worker("js/hilos.js");
 var worker2 = new Worker("js/EUR_AUD.js");
@@ -602,8 +600,9 @@ worker2.onmessage = function(event) {
 
 };
 
+console
 jQuery.ajax({
-  url: 'http://localhost:8080/ProyectoFinal-web/api/Logica/consultarDinero',
+  url: 'http://localhost:8080/ProyectoFinal-web/api/Logica/consultarDinero/',
   type: 'POST',
   dataType: 'json',
   headers: {"token-auto": localStorage.getItem("tokenuser")},
@@ -675,7 +674,7 @@ $( "#submitCompra").on( "click", function() {
 
    bootbox.dialog({ 
     title: 'Error!',
-    message: '<p>Porfavor Ingrese primero</p>',
+    message: '<p>Error comprando</p>',
     size: 'large',
     onEscape: true,
     backdrop: true,
@@ -684,8 +683,7 @@ $( "#submitCompra").on( "click", function() {
         label: 'Aceptar',
         className: 'btn-danger',
         callback: function(){
-
-         $(location).attr('href','login.html');         
+   
        }
      }
    }
