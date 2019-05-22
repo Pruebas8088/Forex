@@ -257,10 +257,11 @@
                          Valor del pip
                         </button>
                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                          <a class="dropdown-item" href="#">1</a>
-                          <a class="dropdown-item" href="#">2</a>
-                          <a class="dropdown-item" href="#">3</a>
+                          <a class="dropdown-item" onclick = "prueba1()" value="1" href="#">1</a>
+                          <a class="dropdown-item" onclick = "prueba2()"  value="2" href="#">2</a>
+                          <a class="dropdown-item" onclick = "prueba3()"  value="3" href="#">3</a>
                         </div>
+                        <h1  class="badge badge-primary text-wrap">$</h1><h1  id="prueba" class="badge badge-primary text-wrap"></h1>
                     </div>
                  </div>
                  <div class="modal-footer">
@@ -288,10 +289,11 @@
                          Valor del pip
                         </button>
                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                          <a class="dropdown-item" href="#">1</a>
-                          <a class="dropdown-item" href="#">2</a>
-                          <a class="dropdown-item" href="#">3</a>
+                          <a class="dropdown-item" onclick = "prueba1()" value="1" href="#">1</a>
+                          <a class="dropdown-item" onclick = "prueba2()"  value="2" href="#">2</a>
+                          <a class="dropdown-item" onclick = "prueba3()"  value="3" href="#">3</a>
                         </div>
+                        <h1  class="badge badge-primary text-wrap">$</h1><h1  id="prueba" class="badge badge-primary text-wrap"></h1>
                     </div>
                </div>
                <div class="modal-footer">
@@ -359,10 +361,11 @@
                          Valor del pip
                         </button>
                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                          <a class="dropdown-item" href="#">1</a>
-                          <a class="dropdown-item" href="#">2</a>
-                          <a class="dropdown-item" href="#">3</a>
+                          <a class="dropdown-item" onclick = "prueba1()" value="1" href="#">1</a>
+                          <a class="dropdown-item" onclick = "prueba2()"  value="2" href="#">2</a>
+                          <a class="dropdown-item" onclick = "prueba3()"  value="3" href="#">3</a>
                         </div>
+                        <h5  class="badge badge-primary text-wrap">$</h5><h5  id="prueba" class="badge badge-primary text-wrap"></h5>
                     </div>
          </div>
          <div class="modal-footer">
@@ -389,12 +392,13 @@
                         <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                          Valor del pip
                         </button>
-                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                          <a class="dropdown-item" href="#">1</a>
-                          <a class="dropdown-item" href="#">2</a>
-                          <a class="dropdown-item" href="#">3</a>
+                        <div id= "opciones"class="dropdown-menu"  aria-labelledby="dropdownMenuButton">
+                          <a class="dropdown-item" onclick = "prueba1()" value="1" href="#">1</a>
+                          <a class="dropdown-item" onclick = "prueba2()"  value="2" href="#">2</a>
+                          <a class="dropdown-item" onclick = "prueba3()"  value="3" href="#">3</a>
                         </div>
-                    </div>
+                        <h1  class="badge badge-primary text-wrap">$</h1><h1  id="prueba" class="badge badge-primary text-wrap"></h1>
+          </div>
        </div>
        <div class="modal-footer">
         <button type="button" class="btn btn-info"  data-dismiss="modal" >Cancelar</button>
@@ -408,18 +412,7 @@
 
 <!--------------------------------------- operacion----------------------------------------------------->
 
-      <!-- Area Chart Example
-      <div class="card mb-3">
-        <div class="card-header">
-          <i class="fas fa-chart-area"></i>
-        Transacciones activas</div>
-        <div class="card-body">
-          <canvas id="myAreaChart" width="100%" height="30"></canvas>
-        </div>
-        <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
-      </div>-->
-
-      <!-- DataTables Example -->
+ 
       <div class="card mb-3">
         <div class="card-header">
           <i class="fas fa-table"></i>
@@ -537,10 +530,61 @@
 <!-- JS -->
 <script type="text/javascript">
 
-
+var opcion;
   window.onload = function(){
+<<<<<<< HEAD
 
   
+=======
+    
+    function validarhora(){ 
+
+
+      if(localStorage.getItem("tokenuser")  == "undefined"){
+       $(location).attr('href','index.html');
+     }else{
+      try {
+       var token = localStorage.getItem("tokenuser");
+       var decoded = jwt_decode(token);
+       var cad=(new Date().getTime())/1000;
+       if(cad > decoded.exp){
+         jQuery.ajax({
+          url: 'http://localhost:8080/ProyectoFinal-web/api/Logica/Cerrar/',
+          type: 'POST',
+          dataType: 'json',
+          headers: {"token-auto": localStorage.getItem("tokenuser")},
+          contentType:'application/json',
+          data: JSON.stringify({
+
+            token: localStorage.getItem("tokenuser")
+          }),
+          success: function(data, textStatus, xhr) {
+            localStorage.removeItem("tokenuser");
+            alert("Token Invalido lo sentimos por favor inicie sesion")
+            $(location).attr('href','login.html'); 
+
+          },
+          error: function(xhr, textStatus, errorThrown) {
+            localStorage.removeItem("tokenuser");
+            alert("Token Invalido lo sentimos por favor inicie sesion")
+            $(location).attr('href','login.html'); 
+
+          }
+        });
+         event.preventDefault();
+     }//if validaciom
+   } catch(e) {
+    alert("Token Invalido lo sentimos por favor inicie sesion")
+    $(location).attr('href','login.html');   
+  }
+
+
+}
+
+
+
+}//validacion token vencido
+>>>>>>> a6e15c33e84bbfd0118d14683046a36b870c6073
 //////////////////////////
 
 //setInterval(validarhora,1000); 
@@ -655,7 +699,7 @@ if(dineroAct <= 0 || dineroCuen <=0){
     token: decoded.sub,
     valorInicial: document.getElementById("USD/JYP").innerHTML,
     valorFinal: 0,
-    cantidad:$("#ValorCompra").val(),
+    cantidad:opcion,
     idOperacion: 1,
     beneficio: 0,
     divisa: document.getElementById("iddivisa1").innerHTML
@@ -710,7 +754,7 @@ if(dineroAct <= 0 || dineroCuen <=0){
       token: decoded.sub,
       valorInicial: document.getElementById("USD/JYP").innerHTML,
       valorFinal: 0,
-      cantidad:$("#ValorVenta").val(),
+      cantidad:opcion,
       idOperacion: 2,
       beneficio: 0,
       divisa: document.getElementById("iddivisa1").innerHTML
@@ -767,7 +811,7 @@ if(dineroAct <= 0 || dineroCuen <=0){
     token: decoded.sub,
     valorInicial: document.getElementById("EUR/AUD").innerHTML,
     valorFinal: 0,
-    cantidad:$("#ValorCompra2").val(),
+    cantidad:opcion,
     idOperacion: 1,
     beneficio: 0,
     divisa: document.getElementById("iddivisa2").innerHTML
@@ -820,7 +864,7 @@ if(dineroAct <= 0 || dineroCuen <=0){
       token: decoded.sub,
       valorInicial: document.getElementById("EUR/AUD").innerHTML,
       valorFinal: 0,
-      cantidad:$("#ValorVenta2").val(),
+      cantidad: opcion,
       idOperacion: 2,
       beneficio: 0,
       divisa: document.getElementById("iddivisa2").innerHTML
@@ -1252,6 +1296,19 @@ function consultarDinero(){
     document.getElementById("dineroCuenta").innerHTML = "NaN";
   }
 });
+}
+
+function prueba1(){
+  document.getElementById("prueba").innerHTML = 1; 
+  opcion = 1;
+}
+function prueba2(){
+  document.getElementById("prueba").innerHTML = 2;
+  opcion = 2;
+}
+function prueba3(){
+  document.getElementById("prueba").innerHTML = 3;
+  opcion = 3;
 }
 
 
