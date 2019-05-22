@@ -20,13 +20,13 @@ import java.util.logging.Logger;
  */
 public class Datos {
     
-
+private Conexion re;
     
 /**
  * constructor de la clase
  */
     public Datos() {
-
+        re=new Conexion();
     }//constructor
     
     /**
@@ -34,21 +34,16 @@ public class Datos {
      * @param usuario objeto que contiene los datos del usuario a registrar
      */
      public void envio(Usuario usuario){
-        String url= "jdbc:postgresql://localhost:5432/Proyecto_final";
-        String driver = "org.postgresql.Driver";
-        Connection con=null;
-    String contrase ="123";
-        String us = "postgres";
+        
            try {
-                Class.forName(driver).newInstance();
-                con=DriverManager.getConnection(url,us,contrase);
-                Statement stntenvio = con.createStatement();
+               
+                Statement stntenvio = re.con.createStatement();
                 String qry = "Insert into usuario(nombre,apellido,correo,contrasena,token,dinero) values ("+"'" + usuario.getNombre()+ "'"+","+"'" + usuario.getApellido() + "'"+","+"'" + usuario.getEmail()+ "'"+","+"'" + usuario.getPass()+ "'"+","+"'" + "0" + "'"+"," + 1.0 +")";
                  
                     ResultSet rs = stntenvio.executeQuery(qry);
                     rs.close();
                     stntenvio.close();
-                    con.close();
+                    re.cerrarConexion();
                     
                
             } catch (Exception e) {
@@ -62,21 +57,16 @@ public class Datos {
     * @param divisa objeto que contiene los datos de la operacion a registrar
     */  
       public void compraDivisas(Divisa divisa){
-        String url= "jdbc:postgresql://localhost:5432/Proyecto_final";
-        String driver = "org.postgresql.Driver";
-        Connection con=null;
-    String contrase ="123";
-        String us = "postgres";
+       
            try {
-                 Class.forName(driver).newInstance();
-                 con=DriverManager.getConnection(url,us,contrase);
-                 Statement stntCompraDivisa = con.createStatement();
+                
+                 Statement stntCompraDivisa = re.con.createStatement();
                  String qry = "INSERT INTO public.accion(idoperacion, valoinicial, token, valorfinal, cantidad,beneficio,divisa) values (" + divisa.getIdOperacion()+"," + divisa.getValorInicial()+","+"'" + divisa.getToken()+ "'"+"," + divisa.getValorFinal()+"," + divisa.getCantidad() +"," + divisa.getBeneficio()+","+"'" + divisa.getDivisa()+ "'"+")";
              
                     ResultSet rs =stntCompraDivisa.executeQuery(qry);
                     rs.close();
                     stntCompraDivisa.close();
-                    con.close();
+                    re.cerrarConexion();
                     
          } catch (SQLException ex) {
             System.out.println("fallo funcion compraDivisas");
@@ -91,15 +81,9 @@ public class Datos {
       */
       public  Boolean validacion(Usuario usuario){
         boolean estado;
-        String url= "jdbc:postgresql://localhost:5432/Proyecto_final";
-        String driver = "org.postgresql.Driver";
-        Connection con=null;
-    String contrase ="123";
-        String us = "postgres";
+        
            try {
-                 Class.forName(driver).newInstance();
-                 con=DriverManager.getConnection(url,us,contrase);
-                 Statement stntvalidacion = con.createStatement();
+                 Statement stntvalidacion = re.con.createStatement();
                  String qry = "SELECT * FROM public.usuario where correo="+"'" + usuario.getEmail()+ "'"+"and contrasena="+"'" + usuario.getPass()+ "'"+"";
                  ResultSet rsValidacion=stntvalidacion.executeQuery(qry);
              while(rsValidacion.next()){
@@ -107,17 +91,22 @@ public class Datos {
                 user.setToken(rsValidacion.getString("token")); 
                 if(user.getToken().isEmpty()){
                      estado=false;
-                     
+                     rsValidacion.close();
+                     stntvalidacion.close();
+                     re.cerrarConexion();
                      return estado;
                 }else{
                     estado=true;
+                    rsValidacion.close();
+                    stntvalidacion.close();
+                    re.cerrarConexion();
                     return estado;
                 }
                    
             }
              rsValidacion.close();
              stntvalidacion.close();
-             con.close();
+             re.cerrarConexion();
         } catch (SQLException ex) {
              System.out.println("fallo funcion validacion");
         } catch (Exception ex) {
@@ -131,20 +120,15 @@ public class Datos {
      * @param jwt token generado para modificacion
      */
      public  void updateToken(Usuario usuario,String jwt){
-        String url= "jdbc:postgresql://localhost:5432/Proyecto_final";
-        String driver = "org.postgresql.Driver";
-        Connection con=null;
-    String contrase ="123";
-        String us = "postgres";
+       
            try {
-                 Class.forName(driver).newInstance();
-                 con=DriverManager.getConnection(url,us,contrase);
-                 Statement stntupdateTok =  con.createStatement();
+                 
+                 Statement stntupdateTok =  re.con.createStatement();
                  String qry = "UPDATE public.usuario SET  token="+"'" + jwt+ "'"+"WHERE correo="+"'" + usuario.getEmail()+ "'"+"";
                  ResultSet rs = stntupdateTok.executeQuery(qry);
                  rs.close();
                  stntupdateTok.close();
-                 con.close();
+                 re.cerrarConexion();
                    
          } catch (SQLException ex) {
                System.out.println("fallo updatetoken"+ex);
@@ -160,21 +144,17 @@ public class Datos {
       * @param usuario objeto que contiene los datos de usuario para cerrar sesion
       */
      public  void cerradoCuenta(Usuario usuario){
-        String url= "jdbc:postgresql://localhost:5432/Proyecto_final";
-        String driver = "org.postgresql.Driver";
-        Connection con=null;
-    String contrase ="123";
-        String us = "postgres";
+       
            try {
-                 Class.forName(driver).newInstance();
-                 con=DriverManager.getConnection(url,us,contrase);
-             Statement stntcerradoCuenta = con.createStatement();
+                 
+               
+             Statement stntcerradoCuenta = re.con.createStatement();
              String qry = "UPDATE public.usuario SET  token="+"'" + 0 + "'"+"WHERE token="+"'" + usuario.getToken()+ "'"+"";
               
                     ResultSet rs = stntcerradoCuenta.executeQuery(qry);
                     rs.close();
                     stntcerradoCuenta.close();
-                    con.close();
+                    re.cerrarConexion();
               
          } catch (SQLException ex) {
               System.out.println("fallo  cerradoCuenta ");
@@ -187,21 +167,16 @@ public class Datos {
       * @param usuario objeto que coneitne los datos del usuario a modificar el dinero
       */
      public  void updateDinero(Usuario usuario){
-        String url= "jdbc:postgresql://localhost:5432/Proyecto_final";
-        String driver = "org.postgresql.Driver";
-        Connection con=null;
-    String contrase ="123";
-        String us = "postgres";
+        
            try {
-                 Class.forName(driver).newInstance();
-                 con=DriverManager.getConnection(url,us,contrase);
-             Statement stntupdateDinero = con.createStatement();
+                
+             Statement stntupdateDinero = re.con.createStatement();
              String qry = "UPDATE public.usuario SET  dinero="+ usuario.getDinero()+"WHERE token="+"'" + usuario.getToken() + "'"+"";
               
                      ResultSet rs =  stntupdateDinero.executeQuery(qry);
                      rs.close();
                      stntupdateDinero.close();
-                     con.close();
+                     re.cerrarConexion();
                 
          } catch (SQLException ex) {
             System.out.println("fallo updateDinero ");
@@ -216,15 +191,11 @@ public class Datos {
      */
     public  ArrayList<Usuario> traerInfo(){
          ArrayList<Usuario> listauser = new ArrayList<Usuario>();
-          String url= "jdbc:postgresql://localhost:5432/Proyecto_final";
-        String driver = "org.postgresql.Driver";
-        Connection con=null;
-    String contrase ="123";
-        String us = "postgres";
+         
+         
            try {
-                 Class.forName(driver).newInstance();
-                 con=DriverManager.getConnection(url,us,contrase);
-             Statement stnttraerInfo = con.createStatement();
+                
+             Statement stnttraerInfo = re.con.createStatement();
              String qry = "SELECT * FROM usuario";
               
                 ResultSet rsTraerinfo = stnttraerInfo.executeQuery(qry);
@@ -242,7 +213,7 @@ public class Datos {
                 }
                  stnttraerInfo.close();
                  rsTraerinfo.close();
-                  con.close();
+                 re.cerrarConexion();
                 return listauser;
             
          } catch (SQLException ex) {
@@ -262,15 +233,10 @@ public class Datos {
      */
     public float traerDinero(Usuario user){
          float dinero=0;
-        String url= "jdbc:postgresql://localhost:5432/Proyecto_final";
-        String driver = "org.postgresql.Driver";
-        Connection con=null;
-    String contrase ="123";
-        String us = "postgres";
-           try {
-                 Class.forName(driver).newInstance();
-                 con=DriverManager.getConnection(url,us,contrase);
-             Statement stnttraerDinero = con.createStatement();
+        
+         try {
+               
+             Statement stnttraerDinero = re.con.createStatement();
              String qry = "SELECT * FROM usuario where token = "+"'"+ user.getToken()+"'";
               
                     ResultSet rstraerdinero=stnttraerDinero.executeQuery(qry);
@@ -282,7 +248,7 @@ public class Datos {
                     
                     stnttraerDinero.close();
                     rstraerdinero.close();
-                     con.close();
+                     re.cerrarConexion();
                     return dinero;
              
          } catch (SQLException ex) {
@@ -300,15 +266,10 @@ public class Datos {
      */
     public  ArrayList<Divisa> consultaDivisa(Divisa divisa){
             ArrayList<Divisa> listaDivisa= new ArrayList<Divisa>();
-        String url= "jdbc:postgresql://localhost:5432/Proyecto_final";
-        String driver = "org.postgresql.Driver";
-        Connection con=null;
-    String contrase ="123";
-        String us = "postgres";
+        
            try {
-                 Class.forName(driver).newInstance();
-                 con=DriverManager.getConnection(url,us,contrase);
-             Statement stntconsultaDivisa = con.createStatement();
+                ;
+             Statement stntconsultaDivisa = re.con.createStatement();
              String qry = "SELECT * FROM public.accion where token = "+"'"+ divisa.getToken()+"'";
                 ResultSet rsconsultaDivisa=stntconsultaDivisa.executeQuery(qry);
                 while(rsconsultaDivisa.next()){
@@ -325,7 +286,7 @@ public class Datos {
                 }
                  stntconsultaDivisa.close();
                  rsconsultaDivisa.close();
-                 con.close();
+                 re.cerrarConexion();
          } catch (SQLException ex) {
              System.out.println("fallo  consultaDivisa");
          } catch (Exception ex) {
@@ -342,15 +303,10 @@ public class Datos {
      */
     public  ArrayList<Divisa> consultaDivisaHistorial(Divisa divisa){
          ArrayList<Divisa> listaDivisa= new ArrayList<Divisa>();
-         String url= "jdbc:postgresql://localhost:5432/Proyecto_final";
-        String driver = "org.postgresql.Driver";
-        Connection con=null;
-    String contrase ="123";
-        String us = "postgres";
+         
            try {
-                 Class.forName(driver).newInstance();
-                 con=DriverManager.getConnection(url,us,contrase);
-             Statement stntconsultaDivisaHistorial = con.createStatement();
+                
+             Statement stntconsultaDivisaHistorial = re.con.createStatement();
              String qry = "SELECT * FROM public.historial where usuario = "+"'"+ divisa.getToken()+"'";
              
                    ResultSet rsconsultaDivisaHistorial=stntconsultaDivisaHistorial.executeQuery(qry);
@@ -369,7 +325,7 @@ public class Datos {
                     }
                    stntconsultaDivisaHistorial.close();
                    rsconsultaDivisaHistorial.close();
-                   con.close();
+                   re.cerrarConexion();
          } catch (SQLException ex) {
               System.out.println("fallo  consultaDivisaHistorial");
          } catch (Exception ex) {
@@ -383,21 +339,16 @@ public class Datos {
      * @param divisa objeto que contiene los datos de la operacion a modificar
      */
      public void updateDivisa(Divisa divisa){
-        String url= "jdbc:postgresql://localhost:5432/Proyecto_final";
-        String driver = "org.postgresql.Driver";
-        Connection con=null;
-    String contrase ="123";
-        String us = "postgres";
+        
            try {
-                 Class.forName(driver).newInstance();
-                 con=DriverManager.getConnection(url,us,contrase);
-             Statement stntupdateDivisa = con.createStatement();
+               
+             Statement stntupdateDivisa = re.con.createStatement();
              String qry = "UPDATE public.accion SET  beneficio="+ divisa.getBeneficio()+"WHERE token="+"'" + divisa.getToken() + "'"+"AND  CAST(valoinicial AS DECIMAL )="+divisa.getValorInicial()+"";
                
                    ResultSet rs = stntupdateDivisa.executeQuery(qry);
                    rs.close();
                    stntupdateDivisa.close();
-                    con.close();
+                    re.cerrarConexion();
               
          } catch (SQLException ex) {
              System.out.println("fallo  updateDivisa");
@@ -410,21 +361,16 @@ public class Datos {
       * @param divisa objeto que contiene los datos de la operacion a eliminar
       */
      public void borrarDivisa(Divisa divisa){
-        String url= "jdbc:postgresql://localhost:5432/Proyecto_final";
-        String driver = "org.postgresql.Driver";
-        Connection con=null;
-    String contrase ="123";
-        String us = "postgres";
+        
            try {
-                 Class.forName(driver).newInstance();
-                 con=DriverManager.getConnection(url,us,contrase);
-             Statement stntborrarDivisa = con.createStatement();
+                
+             Statement stntborrarDivisa = re.con.createStatement();
               String qry = "DELETE FROM public.accion WHERE  token="+"'"+ divisa.getToken()+"'"+"AND beneficio="+"'"+divisa.getBeneficio()+"'"+" AND idoperacion="+"'"+divisa.getIdOperacion()+"'"+"";
                 
                      ResultSet rs = stntborrarDivisa.executeQuery(qry);
                      rs.close();
                      stntborrarDivisa.close();
-                     con.close();
+                     re.cerrarConexion();
                      
                  
          } catch (SQLException ex) {
@@ -438,21 +384,16 @@ public class Datos {
       * @param divisa objeto que contiene los datos de la operacion a registrar
       */
      public void insertarHistorial(Divisa divisa){
-       String url= "jdbc:postgresql://localhost:5432/Proyecto_final";
-        String driver = "org.postgresql.Driver";
-        Connection con=null;
-    String contrase ="123";
-        String us = "postgres";
+     
            try {
-                 Class.forName(driver).newInstance();
-                 con=DriverManager.getConnection(url,us,contrase);
-             Statement stntinsertarHistorial = con.createStatement();
+                 
+             Statement stntinsertarHistorial = re.con.createStatement();
              String qry = "INSERT INTO public.historial(usuario, valorinicial, valorfinal, cantidad, idoperacion, beneficio, divisa) values (" +"'"+ divisa.getToken()+"'"+"," + divisa.getValorInicial()+"," + divisa.getValorFinal()+ "," + divisa.getCantidad()+"," + divisa.getIdOperacion()+"," + divisa.getBeneficio()+","+"'" + divisa.getDivisa()+ "'"+")";
                
                     ResultSet rs = stntinsertarHistorial.executeQuery(qry);
                     rs.close();
                     stntinsertarHistorial.close();
-                     con.close();
+                     re.cerrarConexion();
          } catch (SQLException ex) {
              System.out.println("fallo insertarHistorial");
          } catch (Exception ex) {
@@ -465,20 +406,15 @@ public class Datos {
       * @param usuario objeto que contiene los datos del usuario a modificar
       */
       public void updateDineroCuenta(Usuario usuario){
-         String url= "jdbc:postgresql://localhost:5432/Proyecto_final";
-        String driver = "org.postgresql.Driver";
-        Connection con=null;
-    String contrase ="123";
-        String us = "postgres";
+        
            try {
-                 Class.forName(driver).newInstance();
-                 con=DriverManager.getConnection(url,us,contrase);
-             Statement stntupdateDineroCuenta = con.createStatement();
+                 
+             Statement stntupdateDineroCuenta = re.con.createStatement();
              String qry = "UPDATE public.usuario SET  dinero="+ usuario.getDinero()+"WHERE nombre="+"'" + usuario.getNombre()+ "'"+"";
              ResultSet rs =  stntupdateDineroCuenta.executeQuery(qry);
                     rs.close();
                     stntupdateDineroCuenta.close();
-                    con.close();
+                    re.cerrarConexion();
               
                     
          } catch (SQLException ex) {

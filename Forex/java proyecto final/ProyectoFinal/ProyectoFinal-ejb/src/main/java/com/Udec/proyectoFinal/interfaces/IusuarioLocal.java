@@ -37,5 +37,6 @@ public interface IusuarioLocal {
     
     public ErrorMsg descontarDinero(Usuario user);
     
-
+   
+    
 }

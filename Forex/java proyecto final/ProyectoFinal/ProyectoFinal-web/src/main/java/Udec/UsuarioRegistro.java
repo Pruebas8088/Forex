@@ -8,6 +8,8 @@ package Udec;
 import com.Udec.proyectoFinal.clase.Usuario;
 import com.Udec.proyectoFinal.interfaces.IusuarioLocal;
 import javax.ejb.EJB;
+import javax.json.Json;
+import javax.json.JsonObject;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -47,4 +49,5 @@ public class UsuarioRegistro {
      }         
    }
     
+
 }

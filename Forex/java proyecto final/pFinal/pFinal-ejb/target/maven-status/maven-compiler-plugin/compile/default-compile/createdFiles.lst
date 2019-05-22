@@ -1,0 +1,10 @@
+com\udec\clase\IusuarioLocal.class
+com\udec\utilitarios\Divisa.class
+com\udec\utilitarios\Conexion.class
+com\udec\clase\Iseguridad.class
+com\udec\clase\IseguridadLocal.class
+com\udec\clase\Iusuario.class
+com\udec\utilitarios\ErrorMsg.class
+com\udec\utilitarios\Usuario.class
+com\udec\NewSessionBean.class
+com\udec\utilitarios\Datos.class

@@ -1,0 +1,5 @@
+com\udec\UsuarioRegistro.class
+com\udec\UsuarioService.class
+com\udec\Configuration.class
+com\udec\Interceptor.class
+com\udec\UsuarioLogin.class

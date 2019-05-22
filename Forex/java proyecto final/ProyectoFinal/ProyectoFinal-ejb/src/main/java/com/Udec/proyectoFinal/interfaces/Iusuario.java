@@ -32,15 +32,27 @@ public class Iusuario implements IusuarioLocal {
     @Override
     public ErrorMsg anadirUser(Usuario user) {
          ErrorMsg er = new ErrorMsg();
-            if(user.getNombre().isEmpty() || user.getApellido().isEmpty() || user.getEmail().isEmpty() || user.getPass().isEmpty()){
-               er.setErrormsg("no se aceptan campos vacios");
-               return er;
-            }else{
+         ArrayList<Usuario> listauser = new ArrayList<Usuario>();
+         Datos datos = new  Datos();
+         listauser = datos.traerInfo();
+         if(listauser.isEmpty()){
               Datos dat =  new Datos();
-              dat.envio(user);
-             er.setErrormsg("Registro exitoso");
-               return er;
-         }  
+            dat.envio(user);
+            er.setErrormsg("Registro exitoso");
+            return er;
+        }else{
+            for (Usuario userL : listauser) {
+                    if(userL.getEmail().equals(user.getEmail())){
+                         er.setErrormsg("EL correo Ya existe");
+                         return er;
+                    }
+                }
+            Datos dat =  new Datos();
+            dat.envio(user);
+            er.setErrormsg("Registro exitoso");
+            return er;
+        }
+       
     }
     /**
      * funcion que recarga el dinero de la cuenta
@@ -220,5 +232,8 @@ public class Iusuario implements IusuarioLocal {
         }
     }//enviarCorreo
 
+   
+
+   
     
 }

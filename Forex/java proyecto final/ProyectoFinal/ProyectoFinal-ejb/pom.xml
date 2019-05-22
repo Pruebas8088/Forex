@@ -32,12 +32,6 @@
             <version>7.0</version>
             <scope>provided</scope>
         </dependency>
-        <dependency>
-            <groupId>postgresql</groupId>
-            <artifactId>postgresql-9.4-1203.jdbc42</artifactId>
-            <version>9.4</version>
-            <type>jar</type>
-        </dependency>
          <dependency>
              <groupId>com.sun.jersey</groupId>
             <artifactId>jersey-json</artifactId>
@@ -69,6 +63,11 @@
                 <artifactId>jjwt-jackson</artifactId>
                 <version>0.10.5</version>
                 <scope>runtime</scope>
+            </dependency>
+            <dependency>
+                <groupId>postgresql</groupId>
+                <artifactId>postgresql</artifactId>
+                <version>9.1-901-1.jdbc4</version>
             </dependency>
     </dependencies>
 

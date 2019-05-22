@@ -46,18 +46,18 @@
             <artifactId>ProyectoFinal-ejb</artifactId>
             <version>1.0-SNAPSHOT</version>
             <type>ejb</type>
+            <exclusions>
+                <exclusion>
+                    <groupId>postgresql</groupId>
+                    <artifactId>postgresql-42.2.5.jre7</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
         <dependency>
             <groupId>Udec</groupId>
             <artifactId>ProyectoFinal-web</artifactId>
             <version>1.0-SNAPSHOT</version>
             <type>war</type>
-        </dependency>
-         <dependency>
-            <groupId>postgresql</groupId>
-            <artifactId>postgresql-9.4-1203.jdbc42</artifactId>
-            <version>9.4</version>
-            <type>jar</type>
         </dependency>
         <dependency>
             <groupId>javax</groupId>

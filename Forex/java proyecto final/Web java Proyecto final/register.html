@@ -91,7 +91,7 @@
 
       $("#Fregistro").submit(function(event) {
           var x = comparaContrasena();
-          if(x == false){
+         if(x == false){
               alert("Contraseñas no coinciden!!");
               event.preventDefault();
           }else{
@@ -107,8 +107,19 @@
             pass: $("#inputPassword").val()
           }),
           success: function(data, textStatus, xhr) {
-            alert(data.errormsg);
-            $(location).attr('href','login.html')
+           
+            if(data.errormsg == "fallo el Registro"){
+                alert(data.errormsg);
+            }else if(data.errormsg == "EL correo Ya existe"){
+                alert(data.errormsg);
+            }else if(data.errormsg == "Registro exitoso"){
+                alert(data.errormsg);
+               $(location).attr('href','login.html');
+
+            }else{
+                 alert(data.errormsg);
+            }
+           
           },
           error: function(xhr, textStatus, errorThrown) {
            bootbox.dialog({ 
@@ -135,6 +146,9 @@
 
     });
 
+
+  
+
     function comparaContrasena(){
       var contra1 = $("#inputPassword").val();
       var contra2 = $("#confirmPassword").val();
@@ -146,6 +160,8 @@
         return true;
       }
     }
+
+
 
     
   </script>
