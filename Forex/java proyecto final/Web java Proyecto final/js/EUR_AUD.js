@@ -1,7 +1,7 @@
 function actualizarPrecioEUR() {
 	var valoriginal=30000; 
-	var min= 20;
-	var max= -20;
+	var min= 5;
+	var max= -5;
 	var randomnum =Math.floor(Math.random() * (+max - +min)) + +min;
 	var result= valoriginal +randomnum;
 	postMessage(result);
@@ -9,4 +9,4 @@ function actualizarPrecioEUR() {
 	
 }
 
-setInterval("actualizarPrecioEUR()",5000);
+setInterval("actualizarPrecioEUR()"12000);

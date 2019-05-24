@@ -34,15 +34,8 @@ private Conexion re;
      * @param usuario objeto que contiene los datos del usuario a registrar
      */
      public void envio(Usuario usuario){
-<<<<<<< HEAD
-        
-=======
-        String url= "jdbc:postgresql://localhost:5432/ProyectoFinal";
-        String driver = "org.postgresql.Driver";
-        Connection con=null;
-    String contrase ="1234";
-        String us = "postgres";
->>>>>>> a6e15c33e84bbfd0118d14683046a36b870c6073
+
+     
            try {
                
                 Statement stntenvio = re.con.createStatement();
@@ -65,15 +58,8 @@ private Conexion re;
     * @param divisa objeto que contiene los datos de la operacion a registrar
     */  
       public void compraDivisas(Divisa divisa){
-<<<<<<< HEAD
-       
-=======
-        String url= "jdbc:postgresql://localhost:5432/ProyectoFinal";
-        String driver = "org.postgresql.Driver";
-        Connection con=null;
-    String contrase ="1234";
-        String us = "postgres";
->>>>>>> a6e15c33e84bbfd0118d14683046a36b870c6073
+
+     
            try {
                 
                  Statement stntCompraDivisa = re.con.createStatement();
@@ -97,15 +83,8 @@ private Conexion re;
       */
       public  Boolean validacion(Usuario usuario){
         boolean estado;
-<<<<<<< HEAD
-        
-=======
-        String url= "jdbc:postgresql://localhost:5432/ProyectoFinal";
-        String driver = "org.postgresql.Driver";
-        Connection con=null;
-    String contrase ="1234";
-        String us = "postgres";
->>>>>>> a6e15c33e84bbfd0118d14683046a36b870c6073
+
+       
            try {
                  Statement stntvalidacion = re.con.createStatement();
                  String qry = "SELECT * FROM public.usuario where correo="+"'" + usuario.getEmail()+ "'"+"and contrasena="+"'" + usuario.getPass()+ "'"+"";
@@ -144,15 +123,8 @@ private Conexion re;
      * @param jwt token generado para modificacion
      */
      public  void updateToken(Usuario usuario,String jwt){
-<<<<<<< HEAD
+
        
-=======
-        String url= "jdbc:postgresql://localhost:5432/ProyectoFinal";
-        String driver = "org.postgresql.Driver";
-        Connection con=null;
-    String contrase ="1234";
-        String us = "postgres";
->>>>>>> a6e15c33e84bbfd0118d14683046a36b870c6073
            try {
                  
                  Statement stntupdateTok =  re.con.createStatement();
@@ -176,15 +148,8 @@ private Conexion re;
       * @param usuario objeto que contiene los datos de usuario para cerrar sesion
       */
      public  void cerradoCuenta(Usuario usuario){
-<<<<<<< HEAD
+
        
-=======
-        String url= "jdbc:postgresql://localhost:5432/ProyectoFinal";
-        String driver = "org.postgresql.Driver";
-        Connection con=null;
-    String contrase ="1234";
-        String us = "postgres";
->>>>>>> a6e15c33e84bbfd0118d14683046a36b870c6073
            try {
                  
                
@@ -207,15 +172,7 @@ private Conexion re;
       * @param usuario objeto que coneitne los datos del usuario a modificar el dinero
       */
      public  void updateDinero(Usuario usuario){
-<<<<<<< HEAD
-        
-=======
-        String url= "jdbc:postgresql://localhost:5432/ProyectoFinal";
-        String driver = "org.postgresql.Driver";
-        Connection con=null;
-    String contrase ="1234";
-        String us = "postgres";
->>>>>>> a6e15c33e84bbfd0118d14683046a36b870c6073
+
            try {
                 
              Statement stntupdateDinero = re.con.createStatement();
@@ -239,16 +196,8 @@ private Conexion re;
      */
     public  ArrayList<Usuario> traerInfo(){
          ArrayList<Usuario> listauser = new ArrayList<Usuario>();
-<<<<<<< HEAD
-         
-         
-=======
-          String url= "jdbc:postgresql://localhost:5432/ProyectoFinal";
-        String driver = "org.postgresql.Driver";
-        Connection con=null;
-    String contrase ="1234";
-        String us = "postgres";
->>>>>>> a6e15c33e84bbfd0118d14683046a36b870c6073
+
+       
            try {
                 
              Statement stnttraerInfo = re.con.createStatement();
@@ -289,34 +238,22 @@ private Conexion re;
      */
     public float traerDinero(Usuario user){
          float dinero=0;
-<<<<<<< HEAD
-        
-         try {
-               
-             Statement stnttraerDinero = re.con.createStatement();
-=======
-        String url= "jdbc:postgresql://localhost:5432/ProyectoFinal";
-        String driver = "org.postgresql.Driver";
-        Connection con=null;
-    String contrase ="1234";
-        String us = "postgres";
            try {
-                 Class.forName(driver).newInstance();
-                 con=DriverManager.getConnection(url,us,contrase);
-             Statement stnttraerDinero = con.createStatement();
->>>>>>> a6e15c33e84bbfd0118d14683046a36b870c6073
+                
+              Statement stnttraerDinero = re.con.createStatement();
+
              String qry = "SELECT * FROM usuario where token = "+"'"+ user.getToken()+"'";
               
                     ResultSet rstraerdinero=stnttraerDinero.executeQuery(qry);
+        
                     while(rstraerdinero.next()){
                       user.setDinero(rstraerdinero.getFloat("dinero"));
                    
                      }
                     dinero = user.getDinero();
-                    
-                    stnttraerDinero.close();
                     rstraerdinero.close();
-                     re.cerrarConexion();
+                    stnttraerDinero.close();
+                    re.cerrarConexion();
                     return dinero;
              
          } catch (SQLException ex) {
@@ -334,15 +271,7 @@ private Conexion re;
      */
     public  ArrayList<Divisa> consultaDivisa(Divisa divisa){
             ArrayList<Divisa> listaDivisa= new ArrayList<Divisa>();
-<<<<<<< HEAD
-        
-=======
-        String url= "jdbc:postgresql://localhost:5432/ProyectoFinal";
-        String driver = "org.postgresql.Driver";
-        Connection con=null;
-    String contrase ="1234";
-        String us = "postgres";
->>>>>>> a6e15c33e84bbfd0118d14683046a36b870c6073
+
            try {
                 ;
              Statement stntconsultaDivisa = re.con.createStatement();
@@ -379,15 +308,8 @@ private Conexion re;
      */
     public  ArrayList<Divisa> consultaDivisaHistorial(Divisa divisa){
          ArrayList<Divisa> listaDivisa= new ArrayList<Divisa>();
-<<<<<<< HEAD
-         
-=======
-         String url= "jdbc:postgresql://localhost:5432/ProyectoFinal";
-        String driver = "org.postgresql.Driver";
-        Connection con=null;
-    String contrase ="1234";
-        String us = "postgres";
->>>>>>> a6e15c33e84bbfd0118d14683046a36b870c6073
+
+   
            try {
                 
              Statement stntconsultaDivisaHistorial = re.con.createStatement();
@@ -423,15 +345,8 @@ private Conexion re;
      * @param divisa objeto que contiene los datos de la operacion a modificar
      */
      public void updateDivisa(Divisa divisa){
-<<<<<<< HEAD
-        
-=======
-        String url= "jdbc:postgresql://localhost:5432/ProyectoFinal";
-        String driver = "org.postgresql.Driver";
-        Connection con=null;
-    String contrase ="1234";
-        String us = "postgres";
->>>>>>> a6e15c33e84bbfd0118d14683046a36b870c6073
+
+      
            try {
                
              Statement stntupdateDivisa = re.con.createStatement();
@@ -453,15 +368,8 @@ private Conexion re;
       * @param divisa objeto que contiene los datos de la operacion a eliminar
       */
      public void borrarDivisa(Divisa divisa){
-<<<<<<< HEAD
-        
-=======
-        String url= "jdbc:postgresql://localhost:5432/ProyectoFinal";
-        String driver = "org.postgresql.Driver";
-        Connection con=null;
-    String contrase ="1234";
-        String us = "postgres";
->>>>>>> a6e15c33e84bbfd0118d14683046a36b870c6073
+
+    
            try {
                 
              Statement stntborrarDivisa = re.con.createStatement();
@@ -484,15 +392,8 @@ private Conexion re;
       * @param divisa objeto que contiene los datos de la operacion a registrar
       */
      public void insertarHistorial(Divisa divisa){
-<<<<<<< HEAD
-     
-=======
-       String url= "jdbc:postgresql://localhost:5432/ProyectoFinal";
-        String driver = "org.postgresql.Driver";
-        Connection con=null;
-    String contrase ="1234";
-        String us = "postgres";
->>>>>>> a6e15c33e84bbfd0118d14683046a36b870c6073
+
+
            try {
                  
              Statement stntinsertarHistorial = re.con.createStatement();
@@ -514,15 +415,7 @@ private Conexion re;
       * @param usuario objeto que contiene los datos del usuario a modificar
       */
       public void updateDineroCuenta(Usuario usuario){
-<<<<<<< HEAD
-        
-=======
-         String url= "jdbc:postgresql://localhost:5432/ProyectoFinal";
-        String driver = "org.postgresql.Driver";
-        Connection con=null;
-    String contrase ="1234";
-        String us = "postgres";
->>>>>>> a6e15c33e84bbfd0118d14683046a36b870c6073
+
            try {
                  
              Statement stntupdateDineroCuenta = re.con.createStatement();

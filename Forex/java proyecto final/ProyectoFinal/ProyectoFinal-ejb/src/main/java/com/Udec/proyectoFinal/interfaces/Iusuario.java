@@ -64,7 +64,7 @@ public class Iusuario implements IusuarioLocal {
         //enviarCorreo(user.getEmail(), user.getDinero());
         float dinero = user.getDinero();
         float dinero1 = consultarDinero(user);
-        dinero = (dinero1+user.getDinero());
+        dinero = (dinero1+dinero);
         user.setDinero(dinero);
         Datos dat =  new Datos();
         dat.updateDinero(user);

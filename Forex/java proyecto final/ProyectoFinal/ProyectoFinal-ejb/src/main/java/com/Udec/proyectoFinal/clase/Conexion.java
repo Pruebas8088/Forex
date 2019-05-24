@@ -40,7 +40,7 @@ public class Conexion {
             {
                     //url es un texto que contiene la ruta del nombre o la direccion
                     //de coneccion de la base da Datos conectada al JDBC
-                    String url = "jdbc:postgresql://localhost:5432/ProyectoFinal";
+                    String url = "jdbc:postgresql://localhost:5432/Proyecto_final";
                    
                     //Con es el objeto creado para la coneccion donde se especifican los
                     //parametros de la ubicacion de la BD, login si la base de datos

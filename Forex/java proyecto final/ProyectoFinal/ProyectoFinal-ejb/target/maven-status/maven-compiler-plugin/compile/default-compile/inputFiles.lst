@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 C:\Users\David\Documents\GitHub\Forex\Forex\java proyecto final\ProyectoFinal\ProyectoFinal-ejb\src\main\java\com\Udec\proyectoFinal\interfaces\IusuarioLocal.java
 C:\Users\David\Documents\GitHub\Forex\Forex\java proyecto final\ProyectoFinal\ProyectoFinal-ejb\src\main\java\com\Udec\proyectoFinal\interfaces\IseguridadLocal.java
 C:\Users\David\Documents\GitHub\Forex\Forex\java proyecto final\ProyectoFinal\ProyectoFinal-ejb\src\main\java\com\Udec\proyectoFinal\clase\Usuario.java
@@ -10,15 +9,3 @@ C:\Users\David\Documents\GitHub\Forex\Forex\java proyecto final\ProyectoFinal\Pr
 C:\Users\David\Documents\GitHub\Forex\Forex\java proyecto final\ProyectoFinal\ProyectoFinal-ejb\src\main\java\com\Udec\proyectoFinal\controller\UsuarioController.java
 C:\Users\David\Documents\GitHub\Forex\Forex\java proyecto final\ProyectoFinal\ProyectoFinal-ejb\src\main\java\com\Udec\proyectoFinal\clase\Divisa.java
 C:\Users\David\Documents\GitHub\Forex\Forex\java proyecto final\ProyectoFinal\ProyectoFinal-ejb\src\main\java\com\Udec\proyectoFinal\clase\ErrorMsg.java
-=======
-C:\Users\Jonathan\Documents\GitHub\Forex\Forex\java proyecto final\ProyectoFinal\ProyectoFinal-ejb\src\main\java\com\Udec\proyectoFinal\interfaces\IseguridadLocal.java
-C:\Users\Jonathan\Documents\GitHub\Forex\Forex\java proyecto final\ProyectoFinal\ProyectoFinal-ejb\src\main\java\com\Udec\proyectoFinal\interfaces\Iusuario.java
-C:\Users\Jonathan\Documents\GitHub\Forex\Forex\java proyecto final\ProyectoFinal\ProyectoFinal-ejb\src\main\java\com\Udec\proyectoFinal\clase\Datos.java
-C:\Users\Jonathan\Documents\GitHub\Forex\Forex\java proyecto final\ProyectoFinal\ProyectoFinal-ejb\src\main\java\com\Udec\proyectoFinal\clase\Usuario.java
-C:\Users\Jonathan\Documents\GitHub\Forex\Forex\java proyecto final\ProyectoFinal\ProyectoFinal-ejb\src\main\java\com\Udec\proyectoFinal\clase\Divisa.java
-C:\Users\Jonathan\Documents\GitHub\Forex\Forex\java proyecto final\ProyectoFinal\ProyectoFinal-ejb\src\main\java\com\Udec\proyectoFinal\controller\UsuarioController.java
-C:\Users\Jonathan\Documents\GitHub\Forex\Forex\java proyecto final\ProyectoFinal\ProyectoFinal-ejb\src\main\java\com\Udec\proyectoFinal\utilitario\Seguridad.java
-C:\Users\Jonathan\Documents\GitHub\Forex\Forex\java proyecto final\ProyectoFinal\ProyectoFinal-ejb\src\main\java\com\Udec\proyectoFinal\clase\ErrorMsg.java
-C:\Users\Jonathan\Documents\GitHub\Forex\Forex\java proyecto final\ProyectoFinal\ProyectoFinal-ejb\src\main\java\com\Udec\proyectoFinal\interfaces\IusuarioLocal.java
-C:\Users\Jonathan\Documents\GitHub\Forex\Forex\java proyecto final\ProyectoFinal\ProyectoFinal-ejb\src\main\java\com\Udec\proyectoFinal\interfaces\Iseguridad.java
->>>>>>> a6e15c33e84bbfd0118d14683046a36b870c6073

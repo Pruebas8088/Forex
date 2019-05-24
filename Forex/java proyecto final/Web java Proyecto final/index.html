@@ -257,9 +257,9 @@
                          Valor del pip
                         </button>
                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                          <a class="dropdown-item" onclick = "prueba1()" value="1" href="#">1</a>
-                          <a class="dropdown-item" onclick = "prueba2()"  value="2" href="#">2</a>
-                          <a class="dropdown-item" onclick = "prueba3()"  value="3" href="#">3</a>
+                          <a class="dropdown-item" onclick = "prueba1()" value="0.1" href="#">0.1</a>
+                          <a class="dropdown-item" onclick = "prueba2()"  value="1" href="#">1.0</a>
+                          <a class="dropdown-item" onclick = "prueba3()"  value="10" href="#">10</a>
                         </div>
                         <h1  class="badge badge-primary text-wrap">$</h1><h1  id="prueba" class="badge badge-primary text-wrap"></h1>
                     </div>
@@ -289,9 +289,9 @@
                          Valor del pip
                         </button>
                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                          <a class="dropdown-item" onclick = "prueba1()" value="1" href="#">1</a>
-                          <a class="dropdown-item" onclick = "prueba2()"  value="2" href="#">2</a>
-                          <a class="dropdown-item" onclick = "prueba3()"  value="3" href="#">3</a>
+                          <a class="dropdown-item" onclick = "prueba1()" value="0.1" href="#">0.1</a>
+                          <a class="dropdown-item" onclick = "prueba2()"  value="1" href="#">1.0</a>
+                          <a class="dropdown-item" onclick = "prueba3()"  value="10" href="#">10</a>
                         </div>
                         <h1  class="badge badge-primary text-wrap">$</h1><h1  id="prueba" class="badge badge-primary text-wrap"></h1>
                     </div>
@@ -361,9 +361,9 @@
                          Valor del pip
                         </button>
                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                          <a class="dropdown-item" onclick = "prueba1()" value="1" href="#">1</a>
-                          <a class="dropdown-item" onclick = "prueba2()"  value="2" href="#">2</a>
-                          <a class="dropdown-item" onclick = "prueba3()"  value="3" href="#">3</a>
+                          <a class="dropdown-item" onclick = "prueba1()" value="0.1" href="#">0.1</a>
+                          <a class="dropdown-item" onclick = "prueba2()"  value="1" href="#">1.0</a>
+                          <a class="dropdown-item" onclick = "prueba3()"  value="10" href="#">10</a>
                         </div>
                         <h5  class="badge badge-primary text-wrap">$</h5><h5  id="prueba" class="badge badge-primary text-wrap"></h5>
                     </div>
@@ -393,9 +393,9 @@
                          Valor del pip
                         </button>
                         <div id= "opciones"class="dropdown-menu"  aria-labelledby="dropdownMenuButton">
-                          <a class="dropdown-item" onclick = "prueba1()" value="1" href="#">1</a>
-                          <a class="dropdown-item" onclick = "prueba2()"  value="2" href="#">2</a>
-                          <a class="dropdown-item" onclick = "prueba3()"  value="3" href="#">3</a>
+                          <a class="dropdown-item" onclick = "prueba1()" value="0.1" href="#">0.1</a>
+                          <a class="dropdown-item" onclick = "prueba2()"  value="1" href="#">1.0</a>
+                          <a class="dropdown-item" onclick = "prueba3()"  value="10" href="#">10</a>
                         </div>
                         <h1  class="badge badge-primary text-wrap">$</h1><h1  id="prueba" class="badge badge-primary text-wrap"></h1>
           </div>
@@ -532,59 +532,10 @@
 
 var opcion;
   window.onload = function(){
-<<<<<<< HEAD
-
-  
-=======
-    
-    function validarhora(){ 
-
-
-      if(localStorage.getItem("tokenuser")  == "undefined"){
-       $(location).attr('href','index.html');
-     }else{
-      try {
-       var token = localStorage.getItem("tokenuser");
-       var decoded = jwt_decode(token);
-       var cad=(new Date().getTime())/1000;
-       if(cad > decoded.exp){
-         jQuery.ajax({
-          url: 'http://localhost:8080/ProyectoFinal-web/api/Logica/Cerrar/',
-          type: 'POST',
-          dataType: 'json',
-          headers: {"token-auto": localStorage.getItem("tokenuser")},
-          contentType:'application/json',
-          data: JSON.stringify({
-
-            token: localStorage.getItem("tokenuser")
-          }),
-          success: function(data, textStatus, xhr) {
-            localStorage.removeItem("tokenuser");
-            alert("Token Invalido lo sentimos por favor inicie sesion")
-            $(location).attr('href','login.html'); 
-
-          },
-          error: function(xhr, textStatus, errorThrown) {
-            localStorage.removeItem("tokenuser");
-            alert("Token Invalido lo sentimos por favor inicie sesion")
-            $(location).attr('href','login.html'); 
-
-          }
-        });
-         event.preventDefault();
-     }//if validaciom
-   } catch(e) {
-    alert("Token Invalido lo sentimos por favor inicie sesion")
-    $(location).attr('href','login.html');   
-  }
-
-
-}
 
 
 
-}//validacion token vencido
->>>>>>> a6e15c33e84bbfd0118d14683046a36b870c6073
+validarhora();
 //////////////////////////
 
 //setInterval(validarhora,1000); 
@@ -597,8 +548,8 @@ var opcion;
 
 
 
-setInterval(calculoBeneficio,6000);
-setInterval(calculoBeneficiodivisa2,6000);
+setInterval(calculoBeneficio,5000);
+setInterval(calculoBeneficiodivisa2,5000);
 
 var worker1 = new Worker("js/hilos.js");
 var worker2 = new Worker("js/EUR_AUD.js");
@@ -1299,16 +1250,16 @@ function consultarDinero(){
 }
 
 function prueba1(){
-  document.getElementById("prueba").innerHTML = 1; 
-  opcion = 1;
+  document.getElementById("prueba").innerHTML = 0.1; 
+  opcion = 0.1;
 }
 function prueba2(){
-  document.getElementById("prueba").innerHTML = 2;
-  opcion = 2;
+  document.getElementById("prueba").innerHTML = 1;
+  opcion = 1;
 }
 function prueba3(){
-  document.getElementById("prueba").innerHTML = 3;
-  opcion = 3;
+  document.getElementById("prueba").innerHTML = 10;
+  opcion = 10;
 }
 
 
