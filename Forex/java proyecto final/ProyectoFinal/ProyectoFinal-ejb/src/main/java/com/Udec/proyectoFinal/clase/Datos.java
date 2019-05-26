@@ -39,15 +39,16 @@ private Conexion re;
            try {
                
                 Statement stntenvio = re.con.createStatement();
-                String qry = "Insert into usuario(nombre,apellido,correo,contrasena,token,dinero) values ("+"'" + usuario.getNombre()+ "'"+","+"'" + usuario.getApellido() + "'"+","+"'" + usuario.getEmail()+ "'"+","+"'" + usuario.getPass()+ "'"+","+"'" + "0" + "'"+"," + 1.0 +")";
+                String qry = "INSERT INTO `usuario` ( `nombre`, `apellido`, `correo`, `contrasena`, `token`, `dinero`) VALUES("+"'" + usuario.getNombre()+ "'"+","+"'" + usuario.getApellido() + "'"+","+"'" + usuario.getEmail()+ "'"+","+"'" + usuario.getPass()+ "'"+","+"'" + "0" + "'"+","+"'" + 1.0 +"'"+")";
+                
                  
-                    ResultSet rs = stntenvio.executeQuery(qry);
-                    rs.close();
+                    stntenvio.executeUpdate(qry);
                     stntenvio.close();
                     re.cerrarConexion();
                     
                
             } catch (Exception e) {
+                System.out.println(e);
              System.out.println("fallo funcion envio");
             }
           
@@ -63,10 +64,9 @@ private Conexion re;
            try {
                 
                  Statement stntCompraDivisa = re.con.createStatement();
-                 String qry = "INSERT INTO public.accion(idoperacion, valoinicial, token, valorfinal, cantidad,beneficio,divisa) values (" + divisa.getIdOperacion()+"," + divisa.getValorInicial()+","+"'" + divisa.getToken()+ "'"+"," + divisa.getValorFinal()+"," + divisa.getCantidad() +"," + divisa.getBeneficio()+","+"'" + divisa.getDivisa()+ "'"+")";
-             
-                    ResultSet rs =stntCompraDivisa.executeQuery(qry);
-                    rs.close();
+                 String qry = "INSERT INTO `accion`(`idoperacion`, `valoinicial`, `token`, `valorfinal`, `cantidad`,`beneficio`,`divisa`) VALUES (" +"'"+ divisa.getIdOperacion()+"'"+","+"'" + divisa.getValorInicial()+"'"+","+"'" + divisa.getToken()+ "'"+"," +"'"+ divisa.getValorFinal()+"'"+"," +"'"+ divisa.getCantidad() +"'"+","+"'" + divisa.getBeneficio()+"'"+","+"'" + divisa.getDivisa()+ "'"+")";
+                    stntCompraDivisa.executeUpdate(qry);
+                    //rs.close();
                     stntCompraDivisa.close();
                     re.cerrarConexion();
                     
@@ -77,9 +77,9 @@ private Conexion re;
          }
     }//compraDivisas 
      /**
-      *funcion que realiza la validacion del usuario y contraseÃ±a utilizadas para login 
-      * @param usuario funcion que contiene el correo y contraseÃ±a para la validacion
-      * @return estado retorna un valor booleano true si coinciden usuario y contraseÃ±a y false en caso contrario
+      *funcion que realiza la validacion del usuario y contraseÃƒÂ±a utilizadas para login 
+      * @param usuario funcion que contiene el correo y contraseÃƒÂ±a para la validacion
+      * @return estado retorna un valor booleano true si coinciden usuario y contraseÃƒÂ±a y false en caso contrario
       */
       public  Boolean validacion(Usuario usuario){
         boolean estado;
@@ -87,7 +87,7 @@ private Conexion re;
        
            try {
                  Statement stntvalidacion = re.con.createStatement();
-                 String qry = "SELECT * FROM public.usuario where correo="+"'" + usuario.getEmail()+ "'"+"and contrasena="+"'" + usuario.getPass()+ "'"+"";
+                 String qry = "SELECT * FROM `usuario` where `correo`="+"'" + usuario.getEmail()+ "'"+"and `contrasena`="+"'" + usuario.getPass()+ "'"+"";
                  ResultSet rsValidacion=stntvalidacion.executeQuery(qry);
              while(rsValidacion.next()){
                 Usuario user = new Usuario();
@@ -128,9 +128,9 @@ private Conexion re;
            try {
                  
                  Statement stntupdateTok =  re.con.createStatement();
-                 String qry = "UPDATE public.usuario SET  token="+"'" + jwt+ "'"+"WHERE correo="+"'" + usuario.getEmail()+ "'"+"";
-                 ResultSet rs = stntupdateTok.executeQuery(qry);
-                 rs.close();
+                 String qry = "UPDATE `usuario` SET  `token`="+"'" + jwt+ "'"+"WHERE `correo`="+"'" + usuario.getEmail()+ "'"+"";
+                 stntupdateTok.executeUpdate(qry);
+                 //rs.close();
                  stntupdateTok.close();
                  re.cerrarConexion();
                    
@@ -154,10 +154,10 @@ private Conexion re;
                  
                
              Statement stntcerradoCuenta = re.con.createStatement();
-             String qry = "UPDATE public.usuario SET  token="+"'" + 0 + "'"+"WHERE token="+"'" + usuario.getToken()+ "'"+"";
+             String qry = "UPDATE `usuario` SET  `token`="+"'" + 0 + "'"+"WHERE `token`="+"'" + usuario.getToken()+ "'"+"";
               
-                    ResultSet rs = stntcerradoCuenta.executeQuery(qry);
-                    rs.close();
+                    stntcerradoCuenta.executeUpdate(qry);
+                    //rs.close();
                     stntcerradoCuenta.close();
                     re.cerrarConexion();
               
@@ -176,10 +176,10 @@ private Conexion re;
            try {
                 
              Statement stntupdateDinero = re.con.createStatement();
-             String qry = "UPDATE public.usuario SET  dinero="+ usuario.getDinero()+"WHERE token="+"'" + usuario.getToken() + "'"+"";
+             String qry = "UPDATE `usuario` SET  `dinero`="+"'"+ usuario.getDinero()+"'"+"WHERE `token`="+"'" + usuario.getToken() + "'"+"";
               
-                     ResultSet rs =  stntupdateDinero.executeQuery(qry);
-                     rs.close();
+                     stntupdateDinero.executeUpdate(qry);
+                     //rs.close();
                      stntupdateDinero.close();
                      re.cerrarConexion();
                 
@@ -242,7 +242,7 @@ private Conexion re;
                 
               Statement stnttraerDinero = re.con.createStatement();
 
-             String qry = "SELECT * FROM usuario where token = "+"'"+ user.getToken()+"'";
+             String qry = "SELECT * FROM `usuario` where `token` = "+"'"+ user.getToken()+"'";
               
                     ResultSet rstraerdinero=stnttraerDinero.executeQuery(qry);
         
@@ -275,7 +275,7 @@ private Conexion re;
            try {
                 ;
              Statement stntconsultaDivisa = re.con.createStatement();
-             String qry = "SELECT * FROM public.accion where token = "+"'"+ divisa.getToken()+"'";
+             String qry = "SELECT * FROM `accion` where `token` = "+"'"+ divisa.getToken()+"'";
                 ResultSet rsconsultaDivisa=stntconsultaDivisa.executeQuery(qry);
                 while(rsconsultaDivisa.next()){
                
@@ -313,7 +313,7 @@ private Conexion re;
            try {
                 
              Statement stntconsultaDivisaHistorial = re.con.createStatement();
-             String qry = "SELECT * FROM public.historial where usuario = "+"'"+ divisa.getToken()+"'";
+             String qry = "SELECT * FROM `historial` where `usuario` = "+"'"+ divisa.getToken()+"'";
              
                    ResultSet rsconsultaDivisaHistorial=stntconsultaDivisaHistorial.executeQuery(qry);
                   while(rsconsultaDivisaHistorial.next()){
@@ -350,10 +350,10 @@ private Conexion re;
            try {
                
              Statement stntupdateDivisa = re.con.createStatement();
-             String qry = "UPDATE public.accion SET  beneficio="+ divisa.getBeneficio()+"WHERE token="+"'" + divisa.getToken() + "'"+"AND  CAST(valoinicial AS DECIMAL )="+divisa.getValorInicial()+"";
-               
-                   ResultSet rs = stntupdateDivisa.executeQuery(qry);
-                   rs.close();
+             String qry = "UPDATE `accion` SET  `beneficio`="+"'"+ divisa.getBeneficio()+"'"+"WHERE `token`="+"'" + divisa.getToken() + "'"+"AND `valoinicial`="+"'"+divisa.getValorInicial()+"'"+"";
+               System.out.println(qry);
+                   stntupdateDivisa.executeUpdate(qry);
+                   //rs.close();
                    stntupdateDivisa.close();
                     re.cerrarConexion();
               
@@ -373,10 +373,10 @@ private Conexion re;
            try {
                 
              Statement stntborrarDivisa = re.con.createStatement();
-              String qry = "DELETE FROM public.accion WHERE  token="+"'"+ divisa.getToken()+"'"+"AND beneficio="+"'"+divisa.getBeneficio()+"'"+" AND idoperacion="+"'"+divisa.getIdOperacion()+"'"+"";
+              String qry = "DELETE FROM `accion` WHERE  `token`="+"'"+ divisa.getToken()+"'"+"AND `beneficio`="+"'"+divisa.getBeneficio()+"'"+" AND `idoperacion`="+"'"+divisa.getIdOperacion()+"'"+"";
                 
-                     ResultSet rs = stntborrarDivisa.executeQuery(qry);
-                     rs.close();
+                     stntborrarDivisa.executeUpdate(qry);
+                     //rs.close();
                      stntborrarDivisa.close();
                      re.cerrarConexion();
                      
@@ -397,10 +397,10 @@ private Conexion re;
            try {
                  
              Statement stntinsertarHistorial = re.con.createStatement();
-             String qry = "INSERT INTO public.historial(usuario, valorinicial, valorfinal, cantidad, idoperacion, beneficio, divisa) values (" +"'"+ divisa.getToken()+"'"+"," + divisa.getValorInicial()+"," + divisa.getValorFinal()+ "," + divisa.getCantidad()+"," + divisa.getIdOperacion()+"," + divisa.getBeneficio()+","+"'" + divisa.getDivisa()+ "'"+")";
+             String qry = "INSERT INTO `historial`(`usuario`, `valorinicial`, `valorfinal`, `cantidad`, `idoperacion`, `beneficio`, `divisa`) values (" +"'"+ divisa.getToken()+"'"+"," +"'"+ divisa.getValorInicial()+"'"+","+"'" + divisa.getValorFinal()+"'"+ ","+"'" + divisa.getCantidad()+"'"+","+"'" + divisa.getIdOperacion()+"'"+","+"'" + divisa.getBeneficio()+"'"+","+"'" + divisa.getDivisa()+ "'"+")";
                
-                    ResultSet rs = stntinsertarHistorial.executeQuery(qry);
-                    rs.close();
+                    stntinsertarHistorial.executeUpdate(qry);
+                    //rs.close();
                     stntinsertarHistorial.close();
                      re.cerrarConexion();
          } catch (SQLException ex) {
@@ -419,11 +419,11 @@ private Conexion re;
            try {
                  
              Statement stntupdateDineroCuenta = re.con.createStatement();
-             String qry = "UPDATE public.usuario SET  dinero="+ usuario.getDinero()+"WHERE nombre="+"'" + usuario.getNombre()+ "'"+"";
-             ResultSet rs =  stntupdateDineroCuenta.executeQuery(qry);
-                    rs.close();
-                    stntupdateDineroCuenta.close();
-                    re.cerrarConexion();
+             String qry = "UPDATE `usuario` SET  `dinero`="+"'"+ usuario.getDinero()+"'"+"WHERE `nombre`="+"'" + usuario.getNombre()+ "'"+"";
+             stntupdateDineroCuenta.executeUpdate(qry);
+                    //rs.close();
+             stntupdateDineroCuenta.close();
+             re.cerrarConexion();
               
                     
          } catch (SQLException ex) {

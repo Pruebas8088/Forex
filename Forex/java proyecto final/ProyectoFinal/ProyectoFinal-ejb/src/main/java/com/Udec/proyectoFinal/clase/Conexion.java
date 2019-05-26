@@ -29,7 +29,7 @@ public class Conexion {
             {
               //Clase que especifica el nombre de los controladores que se van
               //ha utilizar en la carga de la BD en este caso son los de Access
-              Class.forName("org.postgresql.Driver");  //loads the driver
+              Class.forName("com.mysql.jdbc.Driver");  //loads the driver
             }
             catch(ClassNotFoundException e)
             {
@@ -40,14 +40,14 @@ public class Conexion {
             {
                     //url es un texto que contiene la ruta del nombre o la direccion
                     //de coneccion de la base da Datos conectada al JDBC
-                    String url = "jdbc:postgresql://localhost:5432/Proyecto_final";
+                    String url = "jdbc:mysql://localhost:3306/proyectofinal?autoReconnect=true&useSSL=false";
                    
                     //Con es el objeto creado para la coneccion donde se especifican los
                     //parametros de la ubicacion de la BD, login si la base de datos
                     //posee seguridad y por ultimo la clave
                     //DriverManager.getConnection es el servicio que permite establecer
                     //la conexion ABRIR CONEXION!!!
-                    con = DriverManager.getConnection(url, "postgres", "123");
+                    con = DriverManager.getConnection(url, "root", "");
                    
                     
                     //checkForWarning es una funcion que recibe como parametro

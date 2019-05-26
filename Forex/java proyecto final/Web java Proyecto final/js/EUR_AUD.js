@@ -9,4 +9,4 @@ function actualizarPrecioEUR() {
 	
 }
 
-setInterval("actualizarPrecioEUR()"12000);
+setInterval("actualizarPrecioEUR()",12000);
